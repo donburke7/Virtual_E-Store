@@ -5,10 +5,13 @@ An online E-store system built in Java 8=>11 and ___ _replace with other platfor
 
 ## Team
 
-- Donald Burke
-- MEMBER2
-- MEMBER3
-- Joseph Doros
+
+- ISAAC POST
+- NICHOLAS LEWANDOWSKI
+- DONALD BURKE
+- JOSEPH DOROS
+- ALAN VAN
+
 
 
 ## Prerequisites
