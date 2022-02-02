@@ -5,8 +5,12 @@ An online E-store system built in Java 8=>11 and ___ _replace with other platfor
   
 ## Team
 
+<<<<<<< HEAD
 - Alen Van
-- MEMBER2
+=======
+- Donald Burke
+>>>>>>> e4b748e653e6d6f2cfabf577433f769427a1a6c5
+- Alen Van
 - MEMBER3
 - MEMBER4
 
