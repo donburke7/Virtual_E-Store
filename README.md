@@ -10,7 +10,7 @@ An online E-store system built in Java 8=>11 and ___ _replace with other platfor
 - NICHOLAS LEWANDOWSKI
 - DONALD BURKE
 - JOSEPH DOROS
-- ALAN VAN
+- ALEN VAN
 
 
 
