@@ -1,6 +1,5 @@
 package com.estore.api.estoreapi.model;
 
-import java.util.logging.Logger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -9,8 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Alen Van
  */
 public class Product {
-    private static final Logger LOG = Logger.getLogger(Product.class.getName());
-
     // The string format of this product, used in toString()
     static final String STRING_FORMAT = "Product [id=%d, name=%s, amount=%d]";
 
@@ -41,7 +38,7 @@ public class Product {
      * 
      * @return an int representing this product's id
      */
-    public int GetID() {
+    public int getID() {
         return this.id;
     }
 
@@ -50,7 +47,7 @@ public class Product {
      * 
      * @return a string representing this product's name
      */
-    public String GetName() {
+    public String getName() {
         return this.name;
     }
 
@@ -59,7 +56,7 @@ public class Product {
      * 
      * @return an int representing the amount of this product
      */
-    public int GetAmount() {
+    public int getAmount() {
         return this.amount;
     }
 
@@ -68,7 +65,7 @@ public class Product {
      * 
      * @param amount the new amount to set this product to
      */
-    public void SetAmount(int amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 
