@@ -2,6 +2,7 @@ package com.estore.api.estoreapi.persistence;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -60,6 +61,69 @@ public class InventoryFileDAO implements InventoryDAO {
 
         // set the nextId to be the next available id
         ++nextId;
+        return true;
+
+    }
+
+    /**
+     * Gets and sets the next id for a {@link Product}
+     * 
+     * @return an id
+     */
+    private synchronized int nextID() {
+        int id = nextId;
+        ++nextId;
+        return id;
+    }
+
+    /**
+     * Given a string, search and find all {@link Product} that matches the string
+     * 
+     * @param searchParameter a string to use to search for {@link Product}
+     * @return an array of all {@link Product} that matches the string, if the
+     *         string is null, return the entire inventory
+     */
+    private Product[] getInventory(String searchParameter) {
+        ArrayList<Product> products = new ArrayList<>();
+
+        // add all items that matches the string that was passed in
+        for (Product currProduct : inventory.values()) {
+            if (searchParameter == null || currProduct.getName().contains(searchParameter)) {
+                products.add(currProduct);
+            }
+        }
+
+        Product[] results = new Product[products.size()];
+        products.toArray(results);
+        return results;
+
+    }
+
+    /**
+     * An overloaded method that gives a default parameter to the getInvetory()
+     * method
+     * uses null as the parameter for the method.
+     * 
+     * @return An array of products that has every {@link Product} in the inventory
+     */
+    private Product[] getInventory() {
+        return getInventory(null);
+    }
+
+    /**
+     * Saves the inventory of {@link Product} from the map
+     * as an array of JSON objects
+     * 
+     * @return true if the inventory was written correctly
+     * 
+     * @throws IOException when the file cannot be accessed or written to
+     */
+    private boolean save() throws IOException {
+        Product[] products = getInventory();
+
+        // serializes the entire inventory into a file
+        // whose path was initially passed into this class
+        objectMapper.writeValue(new File(filename), products);
         return true;
 
     }
