@@ -1,0 +1,50 @@
+commit 2e64e253b561174345513864d10e40bac3054619
+Merge: 467ea38 32db0be
+Author: Joseph Doros <jd3545@g.rit.edu>
+Date:   Tue Feb 1 20:14:49 2022 -0500
+
+    added names
+
+commit 467ea38b4dc7a1cf8f08028876d060f45d586861
+Author: Joseph Doros <jd3545@g.rit.edu>
+Date:   Tue Feb 1 19:43:19 2022 -0500
+
+    added my name in read me
+
+commit 32db0bedd537ce8d72ba53a0bbb1d0df619e1aa2
+Merge: 0e3b2ad 94df998
+Author: Isaac Post <ijp5155@rit.edu>
+Date:   Tue Feb 1 19:30:37 2022 -0500
+
+    Isaac Post filled out README
+
+commit 0e3b2ad75f9d3010dce99ef510119a951303dd43
+Author: Isaac Post <ijp5155@rit.edu>
+Date:   Tue Feb 1 19:28:17 2022 -0500
+
+    Isaac Post updating README.md
+
+commit 94df99801db904def21b0eed898b72d9c36e8b56
+Merge: 24779ec e4b748e
+Author: Alen Van <ajv6049@rit.edu>
+Date:   Tue Feb 1 19:25:41 2022 -0500
+
+    Alen's addition to README
+
+commit 24779ec2ef1f57695480588a030a7541208c267c
+Author: Alen Van <ajv6049@rit.edu>
+Date:   Tue Feb 1 19:21:35 2022 -0500
+
+    Alen's README add
+
+commit e4b748e653e6d6f2cfabf577433f769427a1a6c5
+Author: Donald Burke <db9962@rit.edu>
+Date:   Tue Feb 1 19:20:29 2022 -0500
+
+    Name added
+
+commit ad30d337ea2fbf197405ab18296298ffb4fa2eaf
+Author: github-classroom[bot] <66690702+github-classroom[bot]@users.noreply.github.com>
+Date:   Wed Feb 2 00:01:23 2022 +0000
+
+    Initial commit
