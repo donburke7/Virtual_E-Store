@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 @RequestMapping("products")
 public class InventoryController {
@@ -23,9 +22,10 @@ public class InventoryController {
     /**
      * Creates a REST API controller to reponds to requests
      * 
-     * @param heroDao The {@link InventoryDAO Inventory Data Access Object} to perform CRUD operations
-     * <br>
-     * This dependency is injected by the Spring Framework
+     * @param heroDao The {@link InventoryDAO Inventory Data Access Object} to
+     *                perform CRUD operations
+     *                <br>
+     *                This dependency is injected by the Spring Framework
      */
     public InventoryController(InventoryDAO inventoryDAO) {
         this.inventoryDao = inventoryDAO;
@@ -34,19 +34,30 @@ public class InventoryController {
     /**
      * Responds to the GET request for all {@linkplain Product products}
      * 
-     * @return ResponseEntity with array of {@link Product product} objects (may be empty) and
-     * HTTP status of OK<br>
-     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     * @return ResponseEntity with array of {@link Product product} objects (may be
+     *         empty) and
+     *         HTTP status of OK<br>
+     *         ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("")
     public ResponseEntity<Product[]> getProducts() {
         LOG.info("GET /products");
 
         try {
-            return new ResponseEntity<Product[]>(inventoryDao.getProducts(),HttpStatus.OK);
+            return new ResponseEntity<Product[]>(inventoryDao.getProducts(), HttpStatus.OK);
         } catch (IOException e) {
-            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * 
+     */
+    @GetMapping("")
+    public ResponseEntity<Product> createProduct(Product newProduct) {
+        try {
+            
         }
     }
 }
