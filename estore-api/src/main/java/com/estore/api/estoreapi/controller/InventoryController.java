@@ -13,6 +13,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+<<<<<<< HEAD
+=======
+/**
+ * Handles the REST API requests for the Inventory resource
+ * <p>
+ * {@literal @}RestController Spring annotation identifies this class as a REST API
+ * method handler to the Spring framework
+ * 
+ * @author Team jadin
+ */
+
+>>>>>>> 3e483dbcdbe6e952c378130538de07a5eef858a3
 @RestController
 @RequestMapping("products")
 public class InventoryController {

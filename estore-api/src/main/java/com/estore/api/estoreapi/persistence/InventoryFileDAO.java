@@ -134,10 +134,14 @@ public class InventoryFileDAO implements InventoryDAO {
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Product[] getProducts() throws IOException {
-        // TODO Auto-generated method stub
-        return null;
+        synchronized(inventory) {
+            return getInventory();
+        }
     }
 
     @Override
