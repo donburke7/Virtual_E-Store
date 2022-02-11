@@ -144,7 +144,9 @@ public class InventoryFileDAO implements InventoryDAO {
 
     @Override
     public Product getProduct(int id) throws IOException {
-        return inventory.get(id);
+        synchronized (inventory) {
+            return inventory.get(id);
+        }
     }
 
     /**
@@ -159,7 +161,7 @@ public class InventoryFileDAO implements InventoryDAO {
 
     @Override
     public Product[] searchProducts(String searchParam) throws IOException {
-        synchronized(inventory){
+        synchronized (inventory) {
             return getInventory(searchParam);
         }
     }
