@@ -28,7 +28,7 @@ public class InventoryFileDAO implements InventoryDAO {
      * 
      * @throws IOException when file cannot be accessed or read from
      */
-    public InventoryFileDAO(@Value("${heroes.file}") String filename, ObjectMapper objectMapper) throws IOException {
+    public InventoryFileDAO(@Value("${inventory.file}") String filename, ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;
         load(); // load the heroes from the file
@@ -130,8 +130,7 @@ public class InventoryFileDAO implements InventoryDAO {
 
     @Override
     public Product getProduct(int id) throws IOException {
-        // TODO Auto-generated method stub
-        return null;
+        return inventory.get(id);
     }
 
     /**
@@ -139,7 +138,7 @@ public class InventoryFileDAO implements InventoryDAO {
      */
     @Override
     public Product[] getProducts() throws IOException {
-        synchronized(inventory) {
+        synchronized (inventory) {
             return getInventory();
         }
     }
