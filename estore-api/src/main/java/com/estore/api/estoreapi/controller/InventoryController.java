@@ -100,7 +100,7 @@ public class InventoryController {
      *         found
      *         A ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @GetMapping("")
+    @GetMapping("/{id")
     public ResponseEntity<Product> getProduct(@RequestParam int id) {
         try {
             Product productGot = inventoryDao.getProduct(id);
