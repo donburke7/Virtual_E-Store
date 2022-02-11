@@ -24,7 +24,6 @@ public interface InventoryDAO {
      */
     Product getProduct(int id) throws IOException;
 
-    Product finProducts(String text) throws IOException;
     /**
      * Gets a list of all the {@link Product products} in the inventory
      * 
