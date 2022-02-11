@@ -1,14 +1,21 @@
 package com.estore.api.estoreapi.persistence;
 
+import java.io.EOFException;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
 import com.estore.api.estoreapi.model.Product;
+import com.fasterxml.jackson.annotation.JsonFormat.Feature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
+import org.springframework.beans.BeanInstantiationException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -48,19 +55,26 @@ public class InventoryFileDAO implements InventoryDAO {
         nextId = 0;
 
         // deserialize the JSON file into a list of products
-        Product[] products = objectMapper.readValue(new File(filename), Product[].class);
+        try {
+            String inventoryJSONString = Files.readString(Path.of(filename));
 
-        // add every product that was just recently deserialized to the local storage
-        // inventory
-        for (Product product : products) {
-            inventory.put(product.getID(), product);
-            if (product.getID() > nextId) {
-                nextId = product.getID();
+            if (inventoryJSONString.length() > 0) {
+                Product[] products = objectMapper.readValue(inventoryJSONString, Product[].class);
+
+                // add every product that was just recently deserialized to the local storage
+                // inventory
+                for (Product product : products) {
+                    inventory.put(product.getID(), product);
+                    if (product.getID() > nextId) {
+                        nextId = product.getID();
+                    }
+                }
+                ++nextId;
             }
-        }
 
+        } catch (EOFException e) {
+        }
         // set the nextId to be the next available id
-        ++nextId;
         return true;
 
     }

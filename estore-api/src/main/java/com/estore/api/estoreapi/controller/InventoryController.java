@@ -4,12 +4,17 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.websocket.server.PathParam;
+
 import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.persistence.InventoryDAO;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -73,8 +78,8 @@ public class InventoryController {
      *         product} already exists
      *         A ResposneEntity with HTTP status INTERNAL_SERVER_ERROR otherwise
      */
-    @GetMapping("")
-    public ResponseEntity<Product> createProduct(@RequestParam Product product) {
+    @PostMapping("")
+    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         try {
             Product newProduct = inventoryDao.createProduct(product);
             if (newProduct == null) {
@@ -100,8 +105,8 @@ public class InventoryController {
      *         found
      *         A ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @GetMapping("/{id")
-    public ResponseEntity<Product> getProduct(@RequestParam int id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> getProduct(@PathVariable int id) {
         try {
             Product productGot = inventoryDao.getProduct(id);
             if (productGot == null) {

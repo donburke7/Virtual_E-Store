@@ -28,9 +28,15 @@ public class Product {
      * @param amount How many of this product is currently present
      */
     public Product(@JsonProperty("name") String name, @JsonProperty("id") int id, @JsonProperty("amount") int amount) {
+
+        if (amount <= 0) {
+            this.amount = 1;
+        } else {
+            this.amount = amount;
+        }
+
         this.name = name;
         this.id = id;
-        this.amount = amount;
     }
 
     /**
