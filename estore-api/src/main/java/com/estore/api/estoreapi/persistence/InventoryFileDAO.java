@@ -146,8 +146,9 @@ public class InventoryFileDAO implements InventoryDAO {
 
     @Override
     public Product[] searchProducts(String searchParam) throws IOException {
-        // TODO Auto-generated method stub
-        return null;
+        synchronized(inventory){
+            return getInventory(searchParam);
+        }
     }
 
     @Override
