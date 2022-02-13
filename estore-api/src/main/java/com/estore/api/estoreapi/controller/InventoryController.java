@@ -140,4 +140,26 @@ public class InventoryController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    /**
+     * Responds to the GET request for all {@linkplain Product products} which all share the 
+     * text input in their name
+     * 
+     * @param name The String being searched to find {@link Product products} with
+     * the string in the name
+     * 
+     * @return ResponseEntity with an array of {@link Product product} objects containing 
+     * the input String in their names (Array may be empty)
+     */
+    @GetMapping("/")
+    public ResponseEntity<Product[]> deleteProduct(@RequestParam String name){
+        LOG.info("GET /products/?name=" +name);
+        try{
+            Product[] products = inventoryDao.searchProducts(name);
+            return new ResponseEntity<Product[]>(products, HttpStatus.OK);
+        }
+        catch (IOException e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

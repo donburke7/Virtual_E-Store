@@ -184,8 +184,12 @@ public class InventoryFileDAO implements InventoryDAO {
 
     @Override
     public Boolean deleteProduct(int id) throws IOException {
-        // TODO Auto-generated method stub
-        return null;
+        synchronized (inventory) {
+            Product result = inventory.remove(id);
+            save();
+
+            return result == null;
+        }
     }
 
 }
