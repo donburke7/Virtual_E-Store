@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -139,6 +140,32 @@ public class InventoryController {
             Product[] products = inventoryDao.searchProducts(name);
             return new ResponseEntity<Product[]>(products, HttpStatus.OK);
         } catch (IOException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Updates the {@linkplain Product product} with the provided {@linkplain Product product} object, if it exists
+     * 
+     * @param product The {@link Product product} to update
+     * 
+     * @return ResponseEntity with updated {@link Product product} object and HTTP status of OK if updated<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @PutMapping("")
+    public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
+        LOG.info("PUT /product " + product);
+
+        // Replace below with your implementation
+        try {
+            Product producta = inventoryDao.updateProduct(product);
+            if (producta != null)
+                return new ResponseEntity<Product>(producta,HttpStatus.OK);
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

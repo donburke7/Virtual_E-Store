@@ -178,8 +178,16 @@ public class InventoryFileDAO implements InventoryDAO {
 
     @Override
     public Product updateProduct(Product product) throws IOException {
-        // TODO Auto-generated method stub
-        return null;
+        // TODO 
+        synchronized (inventory) {
+            if (inventory.containsKey(product.getID()) == false)
+                return null; // product does not exist
+            
+            inventory.put(product.getID(),product);
+            save(); // may throw an IOException
+            return product;
+        }
+        
     }
 
     @Override
