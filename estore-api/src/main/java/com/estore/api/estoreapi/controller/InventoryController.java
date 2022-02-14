@@ -150,7 +150,9 @@ public class InventoryController {
      * 
      * @return ResponseEntity with an array of {@link Product product} objects containing 
      * the input String in their names (Array may be empty)
-     */
+     *
+     *
+     *
     @GetMapping("/")
     public ResponseEntity<Product[]> deleteProduct(@RequestParam String name){
         LOG.info("GET /products/?name=" +name);
@@ -159,6 +161,22 @@ public class InventoryController {
             return new ResponseEntity<Product[]>(products, HttpStatus.OK);
         }
         catch (IOException e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    */
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
+        LOG.info("DELETE /products/?name=" + id);
+        try {
+            boolean deleted = inventoryDao.deleteProduct(id);
+            if (!deleted) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            } else {
+                return new ResponseEntity<Product>(HttpStatus.OK);
+            }
+        } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
