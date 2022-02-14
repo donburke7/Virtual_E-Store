@@ -11,6 +11,7 @@ import com.estore.api.estoreapi.persistence.InventoryDAO;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -120,53 +121,57 @@ public class InventoryController {
     }
 
     /**
-     * Responds to the GET request for all {@linkplain Product products} which all share the 
+     * Responds to the GET request for all {@linkplain Product products} which all
+     * share the
      * text input in their name
      * 
      * @param name The String being searched to find {@link Product products} with
-     * the string in the name
+     *             the string in the name
      * 
-     * @return ResponseEntity with an array of {@link Product product} objects containing 
-     * the input String in their names (Array may be empty)
+     * @return ResponseEntity with an array of {@link Product product} objects
+     *         containing
+     *         the input String in their names (Array may be empty)
      */
     @GetMapping("/")
-    public ResponseEntity<Product[]> searchProducts(@RequestParam String name){
-        LOG.info("GET /products/?name=" +name);
-        try{
+    public ResponseEntity<Product[]> searchProducts(@RequestParam String name) {
+        LOG.info("GET /products/?name=" + name);
+        try {
             Product[] products = inventoryDao.searchProducts(name);
             return new ResponseEntity<Product[]>(products, HttpStatus.OK);
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     /**
-     * Responds to the GET request for all {@linkplain Product products} which all share the 
+     * Responds to the GET request for all {@linkplain Product products} which all
+     * share the
      * text input in their name
      * 
      * @param name The String being searched to find {@link Product products} with
-     * the string in the name
+     *             the string in the name
      * 
-     * @return ResponseEntity with an array of {@link Product product} objects containing 
-     * the input String in their names (Array may be empty)
+     * @return ResponseEntity with an array of {@link Product product} objects
+     *         containing
+     *         the input String in their names (Array may be empty)
      *
      *
      *
-    @GetMapping("/")
-    public ResponseEntity<Product[]> deleteProduct(@RequestParam String name){
-        LOG.info("GET /products/?name=" +name);
-        try{
-            Product[] products = inventoryDao.searchProducts(name);
-            return new ResponseEntity<Product[]>(products, HttpStatus.OK);
-        }
-        catch (IOException e){
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-    */
+     *         @GetMapping("/")
+     *         public ResponseEntity<Product[]> deleteProduct(@RequestParam String
+     *         name){
+     *         LOG.info("GET /products/?name=" +name);
+     *         try{
+     *         Product[] products = inventoryDao.searchProducts(name);
+     *         return new ResponseEntity<Product[]>(products, HttpStatus.OK);
+     *         }
+     *         catch (IOException e){
+     *         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+     *         }
+     *         }
+     */
 
-    @GetMapping("/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
         LOG.info("DELETE /products/?name=" + id);
         try {
