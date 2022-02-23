@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Product {
     // The string format of this product, used in toString()
-    static final String STRING_FORMAT = "Product [id=%d, name=%s, amount=%d]";
+    static final String STRING_FORMAT = "Product [id=%d, name=%s, amount=%d, price=%2f]";
 
     @JsonProperty("name")
     private String name;
@@ -17,6 +17,9 @@ public class Product {
     private int id;
     @JsonProperty("amount")
     private int amount;
+
+    @JsonProperty("price")
+    private double price;
 
     /**
      * Constructor for the product class
@@ -26,13 +29,21 @@ public class Product {
      * @param name   The name of the product
      * @param id     The id of the product
      * @param amount How many of this product is currently present
+     * @param price
      */
-    public Product(@JsonProperty("name") String name, @JsonProperty("id") int id, @JsonProperty("amount") int amount) {
+    public Product(@JsonProperty("name") String name, @JsonProperty("id") int id,
+            @JsonProperty("amount") int amount, @JsonProperty("price") double price) {
 
         if (amount <= 0) {
             this.amount = 1;
         } else {
             this.amount = amount;
+        }
+
+        if (price <= 0) {
+            this.price = 1.00;
+        } else {
+            this.price = price;
         }
 
         this.name = name;
@@ -75,6 +86,10 @@ public class Product {
         this.amount = amount;
     }
 
+    public double getPrice() {
+        return this.price;
+    }
+
     /**
      * The overidden ToString() method
      * Creates a string that represents this instance
@@ -83,7 +98,7 @@ public class Product {
      */
     @Override
     public String toString() {
-        return String.format(STRING_FORMAT, this.id, this.name, this.amount);
+        return String.format(STRING_FORMAT, this.id, this.name, this.amount, this.price);
     }
 
 }

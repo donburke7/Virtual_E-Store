@@ -2,7 +2,6 @@ package com.estore.api.estoreapi.persistence;
 
 import java.io.EOFException;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,11 +10,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import com.estore.api.estoreapi.model.Product;
-import com.fasterxml.jackson.annotation.JsonFormat.Feature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 
-import org.springframework.beans.BeanInstantiationException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -169,7 +165,7 @@ public class InventoryFileDAO implements InventoryDAO {
     @Override
     public Product createProduct(Product product) throws IOException {
         synchronized (inventory) {
-            Product newProduct = new Product(product.getName(), nextID(), product.getAmount());
+            Product newProduct = new Product(product.getName(), nextID(), product.getAmount(), product.getPrice());
             inventory.put(newProduct.getID(), newProduct);
             save();
             return newProduct;
@@ -178,16 +174,16 @@ public class InventoryFileDAO implements InventoryDAO {
 
     @Override
     public Product updateProduct(Product product) throws IOException {
-        // TODO 
+        // TODO
         synchronized (inventory) {
             if (inventory.containsKey(product.getID()) == false)
                 return null; // product does not exist
-            
-            inventory.put(product.getID(),product);
+
+            inventory.put(product.getID(), product);
             save(); // may throw an IOException
             return product;
         }
-        
+
     }
 
     @Override

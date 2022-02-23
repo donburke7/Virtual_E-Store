@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.websocket.server.PathParam;
-
 import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.persistence.InventoryDAO;
 
@@ -145,13 +143,15 @@ public class InventoryController {
     }
 
     /**
-     * Updates the {@linkplain Product product} with the provided {@linkplain Product product} object, if it exists
+     * Updates the {@linkplain Product product} with the provided
+     * {@linkplain Product product} object, if it exists
      * 
      * @param product The {@link Product product} to update
      * 
-     * @return ResponseEntity with updated {@link Product product} object and HTTP status of OK if updated<br>
-     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
-     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     * @return ResponseEntity with updated {@link Product product} object and HTTP
+     *         status of OK if updated<br>
+     *         ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     *         ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PutMapping("")
     public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
@@ -161,7 +161,7 @@ public class InventoryController {
         try {
             Product producta = inventoryDao.updateProduct(product);
             if (producta != null)
-                return new ResponseEntity<Product>(producta,HttpStatus.OK);
+                return new ResponseEntity<Product>(producta, HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (IOException e) {
