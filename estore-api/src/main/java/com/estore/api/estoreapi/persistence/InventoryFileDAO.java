@@ -192,7 +192,7 @@ public class InventoryFileDAO implements InventoryDAO {
             Product result = inventory.remove(id);
             save();
 
-            return result == null;
+            return result != null;
         }
     }
 

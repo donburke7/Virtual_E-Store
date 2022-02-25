@@ -203,7 +203,7 @@ public class InventoryController {
         LOG.info("DELETE /products/?name=" + id);
         try {
             boolean deleted = inventoryDao.deleteProduct(id);
-            if (deleted) {
+            if (!deleted) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             } else {
                 return new ResponseEntity<Product>(HttpStatus.OK);
