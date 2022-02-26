@@ -86,8 +86,22 @@ public class Product {
         this.amount = amount;
     }
 
+    /**
+     * Gets the price of this item
+     * 
+     * @return the price of this item as a double
+     */
     public double getPrice() {
         return this.price;
+    }
+
+    /**
+     * Sets the price of this product
+     * 
+     * @param price the price to be
+     */
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     /**
