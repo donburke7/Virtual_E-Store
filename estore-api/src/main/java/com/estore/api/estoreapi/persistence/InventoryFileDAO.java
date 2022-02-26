@@ -15,6 +15,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+/**
+ * Implements the functionality for JSON file-based peristance for Inventory
+ * 
+ * {@literal @}Component Spring annotation instantiates a single instance of this
+ * class and injects the instance into other classes as needed
+ * 
+ * @author team-4-jadin
+ */
 @Component
 public class InventoryFileDAO implements InventoryDAO {
 
@@ -84,6 +92,14 @@ public class InventoryFileDAO implements InventoryDAO {
         int id = nextId;
         ++nextId;
         return id;
+    }
+    
+    /**
+     * Gets value of nextID
+     * @return the next id
+     */
+    public int getNextID() {
+        return nextID();
     }
 
     /**
