@@ -17,7 +17,10 @@ public class ShoppingCart {
 
     @JsonCreator
     public ShoppingCart(@JsonProperty("items") Map<Integer, Product> items) {
-        this.items = items;
+        // items can be null indicating this should be a new empty cart
+        if (items != null) {
+            this.items = items;
+        }
     }
 
     /**
@@ -39,6 +42,11 @@ public class ShoppingCart {
      */
     public Product removeProduct(int id) {
         return items.remove(id);
+    }
+
+    public void clearCart() {
+        this.items.clear();
+
     }
 
 }
