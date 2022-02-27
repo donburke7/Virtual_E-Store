@@ -95,14 +95,6 @@ public class InventoryFileDAO implements InventoryDAO {
     }
     
     /**
-     * Gets value of nextID
-     * @return the next id
-     */
-    public int getNextID() {
-        return nextID();
-    }
-
-    /**
      * Given a string, search and find all {@link Product} that matches the string
      * 
      * @param searchParameter a string to use to search for {@link Product}

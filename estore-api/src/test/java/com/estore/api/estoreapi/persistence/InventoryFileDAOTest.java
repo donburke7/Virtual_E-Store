@@ -63,12 +63,4 @@ public class InventoryFileDAOTest {
             e.printStackTrace();
         }
     }
-
-    // not finished
-    public void testNextID() {
-        // Invoke
-        int nextID;
-        nextID = inventoryFileDAO.getNextID();
-        // assertEquals(nextID, testInventory[0]);
-    }
 }
