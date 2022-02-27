@@ -52,7 +52,7 @@ public class ProductTest {
         String name = "Magic Bean";
         int amount = 100;
         double price = 489.01;
-        String expected_string = String.format(Product.STRING_FORMAT, id, name);
+        String expected_string = String.format(Product.STRING_FORMAT, id, name, amount, price);
 
         Product bean = new Product(name, id, amount, price);
 
