@@ -15,6 +15,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Unit testing for the InventoryFileDAO class
+ * 
+ * @author Team jadin
+ */
 @Tag("InventoryFileDAO")
 public class InventoryFileDAOTest {
 
