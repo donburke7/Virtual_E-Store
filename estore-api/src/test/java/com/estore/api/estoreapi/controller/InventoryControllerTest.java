@@ -7,8 +7,8 @@ import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 
-import com.estore.api.estoreapi.persistence.InventoryDAO;
 import com.estore.api.estoreapi.model.Product;
+import com.estore.api.estoreapi.persistence.Inventory.InventoryDAO;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;

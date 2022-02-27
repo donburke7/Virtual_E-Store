@@ -5,7 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.estore.api.estoreapi.model.Product;
-import com.estore.api.estoreapi.persistence.InventoryDAO;
+import com.estore.api.estoreapi.persistence.Inventory.InventoryDAO;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -165,7 +165,6 @@ public class InventoryController {
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

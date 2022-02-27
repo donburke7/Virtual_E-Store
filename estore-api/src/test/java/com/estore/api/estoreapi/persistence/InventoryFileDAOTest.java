@@ -1,14 +1,14 @@
 package com.estore.api.estoreapi.persistence;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 import com.estore.api.estoreapi.model.Product;
+import com.estore.api.estoreapi.persistence.Inventory.InventoryDAO;
+import com.estore.api.estoreapi.persistence.Inventory.InventoryFileDAO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.BeforeEach;
