@@ -18,7 +18,8 @@ import org.springframework.stereotype.Component;
 /**
  * Implements the functionality for JSON file-based peristance for Inventory
  * 
- * {@literal @}Component Spring annotation instantiates a single instance of this
+ * {@literal @}Component Spring annotation instantiates a single instance of
+ * this
  * class and injects the instance into other classes as needed
  * 
  * @author team-4-jadin
@@ -42,7 +43,7 @@ public class InventoryFileDAO implements InventoryDAO {
     public InventoryFileDAO(@Value("${inventory.file}") String filename, ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;
-        load(); // load the heroes from the file
+        load(); // load the products from the file
     }
 
     /**
@@ -93,9 +94,10 @@ public class InventoryFileDAO implements InventoryDAO {
         ++nextId;
         return id;
     }
-    
+
     /**
      * Gets value of nextID
+     * 
      * @return the next id
      */
     public int getNextID() {
@@ -208,6 +210,7 @@ public class InventoryFileDAO implements InventoryDAO {
             Product result = inventory.remove(id);
             save();
 
+            // return true if the result was found
             return result != null;
         }
     }
