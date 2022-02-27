@@ -105,14 +105,50 @@ public class Product {
     }
 
     /**
-     * The overidden ToString() method
-     * Creates a string that represents this instance
-     * 
-     * @return a string that represents this object
+     * {@inheritDoc}
      */
     @Override
     public String toString() {
         return String.format(STRING_FORMAT, this.id, this.name, this.amount, this.price);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+
+        if (obj == null) {
+            return false;
+        }
+
+        // check to see if the classes are the same
+        if (obj.getClass() == Product.class) {
+            final Product other = (Product) obj;
+
+            // check to see if the attributes are the same
+            if (other.name.equals(this.name) &&
+                    other.price == this.price &&
+                    other.amount == this.amount &&
+                    other.id == this.id) {
+
+                return true;
+            } else {
+                return false;
+            }
+
+        } else {
+            return false;
+        }
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return (this.name.hashCode() + this.amount + this.id);
     }
 
 }
