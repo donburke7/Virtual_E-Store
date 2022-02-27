@@ -21,7 +21,7 @@ import org.springframework.http.ResponseEntity;
  * 
  * @author Team jadin
  */
-@Tag("InventoryController")
+@Tag("Controller-tier")
 public class InventoryControllerTest {
     private InventoryController inventoryController;
     private InventoryDAO mockInventoryDAO;

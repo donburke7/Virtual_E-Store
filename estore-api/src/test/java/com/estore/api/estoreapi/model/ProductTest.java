@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Team jadin
  */
-@Tag("Product")
+@Tag("Model-tier")
 public class ProductTest {
 
     @Test

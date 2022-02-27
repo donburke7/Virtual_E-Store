@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Team jadin
  */
-@Tag("InventoryFileDAO")
+@Tag("Persistence-tier")
 public class InventoryFileDAOTest {
 
     private InventoryDAO inventoryDAO;
