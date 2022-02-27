@@ -1,17 +1,12 @@
 package com.estore.api.estoreapi.persistence;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 import com.estore.api.estoreapi.model.Product;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,46 +16,52 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 /**
- * Test the Inventory File DAO class
+ * Unit testing for the InventoryFileDAO class
  * 
- * @author Donald Burke
+ * @author Team jadin
  */
+@Tag("InventoryFileDAO")
 public class InventoryFileDAOTest {
-    InventoryFileDAO inventoryFileDAO;
-    Product[] testInventory;
-    ObjectMapper mockObjectMapper;
 
-    /**
-     * Before each test, we will create and inject a Mock Object Mapper to
-     * isolate the tests from the underlying file
-     * @throws IOException
-     */
+    private InventoryDAO inventoryDAO;
+
+    private Product[] testProducts = {
+            // Initialize testProducts
+            new Product("Green Beans", 0, 0, 0),
+            new Product("Blue Beans", 1, 0, 0),
+            new Product("Cow Beans", 2, 0, 0)
+    };
+
     @BeforeEach
-    public void setupHeroFileDAO() throws IOException {
-        mockObjectMapper = mock(ObjectMapper.class);
-        testInventory = new Product[3];
-        testInventory[0] = new Product("Magic Bean", 99, 100, 489.10);
-        testInventory[1] = new Product("Not Magic Bean", 100, 200, 489.20);
-        testInventory[2] = new Product("Relatively Magic Bean", 101, 300, 489.30);
+    public void InventoryFileDAOSetup() throws IOException {
+        // Initialize a test inventory file
+        String filepath = "testInventory.json";
 
-        // When the object mapper is supposed to read from the file
-        // the mock object mapper will return the hero array above
-        when(mockObjectMapper.readValue(new File("doesnt_matter.txt"), Product[].class))
-            .thenReturn(testInventory);
-        inventoryFileDAO = new InventoryFileDAO("doesnt_matter.txt", mockObjectMapper);
+        File file = new File(filepath);
+        file.createNewFile();
+
+        // create an object mapper as well as use it to write the array of test products
+        // into a json file
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.writeValue(file, testProducts);
+
+        // load up an InventoryDAO with the newly created test inventory
+        inventoryDAO = new InventoryFileDAO(filepath, new ObjectMapper());
+
     }
 
     @Test
-    @Tag("Persistence-tier")
-    public void testGetProduct() {
-        // Invoke
-        Product inventory;
-        try {
-            inventory = inventoryFileDAO.getProduct(100);
-            // Analzye
-            assertEquals(inventory, testInventory[0]);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void testgetProducts() throws IOException {
+
+        Product[] products = inventoryDAO.getProducts();
+
+        // we use Arrays.equals here instead of simply using assertEqual
+        // since the two arrays that we ahve will have the same objects in them
+        // but each object will have a different id (memory thing) thus a simple
+        // object.equals
+        // will fail in this case since the two arrays are not exactly the same
+        assertTrue(Arrays.equals(products, testProducts));
+
     }
+
 }

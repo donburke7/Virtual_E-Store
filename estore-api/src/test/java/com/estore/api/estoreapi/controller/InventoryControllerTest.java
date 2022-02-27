@@ -19,9 +19,9 @@ import org.springframework.http.ResponseEntity;
 /**
  * Test the Product Controller class
  * 
- * @author SWEN Faculty
+ * @author Team jadin
  */
-@Tag("Controller-tier")
+@Tag("InventoryController")
 public class InventoryControllerTest {
     private InventoryController inventoryController;
     private InventoryDAO mockInventoryDAO;
@@ -186,7 +186,7 @@ public class InventoryControllerTest {
         Product[] Productes = new Product[2];
         Productes[0] = new Product("Yellow Beans", 99, 1, 1.0);
         Productes[1] = new Product("Space Beans", 100, 1, 1.0);
-        ;
+
         // When getProducts is called return the Productes created above
         when(mockInventoryDAO.getProducts()).thenReturn(Productes);
 
