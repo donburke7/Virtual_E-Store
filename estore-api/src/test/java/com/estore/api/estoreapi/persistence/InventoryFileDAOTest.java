@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 import com.estore.api.estoreapi.model.Product;
@@ -62,6 +61,15 @@ public class InventoryFileDAOTest {
         // will fail in this case since the two arrays are not exactly the same
         assertTrue(Arrays.equals(products, testProducts));
 
+    }
+
+    @Test
+    public void testsearchProducts() throws IOException {
+        // Searches for 'Cow' in the products
+        Product[] products = inventoryDAO.searchProducts("Cow");
+        
+        // Affirms that a found product is the same as the 'Cow Beans' product
+        assertEquals(products[0], testProducts[2]);
     }
 
 }
