@@ -72,4 +72,14 @@ public class InventoryFileDAOTest {
         assertEquals(products[0], testProducts[2]);
     }
 
+    @Test
+    public void testgetProduct() throws IOException {
+        int testID = 1;
+        // Get product with id of 1
+        Product product = inventoryDAO.getProduct(testID);
+
+        // Affirms that the product relating to testID is retrieved
+        assertEquals(product, testProducts[1]);
+    }
+
 }
