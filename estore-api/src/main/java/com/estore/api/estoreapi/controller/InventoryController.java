@@ -165,7 +165,6 @@ public class InventoryController {
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

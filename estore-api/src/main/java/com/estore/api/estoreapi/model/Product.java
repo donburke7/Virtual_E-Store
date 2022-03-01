@@ -143,12 +143,4 @@ public class Product {
 
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int hashCode() {
-        return (this.name.hashCode() + this.amount + this.id);
-    }
-
 }
