@@ -83,13 +83,33 @@ public class InventoryFileDAOTest {
     }
 
     @Test
-    public void testgetProduct() throws IOException {
-        int testID = 1;
-        // Get product with id of 1
-        Product product = inventoryDAO.getProduct(testID);
+    public void testupdateProductFail() throws IOException {
+        
+        // Product to be updated
+        Product testProduct = new Product("Bean1", 4, 3, 5);
+        
+        // Result of the updateProduct function
+        // Should return null if no product was found
+        // Should return the updated product if one was updated
+        Product result = inventoryDAO.updateProduct(testProduct);
 
-        // Affirms that the product relating to testID is retrieved
-        assertEquals(product, testProducts[1]);
+        // Ensures the result is null
+        assertEquals(null, result);
+    }
+
+    @Test
+    public void testupdateProductPass() throws IOException {
+
+        // Product to be updated
+        Product testProduct = new Product("Bean1", 2, 4, 10);
+
+        // Result of the updateProduct function
+        // Should return null if no product was found
+        // Should return the updated product if one was updated
+        Product result = inventoryDAO.updateProduct(testProduct);
+
+        // Ensures the result is the same as the product input
+        assertEquals(testProduct, result);
     }
     @Test
     public void testCreateProducts() throws IOException {
@@ -110,4 +130,33 @@ public class InventoryFileDAOTest {
     }
 
 
+    @Test
+    public void testdeleteProductFail() throws IOException{
+
+        // Product to be deleted
+        int testID = 4;
+
+        // Result of the deleteProduct functino
+        // Should return false if no product was found
+        // Should return true if product was deleted
+        Boolean result = inventoryDAO.deleteProduct(testID);
+
+        // Ensures the result is false
+        assertEquals(false, result);
+    }
+
+    @Test
+    public void testdeleteProductPass() throws IOException{
+        
+        // Product to be deleted
+        int testID = 0;
+
+        // Result of the deleteProduct functino
+        // Should return false if no product was found
+        // Should return true if product was deleted
+        Boolean result = inventoryDAO.deleteProduct(testID);
+        
+        // Ensures the result is true
+        assertEquals(true, result);
+    }
 }
