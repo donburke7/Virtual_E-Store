@@ -1,6 +1,7 @@
 package com.estore.api.estoreapi.model;
 
 import java.util.Map;
+import java.util.TreeMap;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -20,6 +21,10 @@ public class ShoppingCart {
         // items can be null indicating this should be a new empty cart
         if (items != null) {
             this.items = items;
+        }
+
+        else {
+            this.items = new TreeMap<Integer, Product>();
         }
     }
 
@@ -47,6 +52,10 @@ public class ShoppingCart {
     public void clearCart() {
         this.items.clear();
 
+    }
+
+    public Map<Integer, Product> getItems() {
+        return this.items;
     }
 
 }
