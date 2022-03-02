@@ -66,6 +66,15 @@ public class Customer extends User {
     }
 
     /**
+     * Returns the users {@linkplain ShoppingCart cart}
+     * 
+     * @return the {@linkplain ShoppingCart cart}
+     */
+    public ShoppingCart getCart() {
+        return this.cart;
+    }
+
+    /**
      * executes checkout methods once implemented
      */
     public void checkout() {
