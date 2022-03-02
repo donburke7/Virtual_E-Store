@@ -1,4 +1,4 @@
-package com.estore.api.estoreapi.persistence;
+package com.estore.api.estoreapi.persistence.Inventory;
 
 import java.io.EOFException;
 import java.io.File;
