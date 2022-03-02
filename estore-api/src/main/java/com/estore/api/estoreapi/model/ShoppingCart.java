@@ -28,6 +28,7 @@ public class ShoppingCart {
         }
     }
 
+
     /**
      * Adds a {@linkplain Product product} to the shopping cart of this user
      * 

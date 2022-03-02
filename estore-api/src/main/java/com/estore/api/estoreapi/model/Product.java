@@ -143,4 +143,8 @@ public class Product {
 
     }
 
+    public Product removeProduct(int id2) {
+        return null;
+    }
+
 }
