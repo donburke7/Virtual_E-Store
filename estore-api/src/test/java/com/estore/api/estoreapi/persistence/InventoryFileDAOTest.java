@@ -7,23 +7,19 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import com.estore.api.estoreapi.model.Product;
-import com.estore.api.estoreapi.persistence.Inventory.InventoryDAO;
 import com.estore.api.estoreapi.persistence.Inventory.InventoryFileDAO;
+import com.estore.api.estoreapi.persistence.Inventory.InventoryDAO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties.Io;
+
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * Unit testing for the InventoryFileDAO class
@@ -112,24 +108,6 @@ public class InventoryFileDAOTest {
         // Ensures the result is the same as the product input
         assertEquals(testProduct, result);
     }
-    @Test
-    public void testCreateProducts() throws IOException {
-        // Setup
-        Product test = new Product("Green-bean",11, 30, 3.00);
-
-        // Invoke
-        Product result = assertDoesNotThrow(() -> inventoryDAO.createProduct(test),
-                                "Unexpected exception thrown");
-
-        // Analyze
-        assertNotNull(result);
-        Product actual = inventoryDAO.getProduct(test.getID());
-        assertEquals(actual.getID(),test.getID());
-        assertEquals(actual.getName(),test.getName());
-        assertEquals(actual.getAmount(),test.getAmount());
-        assertEquals(actual.getPrice(),test.getPrice());
-    }
-
 
     @Test
     public void testdeleteProductFail() throws IOException{
