@@ -183,7 +183,6 @@ public class InventoryFileDAO implements InventoryDAO {
 
     @Override
     public Product updateProduct(Product product) throws IOException {
-        // TODO
         synchronized (inventory) {
             if (inventory.containsKey(product.getID()) == false)
                 return null; // product does not exist
