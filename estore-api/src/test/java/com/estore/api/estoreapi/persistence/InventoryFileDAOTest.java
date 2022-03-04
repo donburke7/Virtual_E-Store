@@ -130,7 +130,6 @@ public class InventoryFileDAOTest {
         assertEquals(actual.getPrice(),test.getPrice());
     }
 
-
     @Test
     public void testdeleteProductFail() throws IOException{
 

@@ -8,8 +8,10 @@ import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.model.ShoppingCart;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@Tag("Model-Tier")
 public class CustomerTest {
 
     ShoppingCart testShoppingCart;
