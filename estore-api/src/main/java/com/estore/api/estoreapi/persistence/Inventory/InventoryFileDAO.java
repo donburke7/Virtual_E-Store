@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import com.estore.api.estoreapi.model.Product;
+import com.estore.api.estoreapi.persistence.JsonUtilities;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -28,9 +29,9 @@ import org.springframework.stereotype.Component;
 public class InventoryFileDAO implements InventoryDAO {
 
     Map<Integer, Product> inventory; // local data storage of the inventory
-    private ObjectMapper objectMapper; // provides conversion between JSON files to object
     private static int nextId; // the next id to use for a new product
     private String filename; // the file to read and write to
+    private JsonUtilities jsonUtilities;
 
     /**
      * Creates an Inventory File Data Access Object
@@ -40,9 +41,9 @@ public class InventoryFileDAO implements InventoryDAO {
      * 
      * @throws IOException when file cannot be accessed or read from
      */
-    public InventoryFileDAO(@Value("${inventory.file}") String filename, ObjectMapper objectMapper) throws IOException {
+    public InventoryFileDAO(@Value("${inventory.file}") String filename, JsonUtilities jsonUtilities) throws IOException {
         this.filename = filename;
-        this.objectMapper = objectMapper;
+        this.jsonUtilities = jsonUtilities;
         load(); // load the products from the file
     }
 
@@ -64,17 +65,18 @@ public class InventoryFileDAO implements InventoryDAO {
             String inventoryJSONString = Files.readString(Path.of(filename));
 
             if (inventoryJSONString.length() > 0) {
-                Product[] products = objectMapper.readValue(inventoryJSONString, Product[].class);
-
+                Product[] products = jsonUtilities.DeserializeObject(inventoryJSONString, Product[].class);
                 // add every product that was just recently deserialized to the local storage
                 // inventory
-                for (Product product : products) {
-                    inventory.put(product.getID(), product);
-                    if (product.getID() > nextId) {
-                        nextId = product.getID();
+                if (products.length > 0) {
+                    for (Product product : products) {
+                        inventory.put(product.getID(), product);
+                        if (product.getID() > nextId) {
+                            nextId = product.getID();
+                        }
                     }
+                    ++nextId;
                 }
-                ++nextId;
             }
 
         } catch (EOFException e) {
@@ -142,7 +144,7 @@ public class InventoryFileDAO implements InventoryDAO {
 
         // serializes the entire inventory into a file
         // whose path was initially passed into this class
-        objectMapper.writeValue(new File(filename), products);
+        jsonUtilities.SerializeObject(filename, products);
         return true;
 
     }

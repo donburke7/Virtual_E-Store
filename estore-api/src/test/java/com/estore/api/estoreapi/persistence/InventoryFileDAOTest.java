@@ -18,12 +18,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * Unit testing for the InventoryFileDAO class
@@ -56,7 +50,7 @@ public class InventoryFileDAOTest {
         objectMapper.writeValue(file, testProducts);
 
         // load up an InventoryDAO with the newly created test inventory
-        inventoryDAO = new InventoryFileDAO(filepath, new ObjectMapper());
+        inventoryDAO = new InventoryFileDAO(filepath, new JsonUtilities());
 
     }
 
@@ -115,19 +109,15 @@ public class InventoryFileDAOTest {
     @Test
     public void testCreateProducts() throws IOException {
         // Setup
-        Product test = new Product("Green-bean",11, 30, 3.00);
+        Product test = new Product("Green-bean", 3, 30, 3.00);
 
         // Invoke
-        Product result = assertDoesNotThrow(() -> inventoryDAO.createProduct(test),
-                                "Unexpected exception thrown");
+        Product result = inventoryDAO.createProduct(test);
 
-        // Analyze
-        assertNotNull(result);
+        //analyze
+        assertEquals(test, result);
         Product actual = inventoryDAO.getProduct(test.getID());
-        assertEquals(actual.getID(),test.getID());
-        assertEquals(actual.getName(),test.getName());
-        assertEquals(actual.getAmount(),test.getAmount());
-        assertEquals(actual.getPrice(),test.getPrice());
+        assertEquals(test, actual);
     }
 
     @Test
