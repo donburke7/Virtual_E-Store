@@ -7,8 +7,8 @@ import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 
-import com.estore.api.estoreapi.persistence.InventoryDAO;
 import com.estore.api.estoreapi.model.Product;
+import com.estore.api.estoreapi.persistence.Inventory.InventoryDAO;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -19,7 +19,7 @@ import org.springframework.http.ResponseEntity;
 /**
  * Test the Product Controller class
  * 
- * @author SWEN Faculty
+ * @author Team jadin
  */
 @Tag("Controller-tier")
 public class InventoryControllerTest {
@@ -186,7 +186,7 @@ public class InventoryControllerTest {
         Product[] Productes = new Product[2];
         Productes[0] = new Product("Yellow Beans", 99, 1, 1.0);
         Productes[1] = new Product("Space Beans", 100, 1, 1.0);
-        ;
+
         // When getProducts is called return the Productes created above
         when(mockInventoryDAO.getProducts()).thenReturn(Productes);
 

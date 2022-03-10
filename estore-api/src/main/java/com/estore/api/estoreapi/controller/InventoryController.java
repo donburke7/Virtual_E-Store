@@ -5,7 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.estore.api.estoreapi.model.Product;
-import com.estore.api.estoreapi.persistence.InventoryDAO;
+import com.estore.api.estoreapi.persistence.Inventory.InventoryDAO;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -167,48 +167,28 @@ public class InventoryController {
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     /**
-     * Responds to the GET request for all {@linkplain Product products} which all
-     * share the
-     * text input in their name
+     * Deletes a {@linkplain Product product} with the given id
      * 
-     * @param name The String being searched to find {@link Product products} with
-     *             the string in the name
+     * @param id The id of the {@linkplain Product product}to deleted
      * 
-     * @return ResponseEntity with an array of {@link Product product} objects
-     *         containing
-     *         the input String in their names (Array may be empty)
-     *
-     *
-     *
-     *         @GetMapping("/")
-     *         public ResponseEntity<Product[]> deleteProduct(@RequestParam String
-     *         name){
-     *         LOG.info("GET /products/?name=" +name);
-     *         try{
-     *         Product[] products = inventoryDao.searchProducts(name);
-     *         return new ResponseEntity<Product[]>(products, HttpStatus.OK);
-     *         }
-     *         catch (IOException e){
-     *         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-     *         }
-     *         }
+     * @return ResponseEntity HTTP status of OK if deleted<br>
+     *         ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     *         ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
         LOG.info("DELETE /products/?name=" + id);
         try {
             boolean deleted = inventoryDao.deleteProduct(id);
-            if (!deleted) {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            } else {
+            if (deleted) {
                 return new ResponseEntity<Product>(HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

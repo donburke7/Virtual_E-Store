@@ -86,19 +86,65 @@ public class Product {
         this.amount = amount;
     }
 
+    /**
+     * Gets the price of this item
+     * 
+     * @return the price of this item as a double
+     */
     public double getPrice() {
         return this.price;
     }
 
     /**
-     * The overidden ToString() method
-     * Creates a string that represents this instance
+     * Sets the price of this product
      * 
-     * @return a string that represents this object
+     * @param price the price to be
+     */
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    /**
+     * {@inheritDoc}
      */
     @Override
     public String toString() {
         return String.format(STRING_FORMAT, this.id, this.name, this.amount, this.price);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+
+        if (obj == null) {
+            return false;
+        }
+
+        // check to see if the classes are the same
+        if (obj.getClass() == Product.class) {
+            final Product other = (Product) obj;
+
+            // check to see if the attributes are the same
+            if (other.name.equals(this.name) &&
+                    other.price == this.price &&
+                    other.amount == this.amount &&
+                    other.id == this.id) {
+
+                return true;
+            } else {
+                return false;
+            }
+
+        } else {
+            return false;
+        }
+
+    }
+
+    public Product removeProduct(int id2) {
+        return null;
     }
 
 }

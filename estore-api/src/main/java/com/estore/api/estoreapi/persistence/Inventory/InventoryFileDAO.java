@@ -1,4 +1,4 @@
-package com.estore.api.estoreapi.persistence;
+package com.estore.api.estoreapi.persistence.Inventory;
 
 import java.io.EOFException;
 import java.io.File;
@@ -15,6 +15,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+/**
+ * Implements the functionality for JSON file-based peristance for Inventory
+ * 
+ * {@literal @}Component Spring annotation instantiates a single instance of
+ * this
+ * class and injects the instance into other classes as needed
+ * 
+ * @author team-4-jadin
+ */
 @Component
 public class InventoryFileDAO implements InventoryDAO {
 
@@ -34,7 +43,7 @@ public class InventoryFileDAO implements InventoryDAO {
     public InventoryFileDAO(@Value("${inventory.file}") String filename, ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;
-        load(); // load the heroes from the file
+        load(); // load the products from the file
     }
 
     /**
@@ -174,7 +183,6 @@ public class InventoryFileDAO implements InventoryDAO {
 
     @Override
     public Product updateProduct(Product product) throws IOException {
-        // TODO
         synchronized (inventory) {
             if (inventory.containsKey(product.getID()) == false)
                 return null; // product does not exist
@@ -192,6 +200,7 @@ public class InventoryFileDAO implements InventoryDAO {
             Product result = inventory.remove(id);
             save();
 
+            // return true if the result was found
             return result != null;
         }
     }

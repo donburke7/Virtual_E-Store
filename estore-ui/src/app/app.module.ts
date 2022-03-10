@@ -8,6 +8,7 @@ import { UserStoreComponent } from './user-store/user-store.component';
 import { AdminStoreComponent } from './admin-store/admin-store.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { InventoryComponent } from './inventory/inventory.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
     ShoppingCartComponent,
     UserLoginComponent,
     UserStoreComponent,
-    AdminStoreComponent
+    AdminStoreComponent,
+    InventoryComponent,
   ],
   imports: [
     BrowserModule,
