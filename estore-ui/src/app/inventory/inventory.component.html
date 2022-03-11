@@ -1,1 +1,8 @@
 <p>inventory works!</p>
+
+
+<ul>
+    <li *ngFor="let product of inventory">
+        <span>{{product.id}}</span>{{product.name}}
+    </li>
+</ul>
