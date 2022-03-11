@@ -56,7 +56,7 @@ public class ShoppingCartTest {
     public void testClearCart() {
         testShoppingCart.clearCart();
 
-        assertEquals(0, testShoppingCart.getItems().size());
+        assertEquals(0, testShoppingCart.getItems().length);
 
     }
 

@@ -5,6 +5,12 @@ import com.estore.api.estoreapi.model.ShoppingCart;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * The customer class
+ * A class that represents a user that contains a shopping cart and can buy products from the shop
+ * 
+ * @author Alen Van
+ */
 public class Customer extends User {
 
     @JsonProperty("cart")
@@ -61,17 +67,17 @@ public class Customer extends User {
     /**
      * clears the {@linkplain ShoppingCart cart}
      */
-    public void clearCart() {
-        this.cart.clearCart();
+    public boolean clearCart() {
+        return this.cart.clearCart();
     }
 
     /**
-     * Returns the users {@linkplain ShoppingCart cart}
+     * Returns the user's {@linkplain ShoppingCart cart}
      * 
      * @return the {@linkplain ShoppingCart cart}
      */
-    public ShoppingCart getCart() {
-        return this.cart;
+    public Product[] getCart() {
+        return this.cart.getItems();
     }
 
     /**

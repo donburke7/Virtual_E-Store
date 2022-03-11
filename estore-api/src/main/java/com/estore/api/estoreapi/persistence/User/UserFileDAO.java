@@ -16,9 +16,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.w3c.dom.UserDataHandler;
 
+/**
+ * The file that manipulates the saved data that correlates specifically to the making and deletions of 
+ * an entire user.
+ * 
+ * {@Literal @Component} is a spring annotation that indicates that this class is to be instantiated
+ * and inserted into any class that needs it upon starting.
+ * 
+ * @author Alen Van
+ */
 @Component
-public class UserFileDAO {
+public class UserFileDAO implements UserDAO {
 
     Map<String, User> users; // local data storage of the inventory
     // to object
@@ -40,7 +50,7 @@ public class UserFileDAO {
     }
 
     /**
-     * Loads all users that were in the file that was passed in
+     * Loads all {@linkplain User users} that were in the file that was passed in
      * Deserialize all JSON products and saves it into a local storage for easy
      * access
      * 
@@ -72,10 +82,10 @@ public class UserFileDAO {
     }
     
     /**
-     * saves the list of users
+     * saves the list of {@linkplain User users}
      *
      * @return a true indicating the save was successful
-     *          An exception if an error occured
+     *         An exception if an error occured
      */
     private boolean save() throws IOException {
         User[] userList = getUsers();
@@ -86,25 +96,10 @@ public class UserFileDAO {
     }
 
     /**
-     * Adds a product to the user's shopping cart if the user is not the admin
+     * creates and returns an array of all the {@linkplain User users} listed in the
+     * system
      * 
-     * @param user    the user to save a product to
-     * @param product the product to add
-     * @return the product that was added, null if otherwise
-     */
-    public Product addProduct(User user, Product product) {
-        if (user.toString() != "admin") {
-            Customer currUser = (Customer) user;
-            return currUser.addProduct(product);
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * temporary method to get the list of users
-     * 
-     * @return an array of users
+     * @return an array of {@link User users}
      */
     public User[] getUsers() {
         //init
@@ -120,22 +115,57 @@ public class UserFileDAO {
         userList.toArray(result);
         return result;
 
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public User addUser(String username) throws IOException {
+        synchronized (users) {
+            User newUser = new User(username);
+            users.put(username, newUser);
+            save();
+            return newUser;
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public User getUser(String username) throws IOException {
+        synchronized (users) {
+            User currUser;
+            if (users.containsKey(username)) {
+                currUser = users.get(username);
+            } else {
+                currUser = addUser(username);
+            }
+
+            return currUser;
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Boolean deleteUser(String username) throws IOException {
+        synchronized (users) {
+            User currUser = users.remove(username);
+            save();
+            return currUser != null;
+        }
     } 
 
     /**
-     * Removes a product from a user's shopping cart if the user is not the admin
-     * 
-     * @param user the user to request a product removal
-     * @param id   the id to search for to find the associated product to remove
-     * @return the product that was removed
+     * {@inheritDoc}
      */
-    public Product removeProduct(User user, int id) {
-        if (user.toString() != "admin") {
-            Customer currUser = (Customer) user;
-            return currUser.removeProduct(id);
-        } else {
-            return null;
-        }
+    @Override
+    public Boolean saveUsers() throws IOException {
+        return this.save();
     }
+    
 
 }

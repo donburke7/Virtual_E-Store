@@ -148,7 +148,10 @@ public class InventoryFileDAO implements InventoryDAO {
         return true;
 
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Product getProduct(int id) throws IOException {
         synchronized (inventory) {
@@ -166,6 +169,9 @@ public class InventoryFileDAO implements InventoryDAO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Product[] searchProducts(String searchParam) throws IOException {
         synchronized (inventory) {
@@ -173,6 +179,9 @@ public class InventoryFileDAO implements InventoryDAO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Product createProduct(Product product) throws IOException {
         synchronized (inventory) {
@@ -183,6 +192,9 @@ public class InventoryFileDAO implements InventoryDAO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Product updateProduct(Product product) throws IOException {
         synchronized (inventory) {
@@ -196,6 +208,9 @@ public class InventoryFileDAO implements InventoryDAO {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Boolean deleteProduct(int id) throws IOException {
         synchronized (inventory) {

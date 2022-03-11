@@ -4,6 +4,12 @@ import com.estore.api.estoreapi.model.ShoppingCart;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * The parents class of the admin and customer class
+ * This class represents any user that interacts with the website
+ * 
+ * @author Alen Van
+ */
 public class User {
 
     @JsonProperty
@@ -22,10 +28,18 @@ public class User {
         this.username = username;
     }
 
+    /**
+     * returns the string that represents the user, also known as the username
+     * 
+     * @return a string representing this user's username
+     */
     public String getUsername() {
         return this.username;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object object) {
         if (object.getClass() == this.getClass()) {
