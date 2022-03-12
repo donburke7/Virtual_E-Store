@@ -5,7 +5,6 @@ import java.io.IOException;
 import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.model.ShoppingCart;
 import com.estore.api.estoreapi.model.Users.Customer;
-import com.estore.api.estoreapi.model.Users.User;
 
 /**
  * The interface that holds the abstracted methods for the {@linkplain ShoppingCartFileDAO} class

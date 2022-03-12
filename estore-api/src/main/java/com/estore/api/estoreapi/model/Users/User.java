@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class User {
 
+    public static final String ADMIN = "admin";
     @JsonProperty
     String username;
 

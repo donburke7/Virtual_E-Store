@@ -8,15 +8,12 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.model.Users.Customer;
 import com.estore.api.estoreapi.model.Users.User;
 import com.estore.api.estoreapi.persistence.JsonUtilities;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.w3c.dom.UserDataHandler;
 
 /**
  * The file that manipulates the saved data that correlates specifically to the making and deletions of 
@@ -30,7 +27,8 @@ import org.w3c.dom.UserDataHandler;
 @Component
 public class UserFileDAO implements UserDAO {
 
-    Map<String, User> users; // local data storage of the inventory
+    Map<String, Customer> customers; // local data storage of the inventory
+    User admin;
     // to object
     private String filename; // the file to read and write to
     private JsonUtilities jsonUtilities; //provides json conversions
@@ -59,18 +57,23 @@ public class UserFileDAO implements UserDAO {
      * @throws IOException when file cannot be accessed or read from
      */
     private boolean load() throws IOException {
-        users = new TreeMap<>();
+        customers = new TreeMap<>();
 
         // deserialize the JSON file into a list of users
         try {
             String inventoryJSONString = Files.readString(Path.of(filename));
 
             if (inventoryJSONString.length() > 0) {
-                User[] userPassedIn = jsonUtilities.DeserializeObject(filename, User[].class);
+                Customer[] customerPassedIn = jsonUtilities.DeserializeObject(filename, Customer[].class);
 
                 // add every user that was just recently deserialized to the local storage
-                for (User i : userPassedIn) {
-                    users.put(i.toString(), i);
+                for (Customer i : customerPassedIn) {
+                    if (i.getUsername().toLowerCase() != User.ADMIN) {
+                        customers.put(i.toString(), i);
+                    } else {
+                        //if the admin was read, change the customer into a regular user to save the admin
+                        admin = (User) i;
+                    }
                 }
             }
 
@@ -88,7 +91,7 @@ public class UserFileDAO implements UserDAO {
      *         An exception if an error occured
      */
     private boolean save() throws IOException {
-        User[] userList = getUsers();
+        Customer[] userList = getUsers();
 
         jsonUtilities.SerializeObject(filename, userList);
         return true;
@@ -97,21 +100,22 @@ public class UserFileDAO implements UserDAO {
 
     /**
      * creates and returns an array of all the {@linkplain User users} listed in the
-     * system
+     * system as the child class {@link Customer customer}
      * 
-     * @return an array of {@link User users}
+     * @return an array of {@link Customers customers}
      */
-    public User[] getUsers() {
+    public Customer[] getUsers() {
         //init
-        ArrayList<User> userList = new ArrayList<>();
+        ArrayList<Customer> userList = new ArrayList<>();
+        userList.add( (Customer) admin);
         
         //get all users saved in a local list
-        for (User user : users.values()) {
+        for (Customer user : customers.values()) {
             userList.add(user);
         }
 
         //transport the list into an array and return it
-        User[] result = new User[userList.size()];
+        Customer[] result = new Customer[userList.size()];
         userList.toArray(result);
         return result;
 
@@ -122,9 +126,9 @@ public class UserFileDAO implements UserDAO {
      */
     @Override
     public User addUser(String username) throws IOException {
-        synchronized (users) {
-            User newUser = new User(username);
-            users.put(username, newUser);
+        synchronized (customers) {
+            Customer newUser = new Customer(username);
+            customers.put(username, newUser);
             save();
             return newUser;
         }
@@ -135,12 +139,16 @@ public class UserFileDAO implements UserDAO {
      */
     @Override
     public User getUser(String username) throws IOException {
-        synchronized (users) {
+        synchronized (customers) {
             User currUser;
-            if (users.containsKey(username)) {
-                currUser = users.get(username);
+            if (customers.containsKey(username)) {
+                currUser = customers.get(username);
             } else {
-                currUser = addUser(username);
+                if (username.toLowerCase() == User.ADMIN) {
+                    currUser = admin;
+                } else {
+                    currUser = addUser(username);
+                }
             }
 
             return currUser;
@@ -152,8 +160,8 @@ public class UserFileDAO implements UserDAO {
      */
     @Override
     public Boolean deleteUser(String username) throws IOException {
-        synchronized (users) {
-            User currUser = users.remove(username);
+        synchronized (customers) {
+            User currUser = customers.remove(username);
             save();
             return currUser != null;
         }

@@ -1,7 +1,9 @@
 package com.estore.api.estoreapi.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Arrays;
 import java.util.TreeMap;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +18,7 @@ public class ShoppingCartTest {
 
     @BeforeEach
     public void setup() {
-        TreeMap<Integer, Product> map = new TreeMap();
+        TreeMap<Integer, Product> map = new TreeMap<>();
         Product expected = new Product("Green Beans", 0, 1, 1.00);
         map.put(0, expected);
 
@@ -27,20 +29,21 @@ public class ShoppingCartTest {
     @Test
     public void testAddProduct() {
         // Setup
-        Product expected = new Product("Green Beans", 0, 500, 2.00);
+        Product addedProduct = new Product("Green Beans", 0, 500, 2.00);
         ShoppingCart cart = new ShoppingCart(null);
 
         // Invoke
-        cart.addProduct(expected);
-        Product actual = cart.getItems().get(0);
+        cart.addProduct(addedProduct);
+        Product[] actual = cart.getItems();
+        Product[] expected = { addedProduct };
 
         // Analysis
-        assertEquals(expected, actual);
+        assertTrue(Arrays.equals(expected, actual));
     }
 
     @Test
     public void testRemoveProduct() {
-        TreeMap<Integer, Product> map = new TreeMap();
+        TreeMap<Integer, Product> map = new TreeMap<>();
 
         Product expected = new Product("Green Beans", 0, 1, 1.00);
 

@@ -7,7 +7,6 @@ import com.estore.api.estoreapi.model.ShoppingCart;
 import com.estore.api.estoreapi.model.Users.Customer;
 
 import org.springframework.stereotype.Component;
-import org.w3c.dom.UserDataHandler;
 
 /**
  * The file that manipulates the {@link ShoppingCart shopping cart} of

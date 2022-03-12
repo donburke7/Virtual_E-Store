@@ -1,7 +1,6 @@
 package com.estore.api.estoreapi.persistence.Inventory;
 
 import java.io.EOFException;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,7 +10,6 @@ import java.util.TreeMap;
 
 import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.persistence.JsonUtilities;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
