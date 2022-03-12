@@ -1,11 +1,16 @@
 <div>
     <h2>
     <label for="username-box">Username </label>
-    <input #searchBox id="username-box">
-
+    <input type="text" id="username-box">
     <br>
-    
     <label for="password-box">Password </label>
-    <input #searchBox id="password-box">
+    <input type="text" id="password-box">
     </h2>
+
+    <div>
+        <button type="button" (click)="login()">Submit</button>
+    </div>
+
+    <!--For Testing Purposes-->
+    <label id="lblTest"></label>
 </div>
