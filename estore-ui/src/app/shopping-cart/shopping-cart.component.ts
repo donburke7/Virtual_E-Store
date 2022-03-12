@@ -14,16 +14,15 @@ export class ShoppingCartComponent implements OnInit {
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.getProducts();
+    this.getCart();
   }
 
   /**
-   * Calls on the productService to asynchronously getProducts
+   * 
    * This should be changed to getCart() when backend is finished
    */
-  getProducts(): void {
-    this.productService.getProducts()
-      .subscribe(products => this.products = products);
+  getCart(): void {
+    
   }
 
 }

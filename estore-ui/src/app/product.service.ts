@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from './product';
+import { PRODUCTS } from './mock-products';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
@@ -12,11 +13,15 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   /**
-   * GETS products from Server
-   * @returns An Observable of a Product array
+   * GETS products from mock-products
+   * @returns An array of products
    */
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.productsURL);
+  getProducts(): Product[] {
+    return PRODUCTS;
   }
   
+  deleteProduct(product: Product) {
+    
+  }
+
 }

@@ -1,8 +1,19 @@
-<p>inventory works!</p>
 
+<div>
+    <label for="new-product">Product name: </label>
+    <input id="new-product" #productName />
 
-<ul>
-    <li *ngFor="let product of inventory">
-        <span>{{product.id}}</span>{{product.name}}
-    </li>
+    <button type="button" class="add-button" (click)="addProduct(productName.value); productName.value=''">
+        Add hero
+    </button>
+</div>
+
+<ul class="wrapper">
+    <div *ngFor="let product of inventory">
+        <div class="box">{{product.name}}</div>
+        <div class="amount">Stock: {{product.amount}}</div>
+        <div class="price">Price: ${{product.price}}</div>
+        <button type="button" class="delete" title="delete product"
+      (click)="deleteProduct(product)">x</button>
+    </div>
 </ul>
