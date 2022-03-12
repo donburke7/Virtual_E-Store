@@ -1,3 +1,9 @@
+/**
+ * SWEN 261
+ * 
+ * Holds functions relating to the user-login component.
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterEvent, RouterLink, RouterModule, RouterState } from '@angular/router';
 import { Location } from '@angular/common';
@@ -14,7 +20,8 @@ export class UserLoginComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     // UserService
-    private location: Location
+    private location: Location,
+    public router: Router
   ) { }
 
   ngOnInit(): void {
@@ -24,32 +31,42 @@ export class UserLoginComponent implements OnInit {
     this.location.back();
   }
 
-  // FOR TESTING PURPOSES
-  copyToLabel(): void {
-    //Reference the TextBox.
-    var txtName = document.getElementById("username-box");
+  incorrectLogin(): void {
+    /**
+     * Sets the badLogin label to the error message if the
+     * username and password inputted is incorrect.
+     */
+    var txtName = "User not found.";
 
     //Reference the Label.
-    var lblName = document.getElementById("lblTest");
+    var lblName = document.getElementById("badLogin");
 
     //Copy the TextBox value to Label.
-    lblName!.innerHTML = (<HTMLInputElement>document.getElementById("username-box")).value; 
+    lblName!.innerHTML = txtName; 
   }
 
   login(): void {
+    /**
+     * Checks the information inputted by the user to direct them
+     * to either admin-store or user-store, or displaying the
+     * incorrect login message.
+     */
     var username = (<HTMLInputElement>document.getElementById("username-box")).value; 
     var password = (<HTMLInputElement>document.getElementById("password-box")).value; 
 
-    // FIX ME Fix going to next page
-    if (this.userService.user_exists(username, password)) {
-        var url: string = 'www.google.com';
-        
-        // Figure out way to go storefront
+    // Admin Login
+    if (username == 'admin') {
+        this.router.navigate(['admin-store']);
     }
 
+    // User Login
+    else if (this.userService.user_exists(username, password)) {
+        this.router.navigate(['user-store']);
+    }
+
+    // Bad Info Login
     else {
-        var url: string = 'www.youtube.com';
-        this.location.go(url);
+        this.incorrectLogin();
     }
   }
 }
