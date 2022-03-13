@@ -9,6 +9,11 @@ import com.estore.api.estoreapi.model.Product;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+/**
+ * unit tests for the customer class
+ * 
+ * @author Alen Van
+ */
 @Tag("Model-Tier")
 public class CustomerTest {
 

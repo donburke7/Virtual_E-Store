@@ -130,6 +130,8 @@ public class UserFileDAOTest {
     public void testdeleteUserFailed() throws IOException {
 
         //invoke
+        //should return true if the deletion deleted something
+        //should return false if deletion was impossible 
         boolean actual = userFileDAO.deleteUser("fail");
 
         //analyze 

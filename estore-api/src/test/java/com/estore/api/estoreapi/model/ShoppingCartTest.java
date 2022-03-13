@@ -10,6 +10,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Unit tests for the shopping cart
+ * 
+ * @author team jadin
+ */
 @Tag("Model-Tier")
 public class ShoppingCartTest {
 
@@ -43,22 +48,23 @@ public class ShoppingCartTest {
 
     @Test
     public void testRemoveProduct() {
+        //setup
         TreeMap<Integer, Product> map = new TreeMap<>();
-
         Product expected = new Product("Green Beans", 0, 1, 1.00);
-
         map.put(expected.getID(), expected);
-
         ShoppingCart cart = new ShoppingCart(map);
 
+        //invoke and analyze
         assertEquals(expected, cart.removeProduct(0));
 
     }
 
     @Test
     public void testClearCart() {
+        //invoke
         testShoppingCart.clearCart();
-
+        
+        //analyze
         assertEquals(0, testShoppingCart.getItems().length);
 
     }
