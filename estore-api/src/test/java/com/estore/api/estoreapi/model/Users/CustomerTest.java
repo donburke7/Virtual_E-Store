@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 /**
  * unit tests for the customer class
  * 
- * @author Alen Van
+ * @author Isaac Post
  */
 @Tag("Model-Tier")
 public class CustomerTest {
