@@ -23,16 +23,15 @@ export class InventoryComponent implements OnInit {
   }
 
   deleteProduct(product: Product): void {
+    // FIX ME WHEN BACK END IMPLEMENTED
     this.inventory = this.inventory.filter(p => p !== product);
-  }
-
-  editProduct(product: Product): void {
-    
   }
 
   addProduct(name: String): void {
     name = name.trim();
     if (!name) { return; }
-    this.inventory.push({ name } as Product);
+    this.productService.addProduct({ name } as Product).subscribe(product => {
+      this.inventory.push(product);
+    });
   }
 }
