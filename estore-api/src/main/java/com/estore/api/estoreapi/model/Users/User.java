@@ -1,6 +1,5 @@
 package com.estore.api.estoreapi.model.Users;
 
-import com.estore.api.estoreapi.model.ShoppingCart;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -13,16 +12,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class User {
 
     public static final String ADMIN = "admin";
-    @JsonProperty
-    String username;
+    @JsonProperty("username")
+    private String username;
 
     /**
-     * Json constructor to initialize a {@linkplain Customer customer} from a json
+     * Json constructor to initialize a {@linkplain User user} from a json
      * string
      * 
-     * @param username the username of the {@link Customer customer}
-     * @param cart     the {@link ShoppingCart cart} that is associated with the
-     *                 {@link Customer customer}
+     * @param username the username of the {@link User user}
+     * 
      */
     @JsonCreator
     public User(@JsonProperty("username") String username) {

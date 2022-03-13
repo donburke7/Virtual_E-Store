@@ -61,15 +61,15 @@ public class UserFileDAO implements UserDAO {
 
         // deserialize the JSON file into a list of users
         try {
-            String inventoryJSONString = Files.readString(Path.of(filename));
+            String JSONString = Files.readString(Path.of(filename));
 
-            if (inventoryJSONString.length() > 0) {
-                Customer[] customerPassedIn = jsonUtilities.DeserializeObject(filename, Customer[].class);
+            if (JSONString.length() > 0) {
+                Customer[] customerPassedIn = jsonUtilities.DeserializeObject(JSONString, Customer[].class);
 
                 // add every user that was just recently deserialized to the local storage
                 for (Customer i : customerPassedIn) {
-                    if (i.getUsername().toLowerCase() != User.ADMIN) {
-                        customers.put(i.toString(), i);
+                    if (!i.getUsername().toLowerCase().equals(User.ADMIN)) {
+                        customers.put(i.getUsername(), i);
                     } else {
                         //if the admin was read, change the customer into a regular user to save the admin
                         admin = (User) i;

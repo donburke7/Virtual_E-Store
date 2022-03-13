@@ -3,6 +3,7 @@ package com.estore.api.estoreapi.model.Users;
 import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.model.ShoppingCart;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -14,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Customer extends User {
 
     @JsonProperty("cart")
-    ShoppingCart cart;
+    private ShoppingCart cart;
 
     /**
      * Json constructor to initialize a {@linkplain Customer customer} from a json
@@ -29,6 +30,7 @@ public class Customer extends User {
         super(username);
         this.cart = cart;
     }
+
 
     /**
      * Create a brand new {@linkplain Customer customer} with an empty
@@ -76,6 +78,7 @@ public class Customer extends User {
      * 
      * @return the {@linkplain ShoppingCart cart}
      */
+    @JsonIgnore
     public Product[] getCart() {
         return this.cart.getItems();
     }

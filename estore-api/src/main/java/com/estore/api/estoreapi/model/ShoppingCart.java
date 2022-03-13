@@ -1,10 +1,9 @@
 package com.estore.api.estoreapi.model;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.TreeMap;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -15,7 +14,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ShoppingCart {
 
     @JsonProperty("items")
-    Map<Integer, Product> items;
+    private TreeMap<Integer, Product> items;
+
 
     /**
      * The json constructor that creates a shopping cart instance
@@ -23,15 +23,12 @@ public class ShoppingCart {
      * 
      * @param items a map of {@linkplain Product products}
      */
-    @JsonCreator
-    public ShoppingCart(@JsonProperty("items") Map<Integer, Product> items) {
+    public ShoppingCart(@JsonProperty("items") TreeMap<Integer, Product> items) {
         // items can be null indicating this should be a new empty cart
         if (items != null) {
             this.items = items;
-        }
-
-        else {
-            this.items = new TreeMap<Integer, Product>();
+        } else {
+            this.items = new TreeMap<>();
         }
     }
 
@@ -71,6 +68,7 @@ public class ShoppingCart {
      * 
      * @return an array of products that represents the items that are in the cart
      */
+    @JsonIgnore
     public Product[] getItems() {
         ArrayList<Product> products = new ArrayList<>();
 

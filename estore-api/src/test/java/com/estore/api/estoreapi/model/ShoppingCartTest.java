@@ -20,7 +20,7 @@ public class ShoppingCartTest {
     public void setup() {
         TreeMap<Integer, Product> map = new TreeMap<>();
         Product expected = new Product("Green Beans", 0, 1, 1.00);
-        map.put(0, expected);
+        map.put(expected.getID(), expected);
 
         testShoppingCart = new ShoppingCart(map);
         emptyShoppingCart = new ShoppingCart(null);
@@ -47,7 +47,7 @@ public class ShoppingCartTest {
 
         Product expected = new Product("Green Beans", 0, 1, 1.00);
 
-        map.put(0, expected);
+        map.put(expected.getID(), expected);
 
         ShoppingCart cart = new ShoppingCart(map);
 
