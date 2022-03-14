@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { InventoryComponent } from './inventory/inventory.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
+import { ProductSearchComponent } from './product-search/product-search.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
     UserStoreComponent,
     InventoryComponent,
     ProductDetailsComponent,
+    ProductSearchComponent
   ],
   imports: [
     BrowserModule,

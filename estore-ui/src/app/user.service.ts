@@ -22,6 +22,8 @@ export class UserService {
       /**
        * Checks to see if the information inputted by the user
        * exists in the user data.
+       * 
+       * FIX ME add backend
        */
       const user: User = {username: username, password: password};
 

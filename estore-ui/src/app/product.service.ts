@@ -45,4 +45,12 @@ export class ProductService {
     return this.http.post<Product>(this.productsURL, product, this.httpOptions);
   }
 
+  searchProducts(name: string): Observable<Product[]> {
+    // FIX ME ADD BACKEND
+
+    // const url = `${this.productsURL}/${name}`;
+    // return this.http.get<Product[]>(url);
+
+    return of(PRODUCTS.filter(product => product.name === name));
+  }
 }

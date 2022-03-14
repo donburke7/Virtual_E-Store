@@ -11,7 +11,7 @@ import { Location } from '@angular/common';
 })
 export class ProductDetailsComponent implements OnInit {
   @Input() product?: Product;
-
+  
   constructor(private productService: ProductService, 
     private route: ActivatedRoute, private location: Location) { 
   }
@@ -37,5 +37,4 @@ export class ProductDetailsComponent implements OnInit {
         .subscribe(() => this.backButton());
     }
   }
-
 }
