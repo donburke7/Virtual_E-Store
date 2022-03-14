@@ -14,14 +14,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties.Io;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-<<<<<<< HEAD
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-=======
->>>>>>> 34f261d2183430a951ec96cacf5e5afe6d524877
 
 /**
  * Unit testing for the InventoryFileDAO class
@@ -110,8 +105,6 @@ public class InventoryFileDAOTest {
         // Ensures the result is the same as the product input
         assertEquals(testProduct, result);
     }
-<<<<<<< HEAD
-=======
     @Test
     public void testCreateProducts() throws IOException {
         // Setup
@@ -125,7 +118,6 @@ public class InventoryFileDAOTest {
         Product actual = inventoryDAO.getProduct(test.getID());
         assertEquals(test, actual);
     }
->>>>>>> 34f261d2183430a951ec96cacf5e5afe6d524877
 
     @Test
     public void testdeleteProductFail() throws IOException{

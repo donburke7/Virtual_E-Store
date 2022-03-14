@@ -3,16 +3,11 @@ package com.estore.api.estoreapi.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-<<<<<<< HEAD
-import java.util.Map;
-
-=======
 import java.util.Arrays;
 import java.util.TreeMap;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
->>>>>>> 34f261d2183430a951ec96cacf5e5afe6d524877
 import org.junit.jupiter.api.Test;
 
 /**
@@ -52,19 +47,6 @@ public class ShoppingCartTest {
     }
 
     @Test
-    public void testRemoveProduct() {
-        //setup
-        TreeMap<Integer, Product> map = new TreeMap<>();
-        Product expected = new Product("Green Beans", 0, 1, 1.00);
-        map.put(expected.getID(), expected);
-        ShoppingCart cart = new ShoppingCart(map);
-
-        //invoke and analyze
-        assertEquals(expected, cart.removeProduct(0));
-
-    }
-
-    @Test
     public void testClearCart() {
         //invoke
         testShoppingCart.clearCart();
@@ -74,22 +56,18 @@ public class ShoppingCartTest {
 
     }
 
-<<<<<<< HEAD
     @Test
     public void testRemoveProduct() {
         // Setup
         Product product = new Product("Green Beans", 0, 500, 2.00);
         ShoppingCart actual = new ShoppingCart(null);
-        ShoppingCart expected = new ShoppingCart(null);
         actual.addProduct(product);
 
         // Invoke
-        actual.removeProduct(1);
+        actual.removeProduct(0);
 
         // Analysis
-        assertEquals(expected, actual);
+        assertEquals(0, actual.getItems().length);
         
     }
-=======
->>>>>>> 34f261d2183430a951ec96cacf5e5afe6d524877
 }
