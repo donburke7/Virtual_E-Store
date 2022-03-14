@@ -1,0 +1,1 @@
+[{"username":"admin","cart":{"items":{}}},{"username":"empty","cart":{"items":{}}},{"username":"filled","cart":{"items":{"0":{"name":"Green Beans","id":0,"amount":1,"price":1.0},"1":{"name":"Red Beans","id":1,"amount":5,"price":2.0},"2":{"name":"Pinto Beans","id":2,"amount":5,"price":1.5}}}},{"username":"testBob","cart":{"items":{}}}]

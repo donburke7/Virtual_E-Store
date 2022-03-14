@@ -17,9 +17,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties.Io;
 
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+<<<<<<< HEAD
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+=======
+>>>>>>> 34f261d2183430a951ec96cacf5e5afe6d524877
 
 /**
  * Unit testing for the InventoryFileDAO class
@@ -52,7 +54,7 @@ public class InventoryFileDAOTest {
         objectMapper.writeValue(file, testProducts);
 
         // load up an InventoryDAO with the newly created test inventory
-        inventoryDAO = new InventoryFileDAO(filepath, new ObjectMapper());
+        inventoryDAO = new InventoryFileDAO(filepath, new JsonUtilities());
 
     }
 
@@ -108,6 +110,22 @@ public class InventoryFileDAOTest {
         // Ensures the result is the same as the product input
         assertEquals(testProduct, result);
     }
+<<<<<<< HEAD
+=======
+    @Test
+    public void testCreateProducts() throws IOException {
+        // Setup
+        Product test = new Product("Green-bean", 3, 30, 3.00);
+
+        // Invoke
+        Product result = inventoryDAO.createProduct(test);
+
+        //analyze
+        assertEquals(test, result);
+        Product actual = inventoryDAO.getProduct(test.getID());
+        assertEquals(test, actual);
+    }
+>>>>>>> 34f261d2183430a951ec96cacf5e5afe6d524877
 
     @Test
     public void testdeleteProductFail() throws IOException{

@@ -1,26 +1,80 @@
 package com.estore.api.estoreapi.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+<<<<<<< HEAD
 import java.util.Map;
 
+=======
+import java.util.Arrays;
+import java.util.TreeMap;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+>>>>>>> 34f261d2183430a951ec96cacf5e5afe6d524877
 import org.junit.jupiter.api.Test;
 
+/**
+ * Unit tests for the shopping cart
+ * 
+ * @author team jadin
+ */
+@Tag("Model-Tier")
 public class ShoppingCartTest {
+
+    ShoppingCart testShoppingCart;
+    ShoppingCart emptyShoppingCart;
+
+    @BeforeEach
+    public void setup() {
+        TreeMap<Integer, Product> map = new TreeMap<>();
+        Product expected = new Product("Green Beans", 0, 1, 1.00);
+        map.put(expected.getID(), expected);
+
+        testShoppingCart = new ShoppingCart(map);
+        emptyShoppingCart = new ShoppingCart(null);
+    }
+
     @Test
     public void testAddProduct() {
         // Setup
-        Product expected = new Product("Green Beans", 0, 500, 2.00);
+        Product addedProduct = new Product("Green Beans", 0, 500, 2.00);
         ShoppingCart cart = new ShoppingCart(null);
 
         // Invoke
-        cart.addProduct(expected);
-        Product actual = cart.getItems().get(0);
+        cart.addProduct(addedProduct);
+        Product[] actual = cart.getItems();
+        Product[] expected = { addedProduct };
 
         // Analysis
-        assertEquals(expected, actual);
+        assertTrue(Arrays.equals(expected, actual));
     }
 
+    @Test
+    public void testRemoveProduct() {
+        //setup
+        TreeMap<Integer, Product> map = new TreeMap<>();
+        Product expected = new Product("Green Beans", 0, 1, 1.00);
+        map.put(expected.getID(), expected);
+        ShoppingCart cart = new ShoppingCart(map);
+
+        //invoke and analyze
+        assertEquals(expected, cart.removeProduct(0));
+
+    }
+
+    @Test
+    public void testClearCart() {
+        //invoke
+        testShoppingCart.clearCart();
+        
+        //analyze
+        assertEquals(0, testShoppingCart.getItems().length);
+
+    }
+
+<<<<<<< HEAD
     @Test
     public void testRemoveProduct() {
         // Setup
@@ -36,4 +90,6 @@ public class ShoppingCartTest {
         assertEquals(expected, actual);
         
     }
+=======
+>>>>>>> 34f261d2183430a951ec96cacf5e5afe6d524877
 }

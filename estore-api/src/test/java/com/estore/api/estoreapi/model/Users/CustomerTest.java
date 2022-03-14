@@ -1,5 +1,6 @@
 package com.estore.api.estoreapi.model.Users;
 
+<<<<<<< HEAD
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -13,6 +14,14 @@ import com.estore.api.estoreapi.model.ShoppingCart;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.BeforeEach;
+=======
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Arrays;
+
+import com.estore.api.estoreapi.model.Product;
+
+>>>>>>> 34f261d2183430a951ec96cacf5e5afe6d524877
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties.Io;
@@ -23,6 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+<<<<<<< HEAD
 @Tag("Model-Tier")
 public class CustomerTest {
     ShoppingCart testShoppingCart;
@@ -73,20 +83,29 @@ public class CustomerTest {
         }    
     }
 
+=======
+/**
+ * unit tests for the customer class
+ * 
+ * @author Isaac Post
+ */
+@Tag("Model-Tier")
+public class CustomerTest {
+>>>>>>> 34f261d2183430a951ec96cacf5e5afe6d524877
 
     @Test
     public void testAddProduct() {
         // Setup
-        Product expected = new Product("Green Beans", 0, 500, 2.00);
+        Product addedProduct = new Product("Green Beans", 0, 500, 2.00);
         Customer testCustomer = new Customer("Bart");
 
         // Invoke
-        testCustomer.addProduct(expected);
-        ShoppingCart cart = testCustomer.getCart();
-        Product actual = cart.removeProduct(0); // Returns the product that was removed, null if not
+        testCustomer.addProduct(addedProduct);
+        Product[] actual = testCustomer.getCart();
+        Product[] expected = {addedProduct};
 
         // Analysis
-        assertEquals(expected, actual);
+        assertTrue(Arrays.equals(expected, actual));
     }
     @Test
     public void testRemoveProduct() {

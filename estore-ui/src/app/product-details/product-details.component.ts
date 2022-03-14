@@ -27,14 +27,14 @@ export class ProductDetailsComponent implements OnInit {
       .subscribe(product => this.product = product)
   }
 
-  goBack(): void {
+  backButton(): void {
     this.location.back();
   }
 
-  save(): void {
+  saveButton(): void {
     if (this.product) {
       this.productService.updateProduct(this.product)
-        .subscribe(() => this.goBack());
+        .subscribe(() => this.backButton());
     }
   }
 
