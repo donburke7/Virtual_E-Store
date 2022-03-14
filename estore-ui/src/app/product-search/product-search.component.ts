@@ -1,3 +1,10 @@
+/**
+ * SWEN 261
+ * Product-search component that interacts with product-search.component.html
+ * 
+ * Contributors: Isaac Post
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 

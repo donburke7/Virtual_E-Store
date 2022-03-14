@@ -1,8 +1,8 @@
 /**
  * SWEN 261
+ * Services the user class of the beans store
  * 
- * Service class for user data. Holds methods to interact
- * with user information.
+ * Contributors: Isaac Post
  */
 
 import { HttpClient } from '@angular/common/http';

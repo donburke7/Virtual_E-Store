@@ -1,3 +1,10 @@
+/**
+ * SWEN 261
+ * Declares the components of the Beans store.
+ * 
+ * Contributors: Isaac Post, Donald Burke
+ */
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 

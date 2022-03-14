@@ -1,6 +1,5 @@
 import { Product } from "./product";
 
-
 export const PRODUCTS: Product[] = [
     { name: "Blue Beans", id: 1, amount: 1, price: 1.0 },
     { name: "Cow Beans", id: 2, amount: 1, price: 1.0 },

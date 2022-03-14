@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
-import { PRODUCTS } from '../mock-products';
-
 
 @Component({
   selector: 'app-inventory',

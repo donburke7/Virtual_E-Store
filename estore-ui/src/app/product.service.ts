@@ -1,3 +1,10 @@
+/**
+ * SWEN 261
+ * Services the product class of the Beans store
+ * 
+ * Contributors: Isaac Post, Donald Burke
+ */
+
 import { Injectable } from '@angular/core';
 import { Product } from './product';
 import { PRODUCTS } from './mock-products';
