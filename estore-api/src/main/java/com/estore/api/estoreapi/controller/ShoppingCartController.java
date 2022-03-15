@@ -45,7 +45,7 @@ public class ShoppingCartController {
      *                     <br>
      *                     This dependency is injected by the Spring Framework
      */
-    public ShoppingCartController(ShoppingCartDao shoppingCartDAO) {
+    public ShoppingCartController(ShoppingCartDAO shoppingCartDAO) {
         this.shoppingCartDao = shoppingCartDAO;
     }
 
@@ -65,7 +65,7 @@ public class ShoppingCartController {
     @GetMapping("/{id}")
     public ResponseEntity<Product[]> getCart(@PathVariable Customer username) {
         try {
-            ShoppingCart cartFound = shoppingCartDao.getShoppingCart(username);
+            Product[] cartFound = shoppingCartDao.getShoppingCart(username);
             if (cartFound == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             } else {
@@ -105,7 +105,7 @@ public class ShoppingCartController {
     public ResponseEntity<Customer> clearCart(@PathVariable Customer customer){
         LOG.info("DELETE /cart/customer=" + customer.getUsername());
         try{
-            boolean deleted = shoppingCartDAO.clearCart(customer);
+            boolean deleted = shoppingCartDao.clearShoppingCart(customer);
             if(deleted){
                 return new ResponseEntity<>(HttpStatus.OK);
             }
@@ -121,7 +121,7 @@ public class ShoppingCartController {
     @PostMapping("/{customer}/{product}")
     public ResponseEntity<Product> addProduct(@PathVariable Customer customer, @PathVariable Product product){
         try {
-            Product result = shoppingCartDAO.addProduct(customer, product);
+            Product result = shoppingCartDao.addProduct(customer, product);
             if(result != null){
                 return new ResponseEntity<>(HttpStatus.OK);
             }

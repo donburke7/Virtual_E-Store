@@ -105,7 +105,7 @@ public class UserController {
     @PostMapping("/{username}")
     public ResponseEntity<String> addUser(@PathVariable String username){
         try {
-            User result = userDAO.addUser(username);
+            User result = userDao.addUser(username);
             if(result != null){
                 return new ResponseEntity<String>(username, HttpStatus.OK);
             }
