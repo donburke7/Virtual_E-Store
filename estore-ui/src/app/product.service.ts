@@ -15,7 +15,7 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductService {
-  private productsURL = 'https://localhost:8080/inventory';
+  private productsURL = 'http://localhost:8080/products';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -24,12 +24,12 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   getProducts(): Observable<Product[]> {
-    const url = '${this.productsURL}'
+    const url = `${this.productsURL}`
     return this.http.get<Product[]>(url, this.httpOptions);
   }
   
   deleteProduct(id: number): Observable<Product> {
-    const url = '${this.productsURL}/${id}';
+    const url = `${this.productsURL}/${id}`;
     return this.http.delete<Product>(url, this.httpOptions);
   }
 
@@ -38,7 +38,7 @@ export class ProductService {
   }
 
   getProduct(id: number): Observable<Product> {
-    const url = '${this.productsURL}/${id}';
+    const url = `${this.productsURL}/${id}`;
     return this.http.get<Product>(url);
   }
 
@@ -47,7 +47,7 @@ export class ProductService {
   }
 
   searchProducts(name: string): Observable<Product[]> {
-    const url = '${this.productsURL}/${name}';
+    const url = `${this.productsURL}/${name}`;
     return this.http.get<Product[]>(url);
   }
 }

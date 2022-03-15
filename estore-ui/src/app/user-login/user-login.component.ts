@@ -52,11 +52,11 @@ export class UserLoginComponent implements OnInit {
     else if (this.userService.userExists(username)) {
         this.router.navigate(['user-store']);
     }
-
+/** 
     // New User
-    else {
-        this.userService.createUser(username);
+    else if(this.userService.createUser(username) != null){
         this.router.navigate(['user-store']);
     }
+    */
   }
 }
