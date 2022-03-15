@@ -8,6 +8,7 @@ import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.model.ShoppingCart;
 import com.estore.api.estoreapi.model.Users.Customer;
 import com.estore.api.estoreapi.model.Users.User;
+import com.estore.api.estoreapi.persistence.User.UserDAO;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,7 +46,7 @@ public class UserController {
      *                     <br>
      *                     This dependency is injected by the Spring Framework
      */
-    public UserController(UserDao userDAO) {
+    public UserController(UserDAO userDAO) {
         this.userDao = userDAO;
     }
 
@@ -64,7 +65,7 @@ public class UserController {
     @GetMapping("/{username}")
     public ResponseEntity<User> getUser(@PathVariable String username) {
         try {
-            User userFound = userDao.getShoppingCart(username);
+            User userFound = userDao.getUser(username);
             if (userFound == null) {
                 return new ResponseEntity<User>(userFound, HttpStatus.NOT_FOUND);
             } else {
