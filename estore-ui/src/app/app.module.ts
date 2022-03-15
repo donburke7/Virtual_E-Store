@@ -18,6 +18,7 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { ProductSearchComponent } from './product-search/product-search.component';
+import { UserProductViewComponent } from './user-product-view/user-product-view.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ProductSearchComponent } from './product-search/product-search.componen
     UserStoreComponent,
     ShoppingCartComponent,
     ProductDetailsComponent,
-    ProductSearchComponent
+    ProductSearchComponent,
+    UserProductViewComponent
   ],
   imports: [
     HttpClientModule,
@@ -38,4 +40,5 @@ import { ProductSearchComponent } from './product-search/product-search.componen
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

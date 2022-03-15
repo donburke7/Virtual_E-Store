@@ -1,6 +1,6 @@
 /**
  * SWEN 261
- * Product-search component that interacts with product-search.component.html
+ * product-search.component.ts
  * 
  * Contributors: Isaac Post
  */

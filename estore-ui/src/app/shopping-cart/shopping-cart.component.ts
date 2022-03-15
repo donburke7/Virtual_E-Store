@@ -1,6 +1,6 @@
 /**
  * SWEN 261
- * Shopping-cart component that interacts with shopping_cart.component.html
+ * shopping-cart.component.ts
  * 
  * Contributors: Isaac Post
  */
@@ -25,15 +25,23 @@ export class ShoppingCartComponent implements OnInit {
     this.getCart();
   }
 
-  /**
-   * 
-   * This should be changed to getCart() when backend is finished
-   */
   getCart(): void {
+    /**
+     * Gets the id from the route to get the cart
+     */
+
+    // FIX ME
     this.cart = this.shoppingCartService.getCart();
   }
 
   deleteProduct(product: Product): void {
+    /**
+     * Initilized with a button and deletes the product from the cart
+     * 
+     * Input Argument:
+     * product -- The product to be deleted
+     */
+
     // FIX ME WHEN BACK END IMPLEMENTED
     this.cart = this.cart.filter(p => p !== product);
   }

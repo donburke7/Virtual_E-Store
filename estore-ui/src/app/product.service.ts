@@ -1,6 +1,6 @@
 /**
  * SWEN 261
- * Services the product class of the Beans store
+ * Services the product class of the Beans store.
  * 
  * Contributors: Isaac Post, Donald Burke
  */
@@ -32,7 +32,6 @@ export class ProductService {
   
   deleteProduct(id: number): Observable<Product> {
     const url = `${this.productsURL}/${id}`;
-
     return this.http.delete<Product>(url, this.httpOptions);
   }
 

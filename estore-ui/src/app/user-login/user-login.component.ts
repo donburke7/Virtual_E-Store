@@ -1,6 +1,6 @@
 /**
  * SWEN 261
- * Holds functions relating to the user-login component.
+ * Huser-login.components.ts
  * 
  * Contributors: Isaac Post
  */
@@ -20,7 +20,6 @@ export class UserLoginComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
-    // UserService
     private location: Location,
     public router: Router
   ) { }
@@ -53,7 +52,6 @@ export class UserLoginComponent implements OnInit {
      * incorrect login message.
      */
     var username = (<HTMLInputElement>document.getElementById("username-box")).value; 
-    var password = (<HTMLInputElement>document.getElementById("password-box")).value; 
 
     // Admin Login
     if (username == 'admin') {
@@ -61,7 +59,7 @@ export class UserLoginComponent implements OnInit {
     }
 
     // User Login
-    else if (this.userService.user_exists(username, password)) {
+    else if (this.userService.user_exists(username)) {
         this.router.navigate(['user-store']);
     }
 

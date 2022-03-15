@@ -41,7 +41,8 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
      */
     @Override
     public synchronized Product addProduct(Customer customer, Product product) throws IOException {
-        Product addedProduct = customer.addProduct(product);
+        Customer targetCustomer = (Customer) userDAO.getUser(customer.getUsername());
+        Product addedProduct = targetCustomer.addProduct(product);
         userDAO.saveUsers();
         return addedProduct;
     }
@@ -51,17 +52,20 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
      */
     @Override
     public synchronized Boolean deleteProduct(Customer customer, Integer id) throws IOException {
-        Product removedProduct = customer.removeProduct(id);
+        Customer targetCustomer = (Customer) userDAO.getUser(customer.getUsername());
+        Product removedProduct = targetCustomer.removeProduct(id);
         userDAO.saveUsers();
         return removedProduct != null;
     }
 
     /**
      * {@inheritDoc}
+     * @throws IOException
      */
     @Override
-    public synchronized Product[] getShoppingCart(Customer customer) {
-        return customer.getCart();
+    public synchronized Product[] getShoppingCart(Customer customer) throws IOException {
+        Customer targetCustomer = (Customer) userDAO.getUser(customer.getUsername());
+        return targetCustomer.getCart();
     }
 
     /**
@@ -69,7 +73,8 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
      */
     @Override
     public synchronized boolean clearShoppingCart(Customer customer) throws IOException {
-        boolean status = customer.clearCart();
+        Customer targetCustomer = (Customer) userDAO.getUser(customer.getUsername());
+        boolean status = targetCustomer.clearCart();
         userDAO.saveUsers();
         return status;
     }

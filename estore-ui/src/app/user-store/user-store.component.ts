@@ -1,6 +1,6 @@
 /**
  * SWEN 261
- * User-store component that interacts with user-store.component.html
+ * user-store.component.ts
  * 
  * Contributors: Isaac Post, Donald Burke
  */
@@ -27,5 +27,4 @@ export class UserStoreComponent implements OnInit {
     this.productService.getProducts()
       .subscribe(inventory => this.inventory = inventory);
   }
-
 }
