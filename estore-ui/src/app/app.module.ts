@@ -25,8 +25,8 @@ import { UserProductViewComponent } from './user-product-view/user-product-view.
     AppComponent,
     UserLoginComponent,
     InventoryComponent,
-    UserStoreComponent,
     ShoppingCartComponent,
+    UserStoreComponent,
     ProductDetailsComponent,
     ProductSearchComponent,
     UserProductViewComponent
