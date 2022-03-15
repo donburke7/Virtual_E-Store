@@ -1,6 +1,9 @@
 package com.estore.api.estoreapi.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
+import com.estore.api.estoreapi.model.Users.User;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -107,9 +110,12 @@ public class ProductTest {
     @Test
     public void testequal() {
 
+        //setup
         Product newProduct = new Product("Green Beans", 0, 20, 1.00);
         Product testProduct = new Product("Green Beans", 0, 20, 1.00);
 
+        //invoke and analyze, should return true
+        //all properties of the two products are equal
         assertEquals(true, newProduct.equals(testProduct));
 
     }
@@ -117,11 +123,29 @@ public class ProductTest {
     @Test
     public void testequalFail() {
 
+        //setup
         Product newProduct = new Product("Green Beans", 0, 20, 1.00);
         Product testProduct = new Product("Green Beans", 1, 20, 1.00);
 
+        //invoke and analyze, should return false
+        //the two are 
         assertEquals(false, newProduct.equals(testProduct));
 
+    }
+
+    @Test
+    public void testequalFailWrongObject() {
+        Product test1 = new Product("Green Beans", 0, 1, 1.00);
+        User test2 = new User("Billy");
+
+        assertFalse(test1.equals(test2));
+    }
+
+    @Test
+    public void testequalFailNull() {
+        Product test1 = new Product("Green Beans", 0, 1, 1.00);
+
+        assertFalse(test1.equals(null));
     }
 
 }

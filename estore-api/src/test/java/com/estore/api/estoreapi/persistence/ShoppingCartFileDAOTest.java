@@ -2,6 +2,7 @@ package com.estore.api.estoreapi.persistence;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -31,12 +32,14 @@ public class ShoppingCartFileDAOTest {
      * setup before each test
      * Create a new shopping cart file DAO with a mock user file DAO passed in
      * Create a new customer with an empty shopping cart
+     * @throws IOException
      */
     @BeforeEach
-    public void setup() {
+    public void setup() throws IOException {
         mockUserFileDAO = mock(UserFileDAO.class);
         shoppingCartFileDAO = new ShoppingCartFileDAO(mockUserFileDAO);
         customer = new Customer("username");
+        when(mockUserFileDAO.getUser(customer.getUsername())).thenReturn(customer);
     }
     
     @Test

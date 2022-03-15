@@ -54,7 +54,7 @@ public interface ShoppingCartDAO {
      *         {@link Customer customer}'s
      *         {@link ShoppingCart shopping cart}
      */
-    Product[] getShoppingCart(Customer customer);
+    Product[] getShoppingCart(Customer customer) throws IOException;
 
     /**
      * Clears the specified {@linkplain Customer customer}'s {@link ShoppingCart shopping

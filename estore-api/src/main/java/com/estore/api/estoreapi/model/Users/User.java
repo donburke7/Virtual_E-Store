@@ -41,9 +41,13 @@ public class User {
      */
     @Override
     public boolean equals(Object object) {
-        if (object.getClass() == this.getClass()) {
+        if (object == null) {
+            return false;
+        }
+
+        if (object.getClass() == this.getClass() || object.getClass() == Customer.class) {
             User other = (User) object;
-            if (other.username == this.username) {
+            if (other.username.equals(this.username)) {
                 return true;
             } else {
                 return false;
