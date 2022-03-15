@@ -51,7 +51,7 @@ public class ShoppingCartControllerTest {
         when(mockCartDAO.getShoppingCart(customer.getUsername()).thenReturn(customer));
 
         // Invoke
-        ResponseEntity<Product> response = cartController.getShoppingCart(customer.getUsername());
+        ResponseEntity<ShoppingCart> response = cartController.getShoppingCart(customer.getUsername());
 
         // Analyze
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -68,7 +68,7 @@ public class ShoppingCartControllerTest {
         when(mockCartDAO.getShoppingCart(customerName)).thenReturn(null);
 
         // Invoke
-        ResponseEntity<Product> response = cartController.getShoppingCart(customerName);
+        ResponseEntity<ShoppingCart> response = cartController.getShoppingCart(customerName);
 
         // Analyze
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
@@ -81,7 +81,7 @@ public class ShoppingCartControllerTest {
         doThrow(new IOException()).when(mockCartDAO).getShoppingCart(customerName);
 
         // Invoke
-        ResponseEntity<Product> response = cartController.getShoppingCart(customerName);
+        ResponseEntity<ShoppingCart> response = cartController.getShoppingCart(customerName);
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
@@ -95,7 +95,7 @@ public class ShoppingCartControllerTest {
         when(mockCartDAO.deleteProduct(customerName, ProductId)).thenReturn(true);
 
         // Invoke
-        ResponseEntity<Product> response = cartController.deleteProduct(customerName, ProductId);
+        ResponseEntity<ShoppingCart> response = cartController.deleteProduct(customerName, ProductId);
 
         // Analyze
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -110,7 +110,7 @@ public class ShoppingCartControllerTest {
         when(mockCartDAO.deleteProduct(customerName, ProductId)).thenReturn(false);
 
         // Invoke
-        ResponseEntity<Product> response = cartController.deleteProduct(customerName, ProductId);
+        ResponseEntity<ShoppingCart> response = cartController.deleteProduct(customerName, ProductId);
 
         // Analyze
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
@@ -139,7 +139,7 @@ public class ShoppingCartControllerTest {
         when(mockCartDAO.clearShoppingCart(customerName)).thenReturn(true);
 
         // Invoke
-        ResponseEntity<Product> response = cartController.clearShoppingCart(customerName);
+        ResponseEntity<ShoppingCart> response = cartController.clearShoppingCart(customerName);
 
         // Analyze
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -154,7 +154,7 @@ public class ShoppingCartControllerTest {
         when(mockCartDAO.clearShoppingCart(customerName)).thenReturn(false);
 
         // Invoke
-        ResponseEntity<Product> response = cartController.clearShoppingCart(customerName);
+        ResponseEntity<ShoppingCart> response = cartController.clearShoppingCart(customerName);
 
         // Analyze
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
@@ -169,7 +169,7 @@ public class ShoppingCartControllerTest {
         doThrow(new IOException()).when(mockCartDAO).clearShoppingCart(customerName);
 
         // Invoke
-        ResponseEntity<Product> response = cartController.clearShoppingCart(customerName);
+        ResponseEntity<ShoppingCart> response = cartController.clearShoppingCart(customerName);
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
