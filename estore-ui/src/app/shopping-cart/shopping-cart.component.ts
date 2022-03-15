@@ -9,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { ShoppingCartService } from '../shopping-cart.service';
 import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -19,7 +21,11 @@ export class ShoppingCartComponent implements OnInit {
 
   cart: Product[] = [];
 
-  constructor(private shoppingCartService: ShoppingCartService, private location: Location) { }
+  constructor(
+      private shoppingCartService: ShoppingCartService, 
+      private location: Location,
+      private route: ActivatedRoute
+      ) { }
 
   ngOnInit(): void {
     this.getCart();
@@ -31,7 +37,8 @@ export class ShoppingCartComponent implements OnInit {
      */
 
     // FIX ME
-    this.cart = this.shoppingCartService.getCart();
+    this.shoppingCartService.getCart()
+      .subscribe(cart => this.cart = cart);
   }
 
   deleteProduct(product: Product): void {
@@ -42,8 +49,9 @@ export class ShoppingCartComponent implements OnInit {
      * product -- The product to be deleted
      */
 
-    // FIX ME WHEN BACK END IMPLEMENTED
+    var username = (this.route.snapshot.paramMap.get('username')!);
     this.cart = this.cart.filter(p => p !== product);
+    this.shoppingCartService.deleteProduct(product, {"username": username}).subscribe();
   }
 
   backButton(): void {

@@ -6,7 +6,7 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterEvent, RouterLink, RouterModule, RouterState } from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import { Location } from '@angular/common';
 import { UserService } from '../user.service';
 import { Observable } from 'rxjs';
@@ -53,12 +53,13 @@ export class UserLoginComponent implements OnInit {
 
     // User Login
     else if (this.userService.userExists(username)) {
-        this.router.navigate(['user-store']);
+        this.router.navigate([`user-store/${username}`]);
     }
 
     // New User
-    else if(this.userService.createUser(username)){
-        this.router.navigate(['user-store']);
+    else {
+        this.userService.createUser(username);
+        this.router.navigate([`user-store/${username}`]);
     }
 
   }

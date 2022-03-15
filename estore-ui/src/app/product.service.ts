@@ -47,7 +47,8 @@ export class ProductService {
    * @returns 
    */
   updateProduct(product: Product): Observable<any> {
-    return this.http.put(this.productsURL, product, this.httpOptions);
+    const url = `${this.productsURL}`
+    return this.http.put(url, product, this.httpOptions);
   }
 
   getProduct(id: number): Observable<Product> {
@@ -56,7 +57,8 @@ export class ProductService {
   }
 
   addProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.productsURL, product, this.httpOptions);
+    const url = `${this.productsURL}`
+    return this.http.post<Product>(url, product, this.httpOptions);
   }
 
   searchProducts(name: string): Observable<Product[]> {

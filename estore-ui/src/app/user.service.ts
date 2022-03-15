@@ -8,7 +8,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { USERS } from './mock-users';
 import { User } from "./user";
 
 @Injectable({
@@ -23,17 +22,16 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  userExists(username: string): Observable<User> {
+  userExists(username: string): Observable<boolean> {
       /**
        * Checks to see if the information inputted by the user
        * exists in the user data.
        * 
        * FIX ME add backend. - > Fixed
        */
-    
-    const url = `${this.usersURL}/${username}`;
-    return this.http.get<User>(url, this.httpOptions);
-      
+      const url = `${this.usersURL}/${username}`;
+      return this.http.get<boolean>(url);
+      //return USERS.some(user => (user.username === username));
   }
 
   createUser(username: string): Observable<User> {
@@ -43,7 +41,12 @@ export class UserService {
        * Input Arguments:
        * username -- The username of the new user
        */
+       const url = `${this.usersURL}/${username}`;
+       return this.http.post<User>(url, this.httpOptions);
+  }
+
+  getUser(username: string): Observable<User> {
     const url = `${this.usersURL}/${username}`;
-    return this.http.post<User>(url, this.httpOptions);
+    return this.http.get<User>(url);
   }
 }

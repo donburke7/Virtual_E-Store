@@ -5,9 +5,12 @@
  * Contributors: Isaac Post, Donald Burke
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
+import { User } from '../user';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-user-store',
@@ -16,15 +19,27 @@ import { ProductService } from '../product.service';
 })
 export class UserStoreComponent implements OnInit {
   inventory: Product[] = [];
+  @Input() user?: User;
 
-  constructor(private productService: ProductService) { }
+  constructor(
+      private productService: ProductService,
+      private userService: UserService,
+      private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getInventory();
+    this.getUser();
   }
 
   getInventory(): void {
     this.productService.getProducts()
       .subscribe(inventory => this.inventory = inventory);
+  }
+
+  getUser(): void {
+    const username = this.route.snapshot.paramMap.get('username')!;
+
+    this.userService.getUser(username)
+      .subscribe(user => this.user = user)
   }
 }

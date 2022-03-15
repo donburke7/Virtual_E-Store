@@ -16,10 +16,10 @@ import { UserProductViewComponent } from './user-product-view/user-product-view.
 
 const routes: Routes =  [
   { path: 'login', component: UserLoginComponent},
-  { path: 'user-store', component: UserStoreComponent},
+  { path: 'user-store/:username', component: UserStoreComponent},
   { path: 'admin-store', component: InventoryComponent},
   { path: 'product-details/:id', component: ProductDetailsComponent },
-  { path: 'shopping-cart', component: ShoppingCartComponent},
+  { path: 'shopping-cart/:username', component: ShoppingCartComponent},
   { path: 'user-product-view/:id', component: UserProductViewComponent}
 ]
 
