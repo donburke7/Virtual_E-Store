@@ -142,6 +142,17 @@ WIthin the model tier we can expect to find 2 types of components, the file data
 > have not had any testing yet. Highlight the issues found during
 > acceptance testing and if there are any concerns._
 
+6 User stories in total
+2 pass all of their acceptance criteria tests
+1 pass some of their acceptance criteria tests
+
+Issues with connecting logging in components with the UserController.
+  -Logging in is possible, but user data are not saved/passed back to the back end
+
+Design error with front-end to back-end shopping cart manipulation and persistence
+  -Unable to pass the user's username back to the backend
+
+
 ### Unit Testing and Code Coverage
 > _Discuss your unit testing strategy. Report on the code coverage
 > achieved from unit testing of the code base. Discuss the team's
