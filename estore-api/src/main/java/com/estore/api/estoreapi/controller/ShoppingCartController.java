@@ -63,13 +63,13 @@ public class ShoppingCartController {
      *         A ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("/{id}")
-    public ResponseEntity<ShoppingCart> getCart(@PathVariable Customer username) {
+    public ResponseEntity<Product[]> getCart(@PathVariable Customer username) {
         try {
             ShoppingCart cartFound = shoppingCartDao.getShoppingCart(username);
             if (cartFound == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             } else {
-                return new ResponseEntity<ShoppingCart>(cartFound, HttpStatus.OK);
+                return new ResponseEntity<>(HttpStatus.OK);
             }
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
