@@ -26,9 +26,9 @@ public class ShoppingCartController {
     private ShoppingCartDAO shoppingCartDao;
     
     /**
-     * Deletes a {@linkplain Product product} with the given id
+     * Deletes a {@linkplain Customer customer} with the given customer
      * 
-     * @param id The id of the {@linkplain Product product}to deleted
+     * @param customer The customer of the {@linkplain Customer Customer}to deleted
      * 
      * @return ResponseEntity HTTP status of OK if deleted<br>
      *         ResponseEntity with HTTP status of NOT_FOUND if not found<br>
@@ -43,6 +43,60 @@ public class ShoppingCartController {
                 return new ResponseEntity<Product>(HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(customer, HttpStatus.NOT_FOUND);
+            }
+        } catch (IOException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    /**
+     * Gets a {@link Product} with the provided username
+     * 
+     * @param username A username that is used to get a product that corresponds to that username
+     *           from the inventory
+     * 
+     * @return A ResonseEntity with the {@link Product product} that was obtained
+     *         from the id
+     *         and a HTTP status code OK
+     *         A ResponseEntity with HTTP status of NOT_FOUND if no product was
+     *         found
+     *         A ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<Product[]> getShoppingCart(@PathVariable Customer username) {
+        try {
+            Product[] cartGot = shoppingCartDao.getShoppingCart(username);
+            if (cartGot == null) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            } else {
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+        } catch (IOException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> getProduct(@PathVariable int id) {
+        //Need to implement
+    }
+    /**
+     * Deletes a {@linkplain Customer customer} with the given customer
+     * 
+     * @param customer The customer of the {@linkplain Customer Customer}to deleted
+     * 
+     * @return ResponseEntity HTTP status of OK if deleted<br>
+     *         ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     *         ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @DeleteMapping("/{customer}/{id}")
+    public ResponseEntity<Product> deleteProduct(@PathVariable Customer customer, @PathVariable int id) {
+        LOG.info("DELETE /cart/customer=" + customer.getUsername() + "/product/id=" + id);
+        try {
+            boolean deleted = shoppingCartDao.deleteProduct(customer, id);
+            if (deleted) {
+                return new ResponseEntity<Product>(HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
