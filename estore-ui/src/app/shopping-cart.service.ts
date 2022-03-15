@@ -16,7 +16,7 @@ import { User } from './user';
   providedIn: 'root'
 })
 export class ShoppingCartService {
-  private shoppingCartURL = 'https://localhost:8080/shoppingCart';
+  private shoppingCartURL = 'http://localhost:8080/shoppingCart';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
