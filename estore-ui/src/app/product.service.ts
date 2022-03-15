@@ -22,16 +22,30 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
+  /**
+   * 
+   * @returns 
+   */
   getProducts(): Observable<Product[]> {
     const url = `${this.productsURL}`
     return this.http.get<Product[]>(url, this.httpOptions);
   }
   
+  /**
+   * 
+   * @param id 
+   * @returns 
+   */
   deleteProduct(id: number): Observable<Product> {
     const url = `${this.productsURL}/${id}`;
     return this.http.delete<Product>(url, this.httpOptions);
   }
 
+  /**
+   * 
+   * @param product 
+   * @returns 
+   */
   updateProduct(product: Product): Observable<any> {
     const url = `${this.productsURL}`
     return this.http.put(url, product, this.httpOptions);

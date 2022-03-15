@@ -8,10 +8,12 @@
 </div>
 
 <ul class="wrapper">
-    <a *ngFor="let product of inventory" routerLink="/product-detail/{{product.id}}"> 
-        <div class="box">{{product.name}}</div>
-        <div class="amount">Stock: {{product.amount}}</div>
-        <div class="price">Price: ${{product.price}}</div>
+    <div *ngFor="let product of inventory"> 
+        <button class="btn-group" routerLink="/product-details/{{product.id}}">{{product.name}}
+            <label class="amount">Stock: {{product.amount}}</label>
+            <label class="price">Price: ${{product.price}}</label>
+        </button>
         <button type="button" class="delete" title="delete product" (click)="deleteProduct(product)">x</button>
-    </a>
+    </div>
+        
 </ul>
