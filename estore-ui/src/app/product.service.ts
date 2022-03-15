@@ -60,11 +60,7 @@ export class ProductService {
   }
 
   searchProducts(name: string): Observable<Product[]> {
-<<<<<<< HEAD
-    const url = `${this.productsURL}/${name}`;
-=======
     const url = `${this.productsURL}/?name=${name}`;
->>>>>>> ajv001-test
     return this.http.get<Product[]>(url);
   }
 }

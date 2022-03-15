@@ -26,6 +26,7 @@ import org.springframework.http.ResponseEntity;
 public class UserControllerTest {
     private UserController userController;
     private UserDAO mockUserDAO;
+    private User mockUser;
 
     /**
      * Before each test, create a new inventoryController object and inject
@@ -35,6 +36,7 @@ public class UserControllerTest {
     public void setupUserController() {
         mockUserDAO = mock(UserDAO.class);
         userController = new UserController(mockUserDAO);
+        mockUser = mock(User.class);
     }
     @Test
     public void testgetUser() throws IOException { // getProduct may throw IOException
@@ -93,98 +95,62 @@ public class UserControllerTest {
 
         // Analyze
         assertEquals(HttpStatus.OK, response.getStatusCode());
+    } 
+
+    @Test
+    public void testDeleteUserFail() throws IOException{
+        String username = "Joe";
+
+        when(mockUserDAO.deleteUser(username)).thenReturn(false);
+
+        ResponseEntity<String> result = userController.deleteUser(username);
+        
+        assertEquals(username, result.getBody());
+        assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
     }
 
     @Test
-    public void testdeleteUserNotFound() throws IOException { // deleteProduct may throw IOException
-        // Setup
-        String user = ("John Smith");
-        // when deleteProduct is called return false, simulating failed deletion
-        when(mockUserDAO.deleteUser(user)).thenReturn(false);
+    public void testDeleteUserError() throws IOException{
+        String username = "Joe";
 
-        // Invoke
-        ResponseEntity<String> response = userController.deleteUser(user);
+        doThrow(new IOException()).when(mockUserDAO).deleteUser(username);
 
-        // Analyze
-        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        ResponseEntity<String> result = userController.deleteUser(username);
+
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, result.getStatusCode());
     }
 
     @Test
-    public void testdeleteUserException() throws IOException { // deleteProduct may throw IOException
-        // Setup
-        String user = ("John Smith");
-        // When deleteProduct is called on the Mock Product DAO, throw an IOException
-        doThrow(new IOException()).when(mockUserDAO).deleteUser(user);
+    public void testAddUserSuccess() throws IOException{
+        String username = "Joe";
 
-        // Invoke
-        ResponseEntity<String> response = userController.deleteUser(user);
+        when(mockUserDAO.addUser(username)).thenReturn(mockUser);
 
-        // Analyze
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-    }
-    @Test
-    public void testcreateProduct() throws IOException { // createProduct may throw IOException
-        // Setup
-        User user = new User("John Smith");
-        // when createProduct is called, return true simulating successful
-        // creation and save
-        when(mockUserDAO.addUser(user.getUsername())).thenReturn(user);
+        ResponseEntity<User> result = userController.addUser(username);
 
-        // Invoke
-        ResponseEntity<User> response = userController.addUser(user.getUsername());
-
-        // Analyze
-        assertEquals(HttpStatus.CREATED, response.getStatusCode());//not sure what created should replace because we are only adding people
-        assertEquals(user, response.getBody());
-    }
-    @Test
-    public void testaddUserProductFailed() throws IOException { // createProduct may throw IOException
-        // Setup
-        User user = new User("John Smith");
-        // when createProduct is called, return false simulating failed
-        // creation and save
-        when(mockUserDAO.addUser(user.getUsername())).thenReturn(null);
-
-        // Invoke
-        ResponseEntity<User> response = userController.addUser(user.getUsername());
-
-        // Analyze
-        assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
+        assertEquals(HttpStatus.OK, result.getStatusCode());
+        assertEquals(mockUser, result.getBody());
     }
 
     @Test
-    public void testaddUserProductHandleException() throws IOException { // createProduct may throw IOException
-        // Setup
-        User user = new User("John Smith");
+    public void testAddUserFail() throws IOException{
+        String username = "Joe";
 
-        // When createProduct is called on the Mock Product DAO, throw an IOException
-        doThrow(new IOException()).when(mockUserDAO).addUser(user.getUsername());
+        when(mockUserDAO.addUser(username)).thenReturn(null);
 
-        // Invoke
-        ResponseEntity<User> response = userController.addUser(user.getUsername());
-
-        // Analyze
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+        ResponseEntity<User> result = userController.addUser(username);
+        
+        assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
     }
-    
+
     @Test
-    public void testSaveuser() throws IOException { // deleteProduct may throw IOException
-        // Setup
-        User[] users = new User[2];
-        users[0] = new User("John Smith");
-        users[1] = new User("Will Smith");
-        String name = "John Smith";
-        String name2 = "Will Smith";
-        // when deleteProduct is called return true, simulating successful deletion
-        when(mockUserDAO.saveUsers(users)).thenReturn(true);
+    public void testAddUserError() throws IOException{
+        String username = "Joe";
 
-        // Invoke
-        ResponseEntity<Product> response = inventoryController.deleteProduct(ProductId);
+        doThrow(new IOException()).when(mockUserDAO).addUser(username);
 
-        // Analyze
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        ResponseEntity<User> result = userController.addUser(username);
+
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, result.getStatusCode());
     }
-
-    
-
 }
