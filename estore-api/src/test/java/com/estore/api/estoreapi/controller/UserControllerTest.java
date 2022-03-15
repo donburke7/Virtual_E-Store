@@ -166,12 +166,13 @@ public class UserControllerTest {
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
+    
     @Test
     public void testSaveuser() throws IOException { // deleteProduct may throw IOException
         // Setup
         User[] users = new User[2];
-        User[0] = new User("John Smith");
-        User[1] = new User("Will Smith");
+        users[0] = new User("John Smith");
+        users[1] = new User("Will Smith");
         String name = "John Smith";
         String name2 = "Will Smith";
         // when deleteProduct is called return true, simulating successful deletion

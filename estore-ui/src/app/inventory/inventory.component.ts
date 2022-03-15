@@ -37,7 +37,7 @@ export class InventoryComponent implements OnInit {
      */
 
     // FIX ME WHEN BACK END IMPLEMENTED
-    this.inventory = this.inventory.filter(p => p !== product);
+    this.productService.deleteProduct(product.id);
   }
 
   addProduct(name: String): void {

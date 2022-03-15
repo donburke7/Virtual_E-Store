@@ -47,7 +47,7 @@ export class ProductService {
   }
 
   searchProducts(name: string): Observable<Product[]> {
-    const url = `${this.productsURL}/${name}`;
+    const url = `${this.productsURL}/?name=${name}`;
     return this.http.get<Product[]>(url);
   }
 }

@@ -48,7 +48,7 @@ public class ShoppingCartControllerTest {
         // When the same id is passed in, our mock Product DAO will return the Product
         // object
         //when(mockCartDAO.getShoppingCart(customer.getUsername(),customer.getCart())).thenReturn(product);
-        when(mockCartDAO.getShoppingCart(customer.getUsername()).thenReturn(customer));
+        when(mockCartDAO.getShoppingCart(customer)).thenReturn(customer);
 
         // Invoke
         ResponseEntity<ShoppingCart> response = cartController.getShoppingCart(customer.getUsername());
