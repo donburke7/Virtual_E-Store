@@ -10,7 +10,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
-  @Input() product?: Product;
+  product: Product | undefined;
   
   constructor(private productService: ProductService, 
     private route: ActivatedRoute, private location: Location) { 
@@ -21,7 +21,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   getProduct(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
 
     this.productService.getProduct(id)
       .subscribe(product => this.product = product)
@@ -36,5 +36,9 @@ export class ProductDetailsComponent implements OnInit {
       this.productService.updateProduct(this.product)
         .subscribe(() => this.backButton());
     }
+  }
+
+  addToCart(): void {
+      
   }
 }
