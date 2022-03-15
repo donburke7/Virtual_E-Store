@@ -57,7 +57,7 @@ public class ShoppingCartController {
      *         found
      *         A ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @GetMapping("/{id}")
+    @GetMapping("/{username}")
     public ResponseEntity<Product[]> getCart(@PathVariable Customer username) {
         try {
             Product[] cartFound = shoppingCartDao.getShoppingCart(username);

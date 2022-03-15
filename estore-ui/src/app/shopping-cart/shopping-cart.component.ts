@@ -5,12 +5,13 @@
  * Contributors: Isaac Post
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { ShoppingCartService } from '../shopping-cart.service';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../user.service';
+import { User } from '../user';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -20,25 +21,32 @@ import { UserService } from '../user.service';
 export class ShoppingCartComponent implements OnInit {
 
   cart: Product[] = [];
+  @Input() user?: User;
 
   constructor(
       private shoppingCartService: ShoppingCartService, 
+      private userService: UserService,
       private location: Location,
       private route: ActivatedRoute
       ) { }
 
   ngOnInit(): void {
     this.getCart();
+    this.getUser();
   }
 
   getCart(): void {
     /**
      * Gets the id from the route to get the cart
      */
-
-    // FIX ME
-    this.shoppingCartService.getCart()
+     var username = (this.route.snapshot.paramMap.get('username')!);
+    this.shoppingCartService.getCart(this.getUser()!)
       .subscribe(cart => this.cart = cart);
+  }
+
+  getUser(): void {
+    this.userService.getUser(this.route.snapshot.paramMap.get('username')!)
+      .subscribe(user => this.user = user);
   }
 
   deleteProduct(product: Product): void {

@@ -16,7 +16,7 @@ import { User } from './user';
   providedIn: 'root'
 })
 export class ShoppingCartService {
-  private shoppingCartURL = 'https://localhost:8080/shoppingCart';
+  private shoppingCartURL = 'http://localhost:8080/shoppingCart';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -24,9 +24,9 @@ export class ShoppingCartService {
 
   constructor(private http: HttpClient) { }
 
-  getCart(): Observable<Product[]> {
-    const url = `${this.shoppingCartURL}`
-    return this.http.get<Product[]>(url, this.httpOptions);
+  getCart(user: User): Observable<Product[]> {
+    const url = `${this.shoppingCartURL}/${user}`
+    return this.http.get<Product[]>(url);
   }
  
   addToCart(product: Product): Observable<any> {

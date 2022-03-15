@@ -1,7 +1,8 @@
- 
+<div *ngIf="user != null">
     <nav>
-        <!-- <h2><a routerLink="shopping-cart/{{user.username}}">Shopping Cart</a></h2> -->
+        <h2><a routerLink="shopping-cart/{{user.username}}">Shopping Cart</a></h2>
     </nav>
+</div>
 
     <h2>Product List: </h2>
     <ul class="product-list">

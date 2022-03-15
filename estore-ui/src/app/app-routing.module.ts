@@ -19,7 +19,7 @@ const routes: Routes =  [
   { path: 'user-store/:username', component: UserStoreComponent},
   { path: 'admin-store', component: InventoryComponent},
   { path: 'product-details/:id', component: ProductDetailsComponent },
-  { path: 'shopping-cart/:username', component: ShoppingCartComponent},
+  { path: 'user-store/:username/shopping-cart/:username', component: ShoppingCartComponent},
   { path: 'user-product-view/:id', component: UserProductViewComponent}
 ]
 
