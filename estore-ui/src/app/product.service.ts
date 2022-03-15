@@ -23,12 +23,13 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(): Product[] {
-    return PRODUCTS;
+  getProducts(): Observable<Product[]> {
+    const url = '${this.productsURL}'
+    return this.http.get<Product[]>(url, this.httpOptions);
   }
   
   deleteProduct(id: number): Observable<Product> {
-    const url = `${this.productsURL}/${id}`;
+    const url = '${this.productsURL}/${id}';
     return this.http.delete<Product>(url, this.httpOptions);
   }
 
@@ -37,11 +38,8 @@ export class ProductService {
   }
 
   getProduct(id: number): Observable<Product> {
-    // const url = `${this.productsURL}/${id}`;
-    // return this.http.get<Product>(url);
-    // FIX ME
-    
-    return of(PRODUCTS.filter(product => product.id === id)[0]);
+    const url = '${this.productsURL}/${id}';
+    return this.http.get<Product>(url);
   }
 
   addProduct(product: Product): Observable<Product> {
@@ -49,9 +47,7 @@ export class ProductService {
   }
 
   searchProducts(name: string): Observable<Product[]> {
-    // const url = `${this.productsURL}/${name}`;
-    // return this.http.get<Product[]>(url);
-
-    return of(PRODUCTS.filter(product => product.name === name));
+    const url = '${this.productsURL}/${name}';
+    return this.http.get<Product[]>(url);
   }
 }

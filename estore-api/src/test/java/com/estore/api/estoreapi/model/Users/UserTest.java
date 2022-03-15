@@ -7,7 +7,6 @@ import com.estore.api.estoreapi.model.Product;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestTemplate;
 
 /**
  * Unit tests for the user class

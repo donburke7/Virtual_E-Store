@@ -24,6 +24,7 @@ export class UserStoreComponent implements OnInit {
   }
 
   getInventory(): void {
-    this.inventory = this.productService.getProducts();
+    this.productService.getProducts()
+      .subscribe(inventory => this.inventory = inventory);
   }
 }
