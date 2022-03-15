@@ -10,12 +10,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PRODUCTS } from './mock-products';
 import { Product } from './product';
+import { User } from './user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingCartService {
-  private shoppingCartURL = 'https://localhost:8080/shopping-cart';
+  private shoppingCartURL = 'https://localhost:8080/shoppingCart';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -23,12 +24,18 @@ export class ShoppingCartService {
 
   constructor(private http: HttpClient) { }
 
-  getCart(): Product[] {
-    // FIX ME WHEN BACK END RUNS
-    return PRODUCTS;
+  getCart(): Observable<Product[]> {
+    const url = `${this.shoppingCartURL}`
+    return this.http.get<Product[]>(url, this.httpOptions);
   }
  
   addToCart(product: Product): Observable<any> {
-    return this.http.put(this.shoppingCartURL, product)
+    const url = `${this.shoppingCartURL}`;
+    return this.http.put(url, product)
+  }
+
+  deleteProduct(product: Product, customer: User): Observable<any> {
+    const url = `${this.shoppingCartURL}/${customer}/${product.id}`;
+    return this.http.delete(url)
   }
 }

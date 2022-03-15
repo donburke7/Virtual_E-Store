@@ -14,7 +14,7 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductService {
-  private productsURL = 'https://localhost:8080/inventory';
+  private productsURL = 'http://localhost:8080/products';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -23,30 +23,32 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   getProducts(): Observable<Product[]> {
-    const url = '${this.productsURL}'
+    const url = `${this.productsURL}`
     return this.http.get<Product[]>(url, this.httpOptions);
   }
   
   deleteProduct(id: number): Observable<Product> {
-    const url = '${this.productsURL}/${id}';
+    const url = `${this.productsURL}/${id}`;
     return this.http.delete<Product>(url, this.httpOptions);
   }
 
   updateProduct(product: Product): Observable<any> {
-    return this.http.put(this.productsURL, product, this.httpOptions);
+    const url = `${this.productsURL}`
+    return this.http.put(url, product, this.httpOptions);
   }
 
   getProduct(id: number): Observable<Product> {
-    const url = '${this.productsURL}/${id}';
+    const url = `${this.productsURL}/${id}`;
     return this.http.get<Product>(url);
   }
 
   addProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.productsURL, product, this.httpOptions);
+    const url = `${this.productsURL}`
+    return this.http.post<Product>(url, product, this.httpOptions);
   }
 
   searchProducts(name: string): Observable<Product[]> {
-    const url = '${this.productsURL}/${name}';
+    const url = `${this.productsURL}/${name}`;
     return this.http.get<Product[]>(url);
   }
 }
