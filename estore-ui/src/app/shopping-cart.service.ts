@@ -30,5 +30,5 @@ export class ShoppingCartService {
  
   addToCart(product: Product): Observable<any> {
     return this.http.put(this.shoppingCartURL, product)
-}
+  }
 }

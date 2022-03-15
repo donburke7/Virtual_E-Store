@@ -31,18 +31,8 @@ export class UserLoginComponent implements OnInit {
     this.location.back();
   }
 
-  incorrectLogin(): void {
-    /**
-     * Sets the badLogin label to the error message if the
-     * username and password inputted is incorrect.
-     */
-    var txtName = "User not found.";
-
-    //Reference the Label.
-    var lblName = document.getElementById("badLogin");
-
-    //Copy the TextBox value to Label.
-    lblName!.innerHTML = txtName; 
+  createUser(username: string) {
+      // FIX ME -- CONNECT TO BACKEND
   }
 
   login(): void {
@@ -59,13 +49,14 @@ export class UserLoginComponent implements OnInit {
     }
 
     // User Login
-    else if (this.userService.user_exists(username)) {
+    else if (this.userService.userExists(username)) {
         this.router.navigate(['user-store']);
     }
 
-    // Bad Info Login
+    // New User
     else {
-        this.incorrectLogin();
+        this.userService.createUser(username);
+        this.router.navigate(['user-store']);
     }
   }
 }

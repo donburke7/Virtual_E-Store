@@ -9,7 +9,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { USERS } from './mock-users';
-import { Product } from './product';
 import { User } from "./user";
 
 @Injectable({
@@ -36,5 +35,14 @@ export class UserService {
       const url = `${this.usersURL}/${username}`;
       return this.http.get<User>(url);
       //return USERS.some(user => (user.username === username));
+  }
+
+  createUser(username: string): void {
+      /**
+       * Creates a new user by passing on the username
+       * 
+       * Input Arguments:
+       * username -- The username of the new user
+       */
   }
 }

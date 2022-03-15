@@ -22,16 +22,13 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  /**
-   * GETS products from http client
-   * @returns An array of products
-   */
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.productsURL);
+    const url = '${this.productsURL}'
+    return this.http.get<Product[]>(url, this.httpOptions);
   }
   
   deleteProduct(id: number): Observable<Product> {
-    const url = `${this.productsURL}/${id}`;
+    const url = '${this.productsURL}/${id}';
     return this.http.delete<Product>(url, this.httpOptions);
   }
 
@@ -40,7 +37,7 @@ export class ProductService {
   }
 
   getProduct(id: number): Observable<Product> {
-    const url = `${this.productsURL}/${id}`;
+    const url = '${this.productsURL}/${id}';
     return this.http.get<Product>(url);
   }
 
@@ -49,13 +46,7 @@ export class ProductService {
   }
 
   searchProducts(name: string): Observable<Product[]> {
-    if (!name.trim()) {
-      // if not search term, return empty product array.
-      return of([]);
-    }
-
-    const url = `${this.productsURL}/${name}`;
+    const url = '${this.productsURL}/${name}';
     return this.http.get<Product[]>(url);
-
   }
 }
