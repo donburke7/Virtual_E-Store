@@ -2,6 +2,7 @@ package com.estore.api.estoreapi.persistence.User;
 
 import java.io.IOException;
 
+import com.estore.api.estoreapi.model.Users.Customer;
 import com.estore.api.estoreapi.model.Users.User;
 
 /**
@@ -68,5 +69,7 @@ public interface UserDAO {
      * @throws IOException If an issue occured whilst accessing the json files
      */
     Boolean saveUsers() throws IOException;
+
+    public Customer[] getUsers();
 
 }

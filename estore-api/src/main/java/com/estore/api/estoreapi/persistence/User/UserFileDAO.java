@@ -144,7 +144,7 @@ public class UserFileDAO implements UserDAO {
             if (customers.containsKey(username)) {
                 currUser = customers.get(username);
             } else {
-                if (username.toLowerCase() == User.ADMIN) {
+                if (username.toLowerCase().equals(User.ADMIN)) {
                     currUser = admin;
                 } else {
                     currUser = addUser(username);

@@ -15,7 +15,7 @@ import { User } from "./user";
   providedIn: 'root'
 })
 export class UserService {
-  private usersURL = 'http://localhost:8080/users';
+  private usersURL = 'http://localhost:8080/user';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -23,18 +23,17 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  userExists(username: string): Observable<boolean> {
+  userExists(username: string): Observable<User> {
       /**
        * Checks to see if the information inputted by the user
        * exists in the user data.
        * 
        * FIX ME add backend. - > Fixed
        */
-      const user: User = {username: username};
-
-      const url = `${this.usersURL}/${username}`;
-      return this.http.get<boolean>(url);
-      //return USERS.some(user => (user.username === username));
+    
+    const url = `${this.usersURL}/${username}`;
+    return this.http.get<User>(url, this.httpOptions);
+      
   }
 
   createUser(username: string): Observable<User> {
@@ -44,8 +43,7 @@ export class UserService {
        * Input Arguments:
        * username -- The username of the new user
        */
-       const url = `${this.usersURL}/${username}`;
-       return this.http.post<User>(url, this.http);
-    
+    const url = `${this.usersURL}/${username}`;
+    return this.http.post<User>(url, this.httpOptions);
   }
 }
