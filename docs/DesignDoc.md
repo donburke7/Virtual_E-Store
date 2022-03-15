@@ -57,9 +57,12 @@ This section describes the application domain.
 
 ![Domain Model](Domain-Analysis.png)
 
-> _Provide a high-level overview of the domain for this application. You
-> can discuss the more important domain entities and their relationship
-> to each other._
+The main components of the application domain can be seen as the following:
+customer, inventory, product, shopping cart, admin.
+
+The admin is the overseer of the store, manipulating the inventory to how they see fit, adding or deleting products.
+Customers view the inventory, and select products based on their preference and add it to their shopping cart.
+Once added to the shopping cart, customers are able to checkout, essentially purchasing the product and removing it from the inventory in the process.
 
 
 ## Architecture and Design
@@ -132,30 +135,27 @@ WIthin the model tier we can expect to find 2 types of components, the file data
 > screenshots from the tool and/or corresponding source code that was flagged._
 
 ## Testing
-> _This section will provide information about the testing performed
-> and the results of the testing._
 
 ### Acceptance Testing
-> _Report on the number of user stories that have passed all their
-> acceptance criteria tests, the number that have some acceptance
-> criteria tests failing, and the number of user stories that
-> have not had any testing yet. Highlight the issues found during
-> acceptance testing and if there are any concerns._
 
 6 User stories in total
-2 pass all of their acceptance criteria tests
-1 pass some of their acceptance criteria tests
-
-Issues with connecting logging in components with the UserController.
-  -Logging in is possible, but user data are not saved/passed back to the back end
-
-Design error with front-end to back-end shopping cart manipulation and persistence
-  -Unable to pass the user's username back to the backend
-
+3 pass all of their acceptance criteria tests
+2 Have not had any testing yet
 
 ### Unit Testing and Code Coverage
-> _Discuss your unit testing strategy. Report on the code coverage
-> achieved from unit testing of the code base. Discuss the team's
-> coverage targets, why you selected those values, and how well your
-> code coverage met your targets. If there are any anomalies, discuss
-> those._
+
+Unit Testing Strategy: 
+
+Create a single test file for each file that has implementations of methods.
+Create tests for every possible execution path, for example, a method that has an if else, we write two tests,
+one to test the if block, and the other to test the else block.
+Whenever creating a new instance of an object that has an interface to pair with it, utilize the interface to create the object. Specifically for mock objects. This follows the interface segregation principle in the SOLID principles, this allows the conformity of hiding an unneccessary code that the client does not need to know of.
+
+Code Coverage: 94% achieved
+
+Discussion:
+
+The team's coverage targets were the controllers, persistence as well as any objects that are utilized between the 2 tiers of classes. The reason for this is because by testing these classes, we can atleast determine whetehr or not an issue that arises in the entirety of the program is either in the front end or back end. With well created unit tests, we can determine that something must have happened in the front end or during the connection between the two ends.
+
+The target coverage goal was 90%, as shown above, we were able to not only achieve this but exceed this by 4%.
+
