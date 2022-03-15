@@ -64,7 +64,7 @@ public class ShoppingCartController {
             if (cartFound == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             } else {
-                return new ResponseEntity<>(HttpStatus.OK);
+                return new ResponseEntity<Product[]>(cartFound, HttpStatus.OK);
             }
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
