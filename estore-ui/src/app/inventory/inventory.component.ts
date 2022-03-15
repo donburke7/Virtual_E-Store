@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
-import { PRODUCTS } from '../mock-products';
-
 
 @Component({
   selector: 'app-inventory',
@@ -19,12 +17,14 @@ export class InventoryComponent implements OnInit {
   }
 
   getInventory(): void {
-    this.inventory = this.productService.getProducts();
+    this.productService.getProducts()
+      .subscribe(inventory => this.inventory = inventory);
   }
 
   deleteProduct(product: Product): void {
     // FIX ME WHEN BACK END IMPLEMENTED
     this.inventory = this.inventory.filter(p => p !== product);
+    this.productService.deleteProduct(product.id).subscribe();
   }
 
   addProduct(name: String): void {

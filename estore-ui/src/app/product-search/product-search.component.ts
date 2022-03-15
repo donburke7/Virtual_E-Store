@@ -1,5 +1,11 @@
-import { Component, NgIterable, OnInit } from '@angular/core';
+/**
+ * SWEN 261
+ * Product-search component that interacts with product-search.component.html
+ * 
+ * Contributors: Isaac Post
+ */
 
+import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
 import {
@@ -14,7 +20,7 @@ import { ProductService } from '../product.service';
   styleUrls: ['./product-search.component.css']
 })
 export class ProductSearchComponent implements OnInit {
-  products$!: Observable<Product>
+  products$!: Observable<Product[]>
   private searchTerms = new Subject<string>();
 
   constructor(private productService: ProductService) { }
@@ -24,5 +30,15 @@ export class ProductSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.products$ = this.searchTerms.pipe(
+        // wait 300ms after each keystroke before considering the term
+        debounceTime(300),
+  
+        // ignore new term if same as previous term
+        distinctUntilChanged(),
+  
+        // switch to new search observable each time the term changes
+        switchMap((term: string) => this.productService.searchProducts(term)),
+    );
   }
 }

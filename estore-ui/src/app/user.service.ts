@@ -1,8 +1,8 @@
 /**
  * SWEN 261
+ * Services the user class of the beans store
  * 
- * Service class for user data. Holds methods to interact
- * with user information.
+ * Contributors: Isaac Post
  */
 
 import { HttpClient } from '@angular/common/http';
@@ -22,6 +22,8 @@ export class UserService {
       /**
        * Checks to see if the information inputted by the user
        * exists in the user data.
+       * 
+       * FIX ME add backend
        */
       const user: User = {username: username, password: password};
 

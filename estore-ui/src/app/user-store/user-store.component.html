@@ -1,1 +1,16 @@
-<p>user-store works!</p>
+<nav>
+    <h2><a routerLink="/shopping-cart">Shopping Cart</a></h2>
+</nav>
+
+<h2>Product List: </h2>
+<ul class="product-list">
+    <li *ngFor="let product of inventory" >
+      <a routerLink="/product-details/{{product.id}}">
+        {{product.name}}
+      </a>
+    </li>
+</ul>
+
+<br><br>
+
+<app-product-search></app-product-search>

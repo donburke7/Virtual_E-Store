@@ -90,7 +90,4 @@ public class Customer extends User {
         // TODO
     }
 
-    public String getUsername(){
-        return this.username;
-    }
 }

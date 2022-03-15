@@ -1,7 +1,8 @@
 /**
  * SWEN 261
- * 
  * Holds functions relating to the user-login component.
+ * 
+ * Contributors: Isaac Post
  */
 
 import { Component, OnInit } from '@angular/core';

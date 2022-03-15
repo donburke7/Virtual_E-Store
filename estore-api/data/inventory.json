@@ -1,5 +1,5 @@
-[ { "name": "Magic Beans", "id": 11, "price": 10, "amount": 5 },
-    { "name": "Green Beans", "id": 12, "price": 7, "amount": 5 },
-    { "name": "Black Beans", "id": 13, "price": 8.5, "amount": 5 },
-    { "name": "Pinto Beans", "id": 14, "price": 8, "amount": 5 },
-    { "name": "Mystery Beans", "id": 15, "price": 25, "amount": 5 } ]
+[ { "name": "Magic Beans", "id": 1, "price": 10, "amount": 5 },
+    { "name": "Green Beans", "id": 2, "price": 7, "amount": 5 },
+    { "name": "Black Beans", "id": 3, "price": 8.5, "amount": 5 },
+    { "name": "Pinto Beans", "id": 4, "price": 8, "amount": 5 },
+    { "name": "Mystery Beans", "id": 5, "price": 25, "amount": 5 } ]

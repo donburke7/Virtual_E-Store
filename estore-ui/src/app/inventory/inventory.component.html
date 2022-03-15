@@ -1,4 +1,3 @@
-
 <div>
     <label for="new-product">Product name: </label>
     <input id="new-product" #productName />
@@ -9,11 +8,10 @@
 </div>
 
 <ul class="wrapper">
-    <div *ngFor="let product of inventory">
+    <a *ngFor="let product of inventory" routerLink="/product-detail/{{product.id}}"> 
         <div class="box">{{product.name}}</div>
         <div class="amount">Stock: {{product.amount}}</div>
         <div class="price">Price: ${{product.price}}</div>
-        <button type="button" class="delete" title="delete product"
-      (click)="deleteProduct(product)">x</button>
-    </div>
+        <button type="button" class="delete" title="delete product" (click)="deleteProduct(product)">x</button>
+    </a>
 </ul>
