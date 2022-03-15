@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.model.ShoppingCart;
+import com.estore.api.estoreapi.model.Users.Customer;
 import com.estore.api.estoreapi.persistence.User.ShoppingCartDAO;
 
 import org.springframework.http.HttpStatus;
@@ -62,13 +63,13 @@ public class ShoppingCartController {
      *         A ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Product[]> getCart(@PathVariable Customer username) {
+    public ResponseEntity<ShoppingCart> getCart(@PathVariable Customer username) {
         try {
             ShoppingCart cartFound = shoppingCartDao.getShoppingCart(username);
             if (cartFound == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             } else {
-                return new ResponseEntity<Product>(cartFound, HttpStatus.OK);
+                return new ResponseEntity<ShoppingCart>(cartFound, HttpStatus.OK);
             }
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -87,7 +88,7 @@ public class ShoppingCartController {
      */
     @DeleteMapping("/{customer}/{id}")
     public ResponseEntity<Product> deleteProduct(@PathVariable Customer customer, @PathVariable int id) {
-        LOG.info("DELETE /cart/customer=" + customer.getName + "/product/id=" + id);
+        LOG.info("DELETE /cart/customer=" + customer.getUsername() + "/product/id=" + id);
         try {
             boolean deleted = shoppingCartDao.deleteProduct(customer, id);
             if (deleted) {
@@ -101,19 +102,19 @@ public class ShoppingCartController {
     }
 
     @DeleteMapping("/{customer}")
-    public ResonseEntity<Customer> clearCart(@PathVariable Customer customer){
-        LOG.info("DELETE /cart/customer=" + customer.getName);
+    public ResponseEntity<Customer> clearCart(@PathVariable Customer customer){
+        LOG.info("DELETE /cart/customer=" + customer.getUsername());
         try{
             boolean deleted = shoppingCartDAO.clearCart(customer);
             if(deleted){
-                return new ResonseEntity<>(HttpStatus.OK);
+                return new ResponseEntity<>(HttpStatus.OK);
             }
             else{
-                return new ResonseEntity<Customer>(customer, HttpStatus.NOT_FOUND);
+                return new ResponseEntity<Customer>(customer, HttpStatus.NOT_FOUND);
             }
         }
         catch (IOException e){
-            return new ResonseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -121,7 +122,7 @@ public class ShoppingCartController {
     public ResponseEntity<Product> addProduct(@PathVariable Customer customer, @PathVariable Product product){
         try {
             Product result = shoppingCartDAO.addProduct(customer, product);
-            if(result){
+            if(result != null){
                 return new ResponseEntity<>(HttpStatus.OK);
             }
             else{
