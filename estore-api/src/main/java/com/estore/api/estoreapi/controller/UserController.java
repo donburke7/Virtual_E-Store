@@ -63,11 +63,11 @@ public class UserController {
      *         A ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("/{username}")
-    public ResponseEntity<User> getUser(@PathVariable String username) {
+    public ResponseEntity<String> getUser(@PathVariable String username) {
         try {
             User userFound = userDao.getUser(username);
             if (userFound == null) {
-                return new ResponseEntity<User>(userFound, HttpStatus.NOT_FOUND);
+                return new ResponseEntity<String>(username, HttpStatus.NOT_FOUND);
             } else {
                 return new ResponseEntity<>(HttpStatus.OK);
             }
@@ -103,11 +103,11 @@ public class UserController {
 
 
     @PostMapping("/{username}")
-    public ResponseEntity<String> addUser(@PathVariable String username){
+    public ResponseEntity<User> addUser(@PathVariable String username){
         try {
             User result = userDao.addUser(username);
             if(result != null){
-                return new ResponseEntity<String>(username, HttpStatus.OK);
+                return new ResponseEntity<User>(result, HttpStatus.OK);
             }
             else{
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
