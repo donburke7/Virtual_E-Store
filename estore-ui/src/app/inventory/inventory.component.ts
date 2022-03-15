@@ -1,3 +1,10 @@
+/**
+ * SWEN 261
+ * inventory.component.ts
+ * 
+ * Contributors: Donald Burke
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
@@ -21,11 +28,25 @@ export class InventoryComponent implements OnInit {
   }
 
   deleteProduct(product: Product): void {
+    /**
+     * Gets called by a button from html to remove product
+     * 
+     * Input Arguments:
+     * product -- The product to be deleted.
+     */
+
     // FIX ME WHEN BACK END IMPLEMENTED
     this.inventory = this.inventory.filter(p => p !== product);
   }
 
   addProduct(name: String): void {
+    /**
+     * Gets called by a button from html to add a new product
+     * 
+     * Input Arguments:
+     * product -- The name of the new product.
+    */
+
     name = name.trim();
     if (!name) { return; }
     this.productService.addProduct({ name } as Product).subscribe(product => {

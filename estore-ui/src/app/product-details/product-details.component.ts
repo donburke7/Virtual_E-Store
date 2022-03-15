@@ -1,3 +1,10 @@
+/**
+ * SWEN 261
+ * product-details.component.ts
+ * 
+ * Contributors: Isaac Post, Donald Burke
+ */
+
 import { Component, Input, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { Product } from '../product';
@@ -10,10 +17,12 @@ import { Location } from '@angular/common';
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
-  product: Product | undefined;
+  @Input() product?: Product;
   
-  constructor(private productService: ProductService, 
-    private route: ActivatedRoute, private location: Location) { 
+  constructor(
+      private productService: ProductService, 
+      private route: ActivatedRoute, 
+      private location: Location) { 
   }
 
   ngOnInit(): void {
@@ -21,6 +30,9 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   getProduct(): void {
+    /**
+     * Gets the id from the route to get the product
+     */
     const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
 
     this.productService.getProduct(id)
@@ -32,13 +44,12 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   saveButton(): void {
+    /**
+     * Saves the current form of the product
+     */
     if (this.product) {
       this.productService.updateProduct(this.product)
         .subscribe(() => this.backButton());
     }
-  }
-
-  addToCart(): void {
-      
   }
 }

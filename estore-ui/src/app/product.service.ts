@@ -1,6 +1,6 @@
 /**
  * SWEN 261
- * Services the product class of the Beans store
+ * Services the product class of the Beans store.
  * 
  * Contributors: Isaac Post, Donald Burke
  */
@@ -10,7 +10,6 @@ import { Product } from './product';
 import { PRODUCTS } from './mock-products';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,18 +23,12 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  /**
-   * GETS products from mock-products
-   * @returns An array of products
-   */
   getProducts(): Product[] {
-    // FIX ME WHEN BACK END RUNS
     return PRODUCTS;
   }
   
   deleteProduct(id: number): Observable<Product> {
     const url = `${this.productsURL}/${id}`;
-
     return this.http.delete<Product>(url, this.httpOptions);
   }
 
@@ -44,8 +37,11 @@ export class ProductService {
   }
 
   getProduct(id: number): Observable<Product> {
-    const url = `${this.productsURL}/${id}`;
-    return this.http.get<Product>(url);
+    // const url = `${this.productsURL}/${id}`;
+    // return this.http.get<Product>(url);
+    // FIX ME
+    
+    return of(PRODUCTS.filter(product => product.id === id)[0]);
   }
 
   addProduct(product: Product): Observable<Product> {
@@ -53,8 +49,6 @@ export class ProductService {
   }
 
   searchProducts(name: string): Observable<Product[]> {
-    // FIX ME ADD BACKEND
-
     // const url = `${this.productsURL}/${name}`;
     // return this.http.get<Product[]>(url);
 

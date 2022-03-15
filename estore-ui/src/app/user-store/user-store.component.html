@@ -5,7 +5,7 @@
 <h2>Product List: </h2>
 <ul class="product-list">
     <li *ngFor="let product of inventory" >
-      <a routerLink="/product-details/{{product.id}}">
+      <a routerLink="/user-product-view/{{product.id}}">
         {{product.name}}
       </a>
     </li>
