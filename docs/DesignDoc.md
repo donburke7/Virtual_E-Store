@@ -111,6 +111,8 @@ with the e-store application.
 > section will follow the same instructions that are given for the View
 > Tier above._
 
+The ViewModel is the set of classes that take data passed in by the View, which is the front-end web store, and send it too the Model, that is the back-end data. In our project, you can expect to find classes called controllers (InventoryController, UserController, and ShoppingCartController) that recieve Http requests from the View. The controller classes take these requests and figure out what functions from the Model the View is requesting. These classes then call that function and return the data that was requested by the View. In the end, the ViewModel tier is used as a connection betwen Model and View through the use of the InventoryController, UserController, and ShoppingCartController classes.
+
 > _At appropriate places as part of this narrative provide one or more
 > static models (UML class diagrams) with some details such as critical attributes and methods._
 
