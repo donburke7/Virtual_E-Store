@@ -62,6 +62,10 @@ export class ProductService {
   }
 
   searchProducts(name: string): Observable<Product[]> {
+    if (!name.trim()) {
+      // if not search term, return empty hero array.
+      return of([]);
+    }
     const url = `${this.productsURL}/?name=${name}`;
     return this.http.get<Product[]>(url);
   }

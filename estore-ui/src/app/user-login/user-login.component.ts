@@ -33,12 +33,7 @@ export class UserLoginComponent implements OnInit {
     this.location.back();
   }
 
-  createUser(username: string) {
-      // FIX ME -- CONNECT TO BACKEND
-  }
-
-  login(): void
-  {
+  login(): void {
     /**
      * Checks the information inputted by the user to direct them
      * to either admin-store or user-store, or displaying the
