@@ -36,7 +36,6 @@ export class InventoryComponent implements OnInit {
      * product -- The product to be deleted.
      */
 
-    // FIX ME WHEN BACK END IMPLEMENTED
     this.inventory = this.inventory.filter(p => p !== product);
     this.productService.deleteProduct(product.id).subscribe();
   }

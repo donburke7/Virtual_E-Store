@@ -3,11 +3,6 @@ geometry: margin=1in
 ---
 # PROJECT Design Documentation
 
-> _The following template provides the headings for your Design
-> Documentation.  As you edit each section make sure you remove these
-> commentary 'blockquotes'; the lines that start with a > character
-> and appear in the generated PDF in italics._
-
 ## Team Information
 * Team name: Jadin
 * Team members
@@ -22,8 +17,8 @@ geometry: margin=1in
 This project is to create a working e-store that allows customers to browse and purchase products that have been posted by an admin of the store.
 
 ### Purpose
-> _Provide a very brief statement about the project and the most
-> important user group and user goals._
+
+The purpose of the project is to host a place for consumers and sellers to have a market in order to transact with one another seeking to meet their demands.
 
 ### Glossary and Acronyms
 > _Provide a table of terms and acronyms._
@@ -35,27 +30,36 @@ This project is to create a working e-store that allows customers to browse and 
 
 ## Requirements
 
-This section describes the features of the application.
-
-> _In this section you do not need to be exhaustive and list every
-> story.  Focus on top-level features from the Vision document and
-> maybe Epics and critical Stories._
 
 ### Definition of MVP
-> _Provide a simple description of the Minimum Viable Product._
+
+A website configured as an e-store to give interactions between sellers and buyers as one party seeks a product that conforms to their likings, and the other sells there goods.
 
 ### MVP Features
-> _Provide a list of top-level Epics and/or Stories of the MVP._
+As a customer I want to be able to view the products on the website in order to buy the product.
+As a customer I want to be able to edit my shopping cart in order to purchase products.
+As a customer I want to be able to search for products in order to quickly find the things I'm looking for.
+As a customer I want to be able to leave a review in order to give feedback.
+
+As an admin I want to be able to edit the inventory to see how I see fit in order to sell my products.
+As an admin I want to be able to be able to view the e-store in order to interact with it.
+As an admin I want to be able to view customer review in order to gain insight on customer reactions.
 
 ### Roadmap of Enhancements
-> _Provide a list of top-level features in the order you plan to consider them._
-
+Product
+Inventory
+User
+Customer
+Shopping Cart
+Website
+Search Bar
+Reviews
 
 ## Application Domain
 
 This section describes the application domain.
 
-![Domain Model](Domain-Analysis.png)
+![Domain Model](Domain_Analysis_jadin.png)
 
 The main components of the application domain can be seen as the following:
 customer, inventory, product, shopping cart, admin.
@@ -92,6 +96,8 @@ with the e-store application.
 > _Provide a summary of the application's user interface.  Describe, from
 > the user's perspective, the flow of the pages in the web application._
 
+The user begins at the home page with only the option to login to ensure a user account is being cached. After this, if the username is the admin username, the user, who is an owner, will be able to see the inventory as well as add and delete items. Once an item is clicked, the owner will be able to edit the price, stock and name of the product. If the user logs in as a customer, the interface is changed to the user-storefront where they can see the inventory without some of the rights that the admin has. They are able to click on a product in order to view the product's details as well as add it to their cart. From the user-storefront, the customer can click on the Shopping Cart link to be routed to their current shopping cart. From there they can remove any items they wish.
+
 
 ### View Tier
 > _Provide a summary of the View Tier UI of your architecture.
@@ -105,8 +111,8 @@ with the e-store application.
 > Be sure to include an relevant HTTP reuqests from the client-side to the server-side 
 > to help illustrate the end-to-end flow._
 
-![User Product Deletion Sequence Diagram](ProductDeletionSequenceDiagram.png)
-![Admin Edit Product Sequence Diagram](AdminEditSequenceDiagram.png)
+For an admin, in the user-login component, once the 'admin' username is typed in and the log in button is pressed, an http GET request will be sent to the backend to handle. Once a response is received, it will send you to the admin storefront. In the case of a user, that same process will also generate a GET request for the backend to handle, which will add the user to the users.json file if not already added.
+Once logged in as an admin, the inventory component will work with the product-details and product service to use http GET, POST and DELETE requests to manage the inventory. As a user the user-store, shopping-cart, user-product-view, and product-search components all use GET, POST, UPDATE and DELETE, and utilize the shopping-cart and user services to produce the user's view of the storefront and transfer to the product details and shopping cart views.
 
 
 ### ViewModel Tier
@@ -122,10 +128,9 @@ The ViewModel is the set of classes that take data passed in by the View, which 
 
 ### Model Tier
 
-WIthin the model tier we can expect to find 2 types of components, the file data access objects and any neccessary object classes to help. Some of these neccessary objects are objects like the product class and users class. The product class creates objects that holds information on a singular product that is being sold in the e-store, whereas a user holds information about a user who interacts with the e-store. The fil data access objects are objects that takes care of saving, loading, and manipulation of any sort of data that is to be utilized throughout the entire e-store. Examples of such data can be seen as the inventory, or a customer's shopping cart. The inventory must be saved and loaded in order for users to see a constantly updated inventory of products. Shopping carts must be saved so that if a customer logs out, and then logs back in, they should still have their shopping cart and continue to add, delete, and overall edit the shopping cart.
+WIthin the model tier we can expect to find 2 types of components, the file data access objects and any neccessary object classes to help. Some of these neccessary objects are objects like the product class and users class. The product class creates objects that holds information on a singular product that is being sold in the e-store, whereas a user holds information about a user who interacts with the e-store. The fil data access objects are objects that takes care of saving, loading, and manipulation of any sort of data that is to be utilized throughout the entire e-store. Examples of such data can be seen as the inventory, or a customer's shopping cart. The inventory must be saved and loaded in order for users to see a constantly updated inventory of products. Shopping carts must be saved so that if a customer logs out, and then logs back in, they should still hacd ve their shopping cart and continue to add, delete, and overall edit the shopping cart.
 
-> _At appropriate places as part of this narrative provide one or more
-> static models (UML class diagrams) with some details such as critical attributes and methods._
+![Model Tier UML Diagram](Model_UML_Diagram_jadin.png)
 
 ### Static Code Analysis/Design Improvements
 > _Discuss design improvements that you would make if the project were
@@ -155,6 +160,8 @@ Create a single test file for each file that has implementations of methods.
 Create tests for every possible execution path, for example, a method that has an if else, we write two tests,
 one to test the if block, and the other to test the else block.
 Whenever creating a new instance of an object that has an interface to pair with it, utilize the interface to create the object. Specifically for mock objects. This follows the interface segregation principle in the SOLID principles, this allows the conformity of hiding an unneccessary code that the client does not need to know of.
+
+![Code Coverage](Code_Coverage_jadin.png)
 
 Code Coverage: 94% achieved
 

@@ -70,6 +70,12 @@ public interface UserDAO {
      */
     Boolean saveUsers() throws IOException;
 
+    /**
+     * creates and returns an array of all the {@linkplain User users} listed in the
+     * system as the child class {@link Customer customer}
+     * 
+     * @return an array of {@link Customers customers}
+     */
     public Customer[] getUsers();
 
 }
