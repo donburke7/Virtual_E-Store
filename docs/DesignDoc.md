@@ -77,7 +77,7 @@ This section describes the application architecture.
 
 The following Tiers/Layers model shows a high-level view of the webapp's architecture.
 
-![The Tiers & Layers of the Architecture](architecture-tiers-and-layers.png)
+![The Tiers & Layers of the Architecture](ArchitectureDiagram.png)
 
 The e-store web application, is built using the Model–View–ViewModel (MVVM) architecture pattern. 
 
