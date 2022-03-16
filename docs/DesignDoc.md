@@ -105,6 +105,9 @@ with the e-store application.
 > Be sure to include an relevant HTTP reuqests from the client-side to the server-side 
 > to help illustrate the end-to-end flow._
 
+![User Product Deletion Sequence Diagram](ProductDeletionSequenceDiagram.png)
+![Admin Edit Product Sequence Diagram](AdminEditSequenceDiagram.png)
+
 
 ### ViewModel Tier
 > _Provide a summary of this tier of your architecture. This
