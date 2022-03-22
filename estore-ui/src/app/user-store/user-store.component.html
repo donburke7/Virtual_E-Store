@@ -1,6 +1,6 @@
 <div *ngIf="user != null">
     <nav>
-        <h2><a routerLink="/shopping-cart/{{user?.username}}">Shopping Cart</a></h2>
+        <h2><a routerLink="shopping-cart/{{user?.username}}">Shopping Cart</a></h2>
     </nav>
 </div>
 
@@ -11,7 +11,7 @@
     <h2>Product List: </h2>
     <ul class="wrapper">
         <div *ngFor="let product of inventory"> 
-            <button class="btn-group" routerLink="/user-product-view/{{product.id}}">{{product.name}}
+            <button class="btn-group" routerLink="/user-product-view/{{user?.username}}/{{product.id}}">{{product.name}}
                 <label class="amount">Stock: {{product.amount}}</label>
                 <label class="price">Price: ${{product.price}}</label>
             </button>

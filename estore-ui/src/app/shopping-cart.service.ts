@@ -8,9 +8,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PRODUCTS } from './mock-products';
 import { Product } from './product';
-import { User } from './user';
 
 @Injectable({
   providedIn: 'root'
@@ -24,18 +22,18 @@ export class ShoppingCartService {
 
   constructor(private http: HttpClient) { }
 
-  getCart(user: User): Observable<Product[]> {
-    const url = `${this.shoppingCartURL}/${user}`
+  getCart(username: string): Observable<Product[]> {
+    const url = `${this.shoppingCartURL}/${username}`
     return this.http.get<Product[]>(url);
   }
  
-  addToCart(product: Product): Observable<any> {
-    const url = `${this.shoppingCartURL}`;
+  addToCart(product: Product, username: string): Observable<any> {
+    const url = `${this.shoppingCartURL}/${username}`;
     return this.http.put(url, product)
   }
 
-  deleteProduct(product: Product, customer: User): Observable<any> {
-    const url = `${this.shoppingCartURL}/${customer}/${product.id}`;
+  deleteProduct(product: Product, username: string): Observable<any> {
+    const url = `${this.shoppingCartURL}/${username}/${product.id}`;
     return this.http.delete(url)
   }
 }
