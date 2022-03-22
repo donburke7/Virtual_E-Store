@@ -99,7 +99,7 @@ public class ShoppingCartController {
     }
 
     @DeleteMapping("/{username}")
-    public ResponseEntity<String> clearCart(@PathVariable String username){
+    public ResponseEntity<Boolean> clearCart(@PathVariable String username){
         LOG.info("DELETE /cart/customer=" + username);
         try{
             boolean deleted = shoppingCartDao.clearShoppingCart(username);
@@ -107,7 +107,7 @@ public class ShoppingCartController {
                 return new ResponseEntity<>(HttpStatus.OK);
             }
             else{
-                return new ResponseEntity<String>(username, HttpStatus.NOT_FOUND);
+                return new ResponseEntity<Boolean>(deleted, HttpStatus.NOT_FOUND);
             }
         }
         catch (IOException e){
