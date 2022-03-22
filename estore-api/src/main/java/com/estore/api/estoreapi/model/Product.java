@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Product {
     // The string format of this product, used in toString()
-    static final String STRING_FORMAT = "Product [id=%d, name=%s, amount=%d, price=%2f]";
+    static final String STRING_FORMAT = "Product [id=%d, name=%s, amount=%d, price=%2f, average rating=%2f]";
 
     @JsonProperty("name")
     private String name;
@@ -20,6 +20,12 @@ public class Product {
 
     @JsonProperty("price")
     private double price;
+
+    @JsonProperty("ratings")
+    private double ratings[];
+
+    @JsonProperty("avg_rating")
+    private double avgRating;
 
     /**
      * Constructor for the product class
@@ -32,7 +38,8 @@ public class Product {
      * @param price
      */
     public Product(@JsonProperty("name") String name, @JsonProperty("id") int id,
-            @JsonProperty("amount") int amount, @JsonProperty("price") double price) {
+            @JsonProperty("amount") int amount, @JsonProperty("price") double price, 
+            @JsonProperty("ratings") double ratings[], @JsonProperty("avg_rating") double avgRating) {
 
         if (amount <= 0) {
             this.amount = 1;
@@ -44,6 +51,12 @@ public class Product {
             this.price = 1.00;
         } else {
             this.price = price;
+        }
+
+        if (ratings.length == 0) {
+            this.avgRating = 0;
+        } else {
+            this.avgRating = avgRating;
         }
 
         this.name = name;
@@ -78,15 +91,6 @@ public class Product {
     }
 
     /**
-     * Sets the amount of this product
-     * 
-     * @param amount the new amount to set this product to
-     */
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    /**
      * Gets the price of this item
      * 
      * @return the price of this item as a double
@@ -96,12 +100,37 @@ public class Product {
     }
 
     /**
+     * Gets the current average rating of this item
+     * @return the average rating of the item as a double
+     */
+    public double getAvgRating() {
+        return this.avgRating;
+    }
+
+    /**
+     * Sets the amount of this product
+     * 
+     * @param amount the new amount to set this product to
+     */
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    /**
      * Sets the price of this product
      * 
-     * @param price the price to be
+     * @param price the price to be set as the products current price
      */
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    /**
+     * Sets the average rating of this product to the passed in value
+     * @param newAvgRating the new average rating to be set as the current average rating
+     */
+    public void setAvgRating(double newAvgRating) {
+        this.avgRating = newAvgRating;
     }
 
     /**
