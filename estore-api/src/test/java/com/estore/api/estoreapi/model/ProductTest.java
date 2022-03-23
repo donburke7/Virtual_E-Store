@@ -55,7 +55,8 @@ public class ProductTest {
         String name = "Magic Bean";
         int amount = 100;
         double price = 489.01;
-        String expected_string = String.format(Product.STRING_FORMAT, id, name, amount, price);
+        double avg_rating = 5.0;
+        String expected_string = String.format(Product.STRING_FORMAT, id, name, amount, price, avg_rating);
 
         Product bean = new Product(name, id, amount, price, new double[]{5.0}, 5.0);
 

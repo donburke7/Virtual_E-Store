@@ -53,7 +53,7 @@ public class Product {
             this.price = price;
         }
 
-        if (ratings.length == 0) {
+        if (ratings == null) {
             this.avgRating = 0;
         } else {
             this.avgRating = avgRating;
@@ -146,7 +146,7 @@ public class Product {
      */
     @Override
     public String toString() {
-        return String.format(STRING_FORMAT, this.id, this.name, this.amount, this.price);
+        return String.format(STRING_FORMAT, this.id, this.name, this.amount, this.price, this.avgRating);
     }
 
     /**
