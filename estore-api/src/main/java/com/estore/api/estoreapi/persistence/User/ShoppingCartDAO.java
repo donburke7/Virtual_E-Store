@@ -70,6 +70,14 @@ public interface ShoppingCartDAO {
      */
     boolean clearShoppingCart(String username) throws IOException;
 
+    /**
+     * 
+     * @param username
+     * @return
+     * @throws IOException
+     */
+    boolean checkout(String username) throws IOException;
+
 
 
 }

@@ -36,4 +36,10 @@ export class ShoppingCartService {
     const url = `${this.shoppingCartURL}/${username}/${product.id}`;
     return this.http.delete(url)
   }
+
+  checkout(username: string): Observable<any>
+  {
+    const url = `${this.shoppingCartURL}/${username}`;
+    return this.http.post(url, this.http);
+  }
 }

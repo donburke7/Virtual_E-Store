@@ -78,6 +78,19 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
         userDAO.saveUsers();
         return status;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public synchronized boolean checkout(String username) throws IOException {
+
+        //will call get cart on the user that corresponds with the parameterized username
+        //using the returned product[] send it to inventoryDAO's checkout function to checkout
+        //clear the cart if the checkout was successful, inficated by a true that was returned from inventoryDAO
+        //return the boolean that gets returned from inventoryDAO's checkout function
+
+        return false;
+    }
     
     
 
