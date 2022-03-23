@@ -183,7 +183,8 @@ public class InventoryFileDAO implements InventoryDAO {
     @Override
     public Product createProduct(Product product) throws IOException {
         synchronized (inventory) {
-            Product newProduct = new Product(product.getName(), nextID(), product.getAmount(), product.getPrice());
+            Product newProduct = new Product(product.getName(), nextID(), product.getAmount(), 
+                                             product.getPrice(), product.getRatings(), product.getAvgRating());
             inventory.put(newProduct.getID(), newProduct);
             save();
             return newProduct;

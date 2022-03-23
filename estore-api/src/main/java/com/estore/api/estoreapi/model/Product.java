@@ -100,6 +100,14 @@ public class Product {
     }
 
     /**
+     * Gets all the ratings of this item
+     * @return the ratings of the item as a double list
+     */
+    public double[] getRatings() {
+        return this.ratings;
+    }
+
+    /**
      * Gets the current average rating of this item
      * @return the average rating of the item as a double
      */

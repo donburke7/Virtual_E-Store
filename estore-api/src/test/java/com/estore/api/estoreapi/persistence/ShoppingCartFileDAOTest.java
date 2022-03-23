@@ -46,7 +46,7 @@ public class ShoppingCartFileDAOTest {
     public void testaddProduct() throws IOException {
 
         //setup
-        Product testProduct = new Product("Green Bean", 0, 1, 1.00);
+        Product testProduct = new Product("Green Bean", 0, 1, 1.00, new double[]{5.0}, 5.0);
         
         //invoke
         shoppingCartFileDAO.addProduct(customer, testProduct);
@@ -63,7 +63,7 @@ public class ShoppingCartFileDAOTest {
     public void testdeleteProduct() throws IOException {
 
         //setup
-        Product testProduct = new Product("Green Bean", 0, 1, 1.00);
+        Product testProduct = new Product("Green Bean", 0, 1, 1.00, new double[]{5.0}, 5.0);
         customer.addProduct(testProduct);
 
         //invoke
@@ -81,8 +81,8 @@ public class ShoppingCartFileDAOTest {
     public void testgetShoppingCart() throws IOException {
 
         //setup
-        Product testProduct = new Product("Green Bean", 0, 1, 1.00);
-        Product testProductTwo = new Product("Red Beans", 1, 1, 2.50);
+        Product testProduct = new Product("Green Bean", 0, 1, 1.00, new double[]{5.0}, 5.0);
+        Product testProductTwo = new Product("Red Beans", 1, 1, 2.50, new double[]{5.0}, 5.0);
         customer.addProduct(testProduct);
         customer.addProduct(testProductTwo);
 
@@ -101,8 +101,8 @@ public class ShoppingCartFileDAOTest {
     public void testclearShoppingCart() throws IOException {
 
         //setup
-        Product testProduct = new Product("Green Bean", 0, 1, 1.00);
-        Product testProductTwo = new Product("Red Beans", 1, 1, 2.50);
+        Product testProduct = new Product("Green Bean", 0, 1, 1.00, new double[]{5.0}, 5.0);
+        Product testProductTwo = new Product("Red Beans", 1, 1, 2.50, new double[]{5.0}, 5.0);
         customer.addProduct(testProduct);
         customer.addProduct(testProductTwo);
 

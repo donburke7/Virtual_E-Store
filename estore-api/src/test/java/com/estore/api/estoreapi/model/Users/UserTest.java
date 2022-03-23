@@ -41,7 +41,7 @@ public class UserTest {
     public void testequalsFalseWrongObject() {
         //setup
         User test1 = new User("Bob");
-        Product product1 = new Product("Green Bean", 0, 1, 1.00);
+        Product product1 = new Product("Green Bean", 0, 1, 1.00, new double[]{5.0}, 5.0);
 
         //invoke and analyze, should return false
         //two different objects

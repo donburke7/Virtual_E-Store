@@ -7,7 +7,6 @@ import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 
-import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.model.Users.User;
 import com.estore.api.estoreapi.persistence.User.UserDAO;
 
