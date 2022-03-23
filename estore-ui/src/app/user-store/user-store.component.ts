@@ -36,10 +36,14 @@ export class UserStoreComponent implements OnInit {
       .subscribe(inventory => this.inventory = inventory);
   }
 
-  getUser(): void {
+  getUser(): User {
     const username = this.route.snapshot.paramMap.get('username')!;
 
     this.userService.getUser(username)
       .subscribe(user => this.user = user)
+    
+    return this.user!;
+    
   }
+
 }

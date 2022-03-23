@@ -5,14 +5,16 @@
  * Contributors: Isaac Post
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { LocalStorageService } from '../local-storage.service';
 
 import {
    debounceTime, distinctUntilChanged, switchMap
  } from 'rxjs/operators';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
+import { User } from '../user';
 
 @Component({
   selector: 'app-product-search',
@@ -22,14 +24,17 @@ import { ProductService } from '../product.service';
 export class ProductSearchComponent implements OnInit {
   products$!: Observable<Product[]>
   private searchTerms = new Subject<string>();
+  @Input() username!: string;
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private localStorage: LocalStorageService) { }
 
   search(term: string): void {
       this.searchTerms.next(term);
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void
+  {
+    this.username = this.localStorage.getUsername();
     this.products$ = this.searchTerms.pipe(
         // wait 300ms after each keystroke before considering the term
         debounceTime(300),
