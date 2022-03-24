@@ -148,4 +148,22 @@ public class InventoryFileDAOTest {
         // Ensures the result is true
         assertEquals(true, result);
     }
+
+    @Test
+    public void testupdateProductAvgRating() throws IOException {
+
+        // Product to be updated
+        Product testProduct = new Product("Bean1", 2, 4, 10, new double[]{5.0, 1.0}, 5.0);
+
+        // Result of the updateProduct function
+        // Should return null if no product was found
+        // Should return the updated product if one was updated
+        Product result = inventoryDAO.updateProduct(testProduct);
+
+        // Ensures the result is the same expected average
+        double actual = result.getAvgRating();
+        double expected = 3.0;
+        assertEquals(expected, actual);
+    }
+
 }

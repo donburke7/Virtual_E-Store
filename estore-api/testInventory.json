@@ -1,1 +1,1 @@
-[{"name":"Blue Beans","id":1,"amount":1,"price":1.0,"ratings":[5.0],"avg_rating":5.0},{"name":"Cow Beans","id":2,"amount":1,"price":1.0,"ratings":[5.0],"avg_rating":5.0}]
+[{"name":"Green Beans","id":0,"amount":1,"price":1.0,"ratings":[5.0],"avg_rating":5.0},{"name":"Blue Beans","id":1,"amount":1,"price":1.0,"ratings":[5.0],"avg_rating":5.0},{"name":"Bean1","id":2,"amount":4,"price":10.0,"ratings":[5.0,1.0],"avg_rating":3.0}]
