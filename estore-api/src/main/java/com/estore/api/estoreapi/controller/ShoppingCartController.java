@@ -126,7 +126,7 @@ public class ShoppingCartController {
     @PutMapping("/{username}")
     public ResponseEntity<Product> addProduct(@PathVariable String username, @RequestBody Product product){
         try {
-            Product result = shoppingCartDao.addProduct(username, product);
+            Product result = shoppingCartDao.addProduct(username, product.getID(), product.getAmount());
             if(result != null){
                 return new ResponseEntity<>(HttpStatus.CREATED);
             }

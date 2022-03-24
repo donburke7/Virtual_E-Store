@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.persistence.JsonUtilities;
 
@@ -218,6 +220,17 @@ public class InventoryFileDAO implements InventoryDAO {
             // return true if the result was found
             return result != null;
         }
+    }
+    
+    public Product createClone(int id, int amount) {
+        if (amount == 0) {
+            return null;
+        } else {
+
+            Product result = new Product(inventory.get(id), amount);
+            return result;
+        }
+        
     }
 
 }

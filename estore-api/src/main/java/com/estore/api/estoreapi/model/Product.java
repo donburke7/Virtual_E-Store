@@ -50,6 +50,13 @@ public class Product {
         this.id = id;
     }
 
+    public Product(Product original, int amount) {
+        this.name = original.name;
+        this.amount = amount;
+        this.price = original.price;
+        this.id = original.id;
+    }
+
     /**
      * Gets the id of this product
      * 
