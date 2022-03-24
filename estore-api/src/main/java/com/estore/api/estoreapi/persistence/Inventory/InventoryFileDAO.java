@@ -4,6 +4,7 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
@@ -218,6 +219,23 @@ public class InventoryFileDAO implements InventoryDAO {
             // return true if the result was found
             return result != null;
         }
+    }
+    /**
+     * Changes the ammount of the inventory has in stock
+     * 
+     * @return false if the length of the product that is being checkedout is larger than the amount the inventory has in stock
+     * 
+     * @throws IOException 
+     */
+    public boolean checkOut(Product[] passed) throws IOException{
+        for (int i = 0; i < passed.length; i++){
+            if(passed.length > inventory.get(passed[i].getID()).getAmount()){
+                return false;
+            }
+            inventory.get(passed[i].getID()).setAmount(inventory.get(passed[i].getID()).getAmount() - passed.length);
+        }
+        return false;
+
     }
 
 }
