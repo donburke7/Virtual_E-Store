@@ -149,4 +149,18 @@ public class ProductTest {
         assertFalse(test1.equals(null));
     }
 
+    @Test
+    public void testUpdateAvgRating() {
+        // setup
+        Product test1 = new Product("Green Beans", 0, 1, 1.00, new double[]{1, 5}, 0.0);
+        double expected = 3.0;
+
+        // invoke
+        test1.updateAvgRating();
+
+        // analysis
+        double actual = test1.getAvgRating();
+        assertEquals(expected, actual);
+    }
+
 }

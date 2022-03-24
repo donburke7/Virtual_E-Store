@@ -54,9 +54,11 @@ public class Product {
         }
 
         if (ratings == null) {
+            this.ratings = new double[]{};
             this.avgRating = 0;
         } else {
             this.avgRating = avgRating;
+            this.ratings = ratings;
         }
 
         this.name = name;
@@ -137,8 +139,21 @@ public class Product {
      * Sets the average rating of this product to the passed in value
      * @param newAvgRating the new average rating to be set as the current average rating
      */
-    public void setAvgRating(double newAvgRating) {
-        this.avgRating = newAvgRating;
+    public void updateAvgRating() {
+        double sum = 0.0;
+
+        for (double rating : this.ratings) {
+            sum += rating;
+        }
+
+        double average = round((sum / this.ratings.length), 1);
+
+        this.avgRating = average;
+    }
+
+    private static double round(double value, int precision) {
+        int scale = (int) Math.pow(10, precision);
+        return (double) Math.round(value * scale) / scale;
     }
 
     /**

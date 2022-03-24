@@ -200,6 +200,8 @@ public class InventoryFileDAO implements InventoryDAO {
             if (inventory.containsKey(product.getID()) == false)
                 return null; // product does not exist
 
+            product.updateAvgRating();
+
             inventory.put(product.getID(), product);
             save(); // may throw an IOException
             return product;
