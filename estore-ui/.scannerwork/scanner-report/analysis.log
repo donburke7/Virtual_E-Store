@@ -1,0 +1,33 @@
+SonarQube plugins:
+  - Python Code Quality and Security 3.9.0.9230 (python)
+  - Go Code Quality and Security 1.9.0.3429 (go)
+  - JaCoCo 1.1.1.1157 (jacoco)
+  - Kotlin Code Quality and Security 2.9.0.1147 (kotlin)
+  - IaC Code Quality and Security 1.5.0.1600 (iac)
+  - JavaScript/TypeScript Code Quality and Security 8.8.0.17228 (javascript)
+  - Ruby Code Quality and Security 1.9.0.3429 (ruby)
+  - Scala Code Quality and Security 1.9.0.3429 (sonarscala)
+  - C# Code Quality and Security 8.34.0.42011 (csharp)
+  - Java Code Quality and Security 7.7.0.28547 (java)
+  - HTML Code Quality and Security 3.6.0.3106 (web)
+  - Flex Code Quality and Security 2.7.0.2865 (flex)
+  - XML Code Quality and Security 2.5.0.3376 (xml)
+  - PHP Code Quality and Security 3.22.1.8626 (php)
+  - Text file Code Quality and Security 1.0.0.120 (text)
+  - VB.NET Code Quality and Security 8.34.0.42011 (vbnet)
+  - Configuration detection fot Code Quality and Security 1.2.0.267 (config)
+Global server settings:
+  - sonar.core.id=BF41A1F2-AX-9Z81jf0ijZog4K4CN
+  - sonar.core.startTime=2022-03-24T19:01:56-0400
+  - sonar.forceAuthentication=false
+Project server settings:
+Project scanner properties:
+  - sonar.host.url=http://localhost:9000
+  - sonar.login=******
+  - sonar.projectBaseDir=C:\Users\ipost\School Documents\2022 Spring\Intro to SE\team-project-2215-swen-261-06-d-jadin\estore-ui
+  - sonar.projectKey=estore-app
+  - sonar.scanner.app=ScannerCLI
+  - sonar.scanner.appVersion=4.7.0.2747
+  - sonar.sourceEncoding=windows-1252
+  - sonar.sources=.
+  - sonar.working.directory=C:\Users\ipost\School Documents\2022 Spring\Intro to SE\team-project-2215-swen-261-06-d-jadin\estore-ui\.scannerwork
