@@ -6,6 +6,7 @@ import com.estore.api.estoreapi.controller.InventoryController;
 import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.model.ShoppingCart;
 import com.estore.api.estoreapi.model.Users.Customer;
+import com.estore.api.estoreapi.persistence.Inventory.InventoryDAO;
 import com.estore.api.estoreapi.persistence.Inventory.InventoryFileDAO;
 
 import org.springframework.stereotype.Component;
@@ -25,7 +26,7 @@ import org.springframework.stereotype.Component;
 public class ShoppingCartFileDAO implements ShoppingCartDAO {
 
     UserDAO userDAO; //the userDAO that corresponds with this DAO
-    InventoryFileDAO inventoryFileDAO;
+    InventoryDAO inventoryFileDAO;
 
     /**
      * Constructor for the shopping cart DAO class
@@ -35,7 +36,7 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
      *                since this class modifies the {@link ShoppingCart shopping
      *                cart} which the {@link Customer customers} hold
      */
-    public ShoppingCartFileDAO(UserDAO userDAO, InventoryFileDAO inventoryFileDAO) {
+    public ShoppingCartFileDAO(UserDAO userDAO, InventoryDAO inventoryFileDAO) {
         this.userDAO = userDAO;
         this.inventoryFileDAO = inventoryFileDAO;
     }

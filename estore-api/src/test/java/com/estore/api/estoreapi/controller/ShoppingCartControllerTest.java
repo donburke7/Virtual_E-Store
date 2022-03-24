@@ -130,7 +130,7 @@ public class ShoppingCartControllerTest {
 
     @Test
     public void testAddProductSuccess() throws IOException {
-        when(mockCartDAO.addProduct(mockUser.getUsername(), mockProduct)).thenReturn(mockProduct);
+        when(mockCartDAO.addProduct(mockUser.getUsername(), mockProduct.getID(), mockProduct.getAmount())).thenReturn(mockProduct);
 
         ResponseEntity<Product> result = cartController.addProduct(mockUser.getUsername(), mockProduct);
 
@@ -139,7 +139,7 @@ public class ShoppingCartControllerTest {
 
     @Test
     public void testAddProductFail() throws IOException {
-        when(mockCartDAO.addProduct(mockUser.getUsername(), mockProduct)).thenReturn(null);
+        when(mockCartDAO.addProduct(mockUser.getUsername(), mockProduct.getID(), mockProduct.getAmount())).thenReturn(null);
 
         ResponseEntity<Product> result = cartController.addProduct(mockUser.getUsername(), mockProduct);
 
@@ -149,7 +149,7 @@ public class ShoppingCartControllerTest {
 
     @Test
     public void testAddProductError() throws IOException {
-        when(mockCartDAO.addProduct(mockUser.getUsername(), mockProduct)).thenThrow(new IOException());
+        when(mockCartDAO.addProduct(mockUser.getUsername(), mockProduct.getID(), mockProduct.getAmount())).thenThrow(new IOException());
 
         ResponseEntity<Product> result = cartController.addProduct(mockUser.getUsername(), mockProduct);
 
