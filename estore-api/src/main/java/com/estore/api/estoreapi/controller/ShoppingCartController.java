@@ -60,6 +60,7 @@ public class ShoppingCartController {
      */
     @GetMapping("/{username}")
     public ResponseEntity<Product[]> getCart(@PathVariable String username) {
+        LOG.info("GET /shoppingcart/customer=" + username);
         try {
             Product[] cartFound = shoppingCartDao.getShoppingCart(username);
             if (cartFound == null) {
@@ -124,7 +125,8 @@ public class ShoppingCartController {
     }
 
     @PutMapping("/{username}")
-    public ResponseEntity<Product> addProduct(@PathVariable String username, @RequestBody Product product){
+    public ResponseEntity<Product> addProduct(@PathVariable String username, @RequestBody Product product) {
+        LOG.info("PUT /shoppingcart/customer=" + username + "/product=" + product);
         try {
             Product result = shoppingCartDao.addProduct(username, product.getID(), product.getAmount());
             if(result != null){

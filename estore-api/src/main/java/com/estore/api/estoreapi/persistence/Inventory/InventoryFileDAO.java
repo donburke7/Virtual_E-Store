@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javax.naming.spi.DirStateFactory.Result;
-
 import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.persistence.JsonUtilities;
 
