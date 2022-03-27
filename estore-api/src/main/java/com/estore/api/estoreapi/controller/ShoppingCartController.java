@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -58,7 +60,7 @@ public class ShoppingCartController {
      *         A ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("/{username}")
-    public ResponseEntity<Product[]> getCart(@PathVariable Customer username) {
+    public ResponseEntity<Product[]> getCart(@PathVariable String username) {
         try {
             Product[] cartFound = shoppingCartDao.getShoppingCart(username);
             if (cartFound == null) {
@@ -81,11 +83,11 @@ public class ShoppingCartController {
      *         ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      *         ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @DeleteMapping("/{customer}/{id}")
-    public ResponseEntity<Product> deleteProduct(@PathVariable Customer customer, @PathVariable int id) {
-        LOG.info("DELETE /cart/customer=" + customer.getUsername() + "/product/id=" + id);
+    @DeleteMapping("/{username}/{id}")
+    public ResponseEntity<Product> deleteProduct(@PathVariable String username, @PathVariable int id) {
+        LOG.info("DELETE /cart/customer=" + username + "/product/id=" + id);
         try {
-            boolean deleted = shoppingCartDao.deleteProduct(customer, id);
+            boolean deleted = shoppingCartDao.deleteProduct(username, id);
             if (deleted) {
                 return new ResponseEntity<Product>(HttpStatus.OK);
             } else {
@@ -96,16 +98,16 @@ public class ShoppingCartController {
         }
     }
 
-    @DeleteMapping("/{customer}")
-    public ResponseEntity<Customer> clearCart(@PathVariable Customer customer){
-        LOG.info("DELETE /cart/customer=" + customer.getUsername());
+    @DeleteMapping("/{username}")
+    public ResponseEntity<Boolean> clearCart(@PathVariable String username){
+        LOG.info("DELETE /cart/customer=" + username);
         try{
-            boolean deleted = shoppingCartDao.clearShoppingCart(customer);
+            boolean deleted = shoppingCartDao.clearShoppingCart(username);
             if(deleted){
                 return new ResponseEntity<>(HttpStatus.OK);
             }
             else{
-                return new ResponseEntity<Customer>(customer, HttpStatus.NOT_FOUND);
+                return new ResponseEntity<Boolean>(deleted, HttpStatus.NOT_FOUND);
             }
         }
         catch (IOException e){
@@ -113,10 +115,10 @@ public class ShoppingCartController {
         }
     }
 
-    @PostMapping("/{customer}/{product}")
-    public ResponseEntity<Product> addProduct(@PathVariable Customer customer, @PathVariable Product product){
+    @PutMapping("/{username}")
+    public ResponseEntity<Product> addProduct(@PathVariable String username, @RequestBody Product product){
         try {
-            Product result = shoppingCartDao.addProduct(customer, product);
+            Product result = shoppingCartDao.addProduct(username, product);
             if(result != null){
                 return new ResponseEntity<>(HttpStatus.OK);
             }

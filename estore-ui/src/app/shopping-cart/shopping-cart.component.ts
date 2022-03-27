@@ -40,7 +40,7 @@ export class ShoppingCartComponent implements OnInit {
      * Gets the id from the route to get the cart
      */
      var username = (this.route.snapshot.paramMap.get('username')!);
-    this.shoppingCartService.getCart(this.getUser()!)
+    this.shoppingCartService.getCart(username)
       .subscribe(cart => this.cart = cart);
   }
 
@@ -59,7 +59,7 @@ export class ShoppingCartComponent implements OnInit {
 
     var username = (this.route.snapshot.paramMap.get('username')!);
     this.cart = this.cart.filter(p => p !== product);
-    this.shoppingCartService.deleteProduct(product, {"username": username}).subscribe();
+    this.shoppingCartService.deleteProduct(product, username).subscribe();
   }
 
   backButton(): void {

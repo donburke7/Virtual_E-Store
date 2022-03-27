@@ -20,7 +20,7 @@ const routes: Routes =  [
   { path: 'admin-store', component: InventoryComponent},
   { path: 'product-details/:id', component: ProductDetailsComponent },
   { path: 'user-store/:username/shopping-cart/:username', component: ShoppingCartComponent},
-  { path: 'user-product-view/:id', component: UserProductViewComponent}
+  { path: 'user-product-view/:username/:id', component: UserProductViewComponent}
 ]
 
 @NgModule({

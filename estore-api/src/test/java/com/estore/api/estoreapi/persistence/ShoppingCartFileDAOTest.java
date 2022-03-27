@@ -49,7 +49,7 @@ public class ShoppingCartFileDAOTest {
         Product testProduct = new Product("Green Bean", 0, 1, 1.00);
         
         //invoke
-        shoppingCartFileDAO.addProduct(customer, testProduct);
+        shoppingCartFileDAO.addProduct(customer.getUsername(), testProduct);
 
         //setup analysis
         Product[] expected = { testProduct };
@@ -67,7 +67,7 @@ public class ShoppingCartFileDAOTest {
         customer.addProduct(testProduct);
 
         //invoke
-        shoppingCartFileDAO.deleteProduct(customer, 0);
+        shoppingCartFileDAO.deleteProduct(customer.getUsername(), 0);
 
         //setup analysis
         Product[] expected = { };
@@ -87,7 +87,7 @@ public class ShoppingCartFileDAOTest {
         customer.addProduct(testProductTwo);
 
         //invoke
-        Product[] actual = shoppingCartFileDAO.getShoppingCart(customer);
+        Product[] actual = shoppingCartFileDAO.getShoppingCart(customer.getUsername());
 
         //setup analysis
         Product[] expected = { testProduct, testProductTwo };
@@ -107,7 +107,7 @@ public class ShoppingCartFileDAOTest {
         customer.addProduct(testProductTwo);
 
         //invoke
-        shoppingCartFileDAO.clearShoppingCart(customer);
+        shoppingCartFileDAO.clearShoppingCart(customer.getUsername());
 
         //setup analysis
         Product[] expected = {};

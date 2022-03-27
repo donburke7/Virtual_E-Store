@@ -24,11 +24,11 @@ export class UserProductViewComponent implements OnInit {
       private productService: ProductService,
       private shoppingCartService: ShoppingCartService,
       private route: ActivatedRoute,
-      private location: Location
+      private location: Location,
   ) { }
 
   ngOnInit(): void {
-      this.getProduct();
+    this.getProduct();
   }
 
   getProduct(): void {
@@ -49,11 +49,9 @@ export class UserProductViewComponent implements OnInit {
     /**
      * Takes in a product to add to the user's cart
      */
-    if (product) { return; }
-
-    this.shoppingCartService.addToCart( product ).subscribe(product => {
+    var username = (this.route.snapshot.paramMap.get('username')!);
+    this.shoppingCartService.addToCart( product, username ).subscribe(product => {
       product.push(product);
     });
   }
-
 }
