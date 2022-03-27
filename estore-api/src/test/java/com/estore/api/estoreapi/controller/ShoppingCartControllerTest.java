@@ -1,6 +1,7 @@
 package com.estore.api.estoreapi.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -30,7 +31,6 @@ public class ShoppingCartControllerTest {
     private ShoppingCartDAO mockCartDAO;
     private Customer mockUser;
     private Product mockProduct;
-    
 
     /**
      * Before each test, create a new inventoryController object and inject
@@ -42,119 +42,120 @@ public class ShoppingCartControllerTest {
         mockCartDAO = mock(ShoppingCartDAO.class);
         cartController = new ShoppingCartController(mockCartDAO);
         mockUser = mock(Customer.class);
+        when(mockUser.getUsername()).thenReturn("mock");
     }
 
-    
     @Test
-    public void testGetCartSuccess() throws IOException{
-        Product[] test = {mockProduct};
+    public void testGetCartSuccess() throws IOException {
+        Product[] test = { mockProduct };
 
-        when(mockCartDAO.getShoppingCart(mockUser)).thenReturn(test);
+        when(mockCartDAO.getShoppingCart(mockUser.getUsername())).thenReturn(test);
 
-        ResponseEntity<Product[]> response = cartController.getCart(mockUser);
+        ResponseEntity<Product[]> response = cartController.getCart(mockUser.getUsername());
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(test, response.getBody());
     }
 
     @Test
-    public void testGetCartFail() throws IOException{
-        when(mockCartDAO.getShoppingCart(mockUser)).thenReturn(null);
+    public void testGetCartFail() throws IOException {
+        when(mockCartDAO.getShoppingCart(mockUser.getUsername())).thenReturn(null);
 
-        ResponseEntity<Product[]> response = cartController.getCart(mockUser);
+        ResponseEntity<Product[]> response = cartController.getCart(mockUser.getUsername());
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
     @Test
-    public void testGetCartError() throws Exception{
-        doThrow(new IOException()).when(mockCartDAO).getShoppingCart(mockUser);
+    public void testGetCartError() throws Exception {
+        when(mockCartDAO.getShoppingCart(mockUser.getUsername())).thenThrow(new IOException());
 
-        ResponseEntity<Product[]> response = cartController.getCart(mockUser);
+        ResponseEntity<Product[]> response = cartController.getCart(mockUser.getUsername());
 
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 
     @Test
-    public void testDeleteProductSuccess() throws IOException{
-        when(mockCartDAO.deleteProduct(mockUser, 1)).thenReturn(true);
+    public void testDeleteProductSuccess() throws IOException {
+        when(mockCartDAO.deleteProduct(mockUser.getUsername(), 1)).thenReturn(true);
 
-        ResponseEntity<Product> result = cartController.deleteProduct(mockUser, 1);
+        ResponseEntity<Product> result = cartController.deleteProduct(mockUser.getUsername(), 1);
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
     }
 
     @Test
-    public void testDeleteProductFail() throws IOException{
-        when(mockCartDAO.deleteProduct(mockUser, 1)).thenReturn(false);
+    public void testDeleteProductFail() throws IOException {
+        when(mockCartDAO.deleteProduct(mockUser.getUsername(), 1)).thenReturn(false);
 
-        ResponseEntity<Product> result = cartController.deleteProduct(mockUser, 1);
+        ResponseEntity<Product> result = cartController.deleteProduct(mockUser.getUsername(), 1);
 
         assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
     }
 
     @Test
-    public void testDeleteProductError() throws IOException{
-        doThrow(new IOException()).when(mockCartDAO).deleteProduct(mockUser, 1);
+    public void testDeleteProductError() throws IOException {
+        // doThrow(new
+        when(mockCartDAO.deleteProduct(mockUser.getUsername(), 1)).thenThrow(new IOException());
 
-        ResponseEntity<Product> result = cartController.deleteProduct(mockUser, 1);
+        ResponseEntity<Product> result = cartController.deleteProduct(mockUser.getUsername(), 1);
 
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, result.getStatusCode());
     }
 
     @Test
-    public void testClearCartSuccess() throws IOException{
-        when(mockCartDAO.clearShoppingCart(mockUser)).thenReturn(true);
+    public void testClearCartSuccess() throws IOException {
+        when(mockCartDAO.clearShoppingCart(mockUser.getUsername())).thenReturn(true);
 
-        ResponseEntity<Customer> result = cartController.clearCart(mockUser);
+        ResponseEntity<Boolean> result = cartController.clearCart(mockUser.getUsername());
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
     }
 
     @Test
-    public void testClearCartFail() throws IOException{
-        when(mockCartDAO.clearShoppingCart(mockUser)).thenReturn(false);
+    public void testClearCartFail() throws IOException {
+        when(mockCartDAO.clearShoppingCart(mockUser.getUsername())).thenReturn(false);
 
-        ResponseEntity<Customer> result = cartController.clearCart(mockUser);
+        ResponseEntity<Boolean> result = cartController.clearCart(mockUser.getUsername());
 
         assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
-        assertEquals(mockUser, result.getBody());
+        assertFalse(result.getBody());
     }
 
     @Test
-    public void testClearCartError() throws IOException{
-        doThrow(new IOException()).when(mockCartDAO).clearShoppingCart(mockUser);
+    public void testClearCartError() throws IOException {
+        when(mockCartDAO.clearShoppingCart(mockUser.getUsername())).thenThrow(new IOException());
 
-        ResponseEntity<Customer> result = cartController.clearCart(mockUser);
+        ResponseEntity<Boolean> result = cartController.clearCart(mockUser.getUsername());
 
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, result.getStatusCode());
     }
 
     @Test
-    public void testAddProductSuccess() throws IOException{
-        when(mockCartDAO.addProduct(mockUser, mockProduct)).thenReturn(mockProduct);
+    public void testAddProductSuccess() throws IOException {
+        when(mockCartDAO.addProduct(mockUser.getUsername(), mockProduct)).thenReturn(mockProduct);
 
-        ResponseEntity<Product> result = cartController.addProduct(mockUser, mockProduct);
+        ResponseEntity<Product> result = cartController.addProduct(mockUser.getUsername(), mockProduct);
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
     }
 
     @Test
-    public void testAddProductFail() throws IOException{
-        when(mockCartDAO.addProduct(mockUser, mockProduct)).thenReturn(null);
+    public void testAddProductFail() throws IOException {
+        when(mockCartDAO.addProduct(mockUser.getUsername(), mockProduct)).thenReturn(null);
 
-        ResponseEntity<Product> result = cartController.addProduct(mockUser, mockProduct);
+        ResponseEntity<Product> result = cartController.addProduct(mockUser.getUsername(), mockProduct);
 
         assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
         assertEquals(mockProduct, result.getBody());
     }
 
     @Test
-    public void testAddProductError() throws IOException{
-        doThrow(new IOException()).when(mockCartDAO).addProduct(mockUser, mockProduct);
+    public void testAddProductError() throws IOException {
+        when(mockCartDAO.addProduct(mockUser.getUsername(), mockProduct)).thenThrow(new IOException());
 
-        ResponseEntity<Product> result = cartController.addProduct(mockUser, mockProduct);
+        ResponseEntity<Product> result = cartController.addProduct(mockUser.getUsername(), mockProduct);
 
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, result.getStatusCode());
-    }    
+    }
 }

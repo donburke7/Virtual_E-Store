@@ -104,7 +104,7 @@ public class UserFileDAO implements UserDAO {
     public Customer[] getUsers() {
         //init
         ArrayList<Customer> userList = new ArrayList<>();
-        userList.add( (Customer) admin);
+        userList.add(new Customer(User.ADMIN));
         
         //get all users saved in a local list
         for (Customer user : customers.values()) {

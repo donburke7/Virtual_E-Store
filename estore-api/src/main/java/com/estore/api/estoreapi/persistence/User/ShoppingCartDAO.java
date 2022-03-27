@@ -27,7 +27,7 @@ public interface ShoppingCartDAO {
      * 
      * @throws IOException If an issue occured whilst accessing the json files
      */
-    Product addProduct(Customer customer, Product product) throws IOException;
+    Product addProduct(String username, Product product) throws IOException;
 
     /**
      * Deletes a {@linkplain Product product} within the specified {@link Customer
@@ -41,7 +41,7 @@ public interface ShoppingCartDAO {
      * 
      * @throws IOException If an issue occured whilst accessing the json files
      */
-    Boolean deleteProduct(Customer customer, Integer id) throws IOException;
+    Boolean deleteProduct(String username, Integer id) throws IOException;
 
     /**
      * A method that gets the entire {@linkplain Customer customer}'s {@link ShoppingCart
@@ -54,7 +54,7 @@ public interface ShoppingCartDAO {
      *         {@link Customer customer}'s
      *         {@link ShoppingCart shopping cart}
      */
-    Product[] getShoppingCart(Customer customer) throws IOException;
+    Product[] getShoppingCart(String username) throws IOException;
 
     /**
      * Clears the specified {@linkplain Customer customer}'s {@link ShoppingCart shopping
@@ -68,7 +68,7 @@ public interface ShoppingCartDAO {
      * 
      * @throws IOException If an issue occured whilst accessing the json files
      */
-    boolean clearShoppingCart(Customer customer) throws IOException;
+    boolean clearShoppingCart(String username) throws IOException;
 
 
 

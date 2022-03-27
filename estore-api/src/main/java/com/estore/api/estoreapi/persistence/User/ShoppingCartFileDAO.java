@@ -40,8 +40,8 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
      * {@inheritDoc}
      */
     @Override
-    public synchronized Product addProduct(Customer customer, Product product) throws IOException {
-        Customer targetCustomer = (Customer) userDAO.getUser(customer.getUsername());
+    public synchronized Product addProduct(String username, Product product) throws IOException {
+        Customer targetCustomer = (Customer) userDAO.getUser(username);
         Product addedProduct = targetCustomer.addProduct(product);
         userDAO.saveUsers();
         return addedProduct;
@@ -51,8 +51,8 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
      * {@inheritDoc}
      */
     @Override
-    public synchronized Boolean deleteProduct(Customer customer, Integer id) throws IOException {
-        Customer targetCustomer = (Customer) userDAO.getUser(customer.getUsername());
+    public synchronized Boolean deleteProduct(String username, Integer id) throws IOException {
+        Customer targetCustomer = (Customer) userDAO.getUser(username);
         Product removedProduct = targetCustomer.removeProduct(id);
         userDAO.saveUsers();
         return removedProduct != null;
@@ -63,8 +63,8 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
      * @throws IOException
      */
     @Override
-    public synchronized Product[] getShoppingCart(Customer customer) throws IOException {
-        Customer targetCustomer = (Customer) userDAO.getUser(customer.getUsername());
+    public synchronized Product[] getShoppingCart(String username) throws IOException {
+        Customer targetCustomer = (Customer) userDAO.getUser(username);
         return targetCustomer.getCart();
     }
 
@@ -72,8 +72,8 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
      * {@inheritDoc}
      */
     @Override
-    public synchronized boolean clearShoppingCart(Customer customer) throws IOException {
-        Customer targetCustomer = (Customer) userDAO.getUser(customer.getUsername());
+    public synchronized boolean clearShoppingCart(String username) throws IOException {
+        Customer targetCustomer = (Customer) userDAO.getUser(username);
         boolean status = targetCustomer.clearCart();
         userDAO.saveUsers();
         return status;
