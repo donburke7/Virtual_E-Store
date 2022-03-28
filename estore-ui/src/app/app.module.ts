@@ -35,7 +35,7 @@ import { UserProductViewComponent } from './user-product-view/user-product-view.
     HttpClientModule,
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

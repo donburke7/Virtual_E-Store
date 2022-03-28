@@ -54,4 +54,13 @@ export class UserProductViewComponent implements OnInit {
       product.push(product);
     });
   }
+
+  addRating(rating: string): void {
+    /**
+     * Adds a rating from a user
+     */
+    if (this.product) {
+      this.productService.rateProduct(parseInt(rating))
+    }
+  }
 }
