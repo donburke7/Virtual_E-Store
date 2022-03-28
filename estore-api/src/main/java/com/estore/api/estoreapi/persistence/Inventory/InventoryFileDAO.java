@@ -222,5 +222,16 @@ public class InventoryFileDAO implements InventoryDAO {
             return result != null;
         }
     }
+    
+    public Product createClone(int id, int amount) {
+        if (amount == 0) {
+            return null;
+        } else {
+
+            Product result = new Product(inventory.get(id), amount);
+            return result;
+        }
+        
+    }
 
 }

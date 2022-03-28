@@ -82,6 +82,7 @@ public class InventoryController {
      */
     @PostMapping("")
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+        LOG.info("POST /products " + product);
         try {
             Product newProduct = inventoryDao.createProduct(product);
             if (newProduct == null) {
@@ -109,6 +110,7 @@ public class InventoryController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProduct(@PathVariable int id) {
+        LOG.info("GET /products/" + id);
         try {
             Product productGot = inventoryDao.getProduct(id);
             if (productGot == null) {

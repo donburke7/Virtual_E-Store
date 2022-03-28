@@ -2,7 +2,6 @@ package com.estore.api.estoreapi.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -131,26 +130,26 @@ public class ShoppingCartControllerTest {
 
     @Test
     public void testAddProductSuccess() throws IOException {
-        when(mockCartDAO.addProduct(mockUser.getUsername(), mockProduct)).thenReturn(mockProduct);
+        when(mockCartDAO.addProduct(mockUser.getUsername(), mockProduct.getID(), mockProduct.getAmount())).thenReturn(mockProduct);
 
         ResponseEntity<Product> result = cartController.addProduct(mockUser.getUsername(), mockProduct);
 
-        assertEquals(HttpStatus.OK, result.getStatusCode());
+        assertEquals(HttpStatus.CREATED, result.getStatusCode());
     }
 
     @Test
     public void testAddProductFail() throws IOException {
-        when(mockCartDAO.addProduct(mockUser.getUsername(), mockProduct)).thenReturn(null);
+        when(mockCartDAO.addProduct(mockUser.getUsername(), mockProduct.getID(), mockProduct.getAmount())).thenReturn(null);
 
         ResponseEntity<Product> result = cartController.addProduct(mockUser.getUsername(), mockProduct);
 
-        assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
+        assertEquals(HttpStatus.CONFLICT, result.getStatusCode());
         assertEquals(mockProduct, result.getBody());
     }
 
     @Test
     public void testAddProductError() throws IOException {
-        when(mockCartDAO.addProduct(mockUser.getUsername(), mockProduct)).thenThrow(new IOException());
+        when(mockCartDAO.addProduct(mockUser.getUsername(), mockProduct.getID(), mockProduct.getAmount())).thenThrow(new IOException());
 
         ResponseEntity<Product> result = cartController.addProduct(mockUser.getUsername(), mockProduct);
 

@@ -2,9 +2,12 @@ package com.estore.api.estoreapi.persistence.User;
 
 import java.io.IOException;
 
+import com.estore.api.estoreapi.controller.InventoryController;
 import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.model.ShoppingCart;
 import com.estore.api.estoreapi.model.Users.Customer;
+import com.estore.api.estoreapi.persistence.Inventory.InventoryDAO;
+import com.estore.api.estoreapi.persistence.Inventory.InventoryFileDAO;
 
 import org.springframework.stereotype.Component;
 
@@ -23,6 +26,7 @@ import org.springframework.stereotype.Component;
 public class ShoppingCartFileDAO implements ShoppingCartDAO {
 
     UserDAO userDAO; //the userDAO that corresponds with this DAO
+    InventoryDAO inventoryFileDAO;
 
     /**
      * Constructor for the shopping cart DAO class
@@ -32,17 +36,19 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
      *                since this class modifies the {@link ShoppingCart shopping
      *                cart} which the {@link Customer customers} hold
      */
-    public ShoppingCartFileDAO(UserDAO userDAO) {
+    public ShoppingCartFileDAO(UserDAO userDAO, InventoryDAO inventoryFileDAO) {
         this.userDAO = userDAO;
+        this.inventoryFileDAO = inventoryFileDAO;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public synchronized Product addProduct(String username, Product product) throws IOException {
+    public synchronized Product addProduct(String username, int id, int amount) throws IOException {
         Customer targetCustomer = (Customer) userDAO.getUser(username);
-        Product addedProduct = targetCustomer.addProduct(product);
+        Product newProduct = this.inventoryFileDAO.createClone(id, amount);
+        Product addedProduct = targetCustomer.addProduct(newProduct);
         userDAO.saveUsers();
         return addedProduct;
     }
@@ -77,6 +83,19 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
         boolean status = targetCustomer.clearCart();
         userDAO.saveUsers();
         return status;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public synchronized boolean checkout(String username) throws IOException {
+
+        //will call get cart on the user that corresponds with the parameterized username
+        //using the returned product[] send it to inventoryDAO's checkout function to checkout
+        //clear the cart if the checkout was successful, inficated by a true that was returned from inventoryDAO
+        //return the boolean that gets returned from inventoryDAO's checkout function
+
+        return false;
     }
     
     

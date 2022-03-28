@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 import com.estore.api.estoreapi.model.Product;
-import com.estore.api.estoreapi.model.Users.Customer;
 import com.estore.api.estoreapi.persistence.User.ShoppingCartDAO;
 
 import org.springframework.http.HttpStatus;
@@ -61,6 +60,7 @@ public class ShoppingCartController {
      */
     @GetMapping("/{username}")
     public ResponseEntity<Product[]> getCart(@PathVariable String username) {
+        LOG.info("GET /shoppingcart/customer=" + username);
         try {
             Product[] cartFound = shoppingCartDao.getShoppingCart(username);
             if (cartFound == null) {
@@ -115,15 +115,25 @@ public class ShoppingCartController {
         }
     }
 
+    @PostMapping("/{username}")
+    public ResponseEntity<Boolean> checkout(@PathVariable String username) {
+        //Calls shoppingDAO's checkout
+        //if shoppingDAO returns false then we know something happend which caused an error in checking out, HttpStatus.CONFLICT
+        //if shoppingDAO returns true then the checkout was successful
+        //if an exception was thrown then an internal server error occured
+        return null;
+    }
+
     @PutMapping("/{username}")
-    public ResponseEntity<Product> addProduct(@PathVariable String username, @RequestBody Product product){
+    public ResponseEntity<Product> addProduct(@PathVariable String username, @RequestBody Product product) {
+        LOG.info("PUT /shoppingcart/customer=" + username + "/product=" + product);
         try {
-            Product result = shoppingCartDao.addProduct(username, product);
+            Product result = shoppingCartDao.addProduct(username, product.getID(), product.getAmount());
             if(result != null){
-                return new ResponseEntity<>(HttpStatus.OK);
+                return new ResponseEntity<>(HttpStatus.CREATED);
             }
             else{
-                return new ResponseEntity<Product>(product, HttpStatus.NOT_FOUND);
+                return new ResponseEntity<Product>(product, HttpStatus.CONFLICT);
             }
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

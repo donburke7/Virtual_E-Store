@@ -20,9 +20,10 @@ import { User } from '../user';
 })
 export class ShoppingCartComponent implements OnInit {
 
+  @Input() username!: string;
   cart: Product[] = [];
   @Input() user?: User;
-
+  
   constructor(
       private shoppingCartService: ShoppingCartService, 
       private userService: UserService,
@@ -30,22 +31,24 @@ export class ShoppingCartComponent implements OnInit {
       private route: ActivatedRoute
       ) { }
 
-  ngOnInit(): void {
-    this.getCart();
+  ngOnInit(): void
+  {
     this.getUser();
+    this.getCart();
   }
 
   getCart(): void {
     /**
      * Gets the id from the route to get the cart
      */
-     var username = (this.route.snapshot.paramMap.get('username')!);
-    this.shoppingCartService.getCart(username)
+    this.shoppingCartService.getCart(this.username)
       .subscribe(cart => this.cart = cart);
   }
 
-  getUser(): void {
-    this.userService.getUser(this.route.snapshot.paramMap.get('username')!)
+  getUser(): void
+  {
+    this.username = this.route.snapshot.paramMap.get('username') as string;
+    this.userService.getUser(this.username)
       .subscribe(user => this.user = user);
   }
 
@@ -57,12 +60,17 @@ export class ShoppingCartComponent implements OnInit {
      * product -- The product to be deleted
      */
 
-    var username = (this.route.snapshot.paramMap.get('username')!);
     this.cart = this.cart.filter(p => p !== product);
-    this.shoppingCartService.deleteProduct(product, username).subscribe();
+    this.shoppingCartService.deleteProduct(product, this.username).subscribe();
   }
 
   backButton(): void {
     this.location.back();
   }
+
+  checkout(): void
+  {
+    this.shoppingCartService.checkout(this.username);
+  }
+
 }
