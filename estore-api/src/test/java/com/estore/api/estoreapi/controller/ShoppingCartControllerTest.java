@@ -9,11 +9,9 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 
 import com.estore.api.estoreapi.model.Product;
-import com.estore.api.estoreapi.model.ShoppingCart;
 import com.estore.api.estoreapi.model.Users.Customer;
 import com.estore.api.estoreapi.persistence.User.ShoppingCartDAO;
 
-import org.apache.tomcat.jni.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
