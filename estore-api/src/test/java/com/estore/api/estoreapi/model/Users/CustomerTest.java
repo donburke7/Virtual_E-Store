@@ -46,8 +46,8 @@ public class CustomerTest {
         // Custumer-to-be-tested's username
         String username = "Joe";
         Product[] expected = {
-            new Product("Green Beans", 0, 1, 1.00),
-            new Product("Pinto Beans", 1, 5, 2.00)
+            new Product("Green Beans", 0, 1, 1.00, new double[]{5.0}, 5.0),
+            new Product("Pinto Beans", 1, 5, 2.00, new double[]{5.0}, 5.0)
         };
         
         // Customer created with cunstructor that only requires a username
@@ -63,7 +63,7 @@ public class CustomerTest {
     @Test
     public void testAddProduct() {
         // Setup
-        Product addedProduct = new Product("Green Beans", 0, 500, 2.00);
+        Product addedProduct = new Product("Green Beans", 0, 500, 2.00, new double[]{5.0}, 5.0);
         Customer testCustomer = new Customer("Bart");
 
         // Invoke
@@ -78,7 +78,7 @@ public class CustomerTest {
     public void testRemoveProduct() {
         // Setup
         int id = 0;
-        Product expected = new Product("Green Beans", id, 500, 2.00);
+        Product expected = new Product("Green Beans", id, 500, 2.00, new double[]{5.0}, 5.0);
 
         TreeMap<Integer, Product> cartMap = new TreeMap<>(){{
             put(id, expected);

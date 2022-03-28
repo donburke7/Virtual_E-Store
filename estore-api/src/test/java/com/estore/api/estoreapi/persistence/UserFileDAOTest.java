@@ -35,9 +35,9 @@ public class UserFileDAOTest {
 
     //a mock shopping cart for a customer
     private TreeMap<Integer, Product> testProducts = new TreeMap<>(){{
-        put(0, new Product("Green Beans", 0, 1, 1.00));
-        put(1,new Product("Red Beans", 1, 5, 2.00));
-        put(2,new Product("Pinto Beans", 2, 5, 1.50));
+        put(0, new Product("Green Beans", 0, 1, 1.00, new double[]{5.0}, 5.0));
+        put(1,new Product("Red Beans", 1, 5, 2.00, new double[]{5.0}, 5.0));
+        put(2,new Product("Pinto Beans", 2, 5, 1.50, new double[]{5.0}, 5.0));
     }};
 
     //a mock array of customers with an admin
