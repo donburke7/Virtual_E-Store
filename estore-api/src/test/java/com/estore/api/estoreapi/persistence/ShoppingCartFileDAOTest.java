@@ -51,8 +51,9 @@ public class ShoppingCartFileDAOTest {
         //setup
         Product testProduct = new Product("Green Bean", 0, 1, 1.00, new double[]{5.0}, 5.0);
         
+        when(mockInventoryDAO.createClone(testProduct.getID(), testProduct.getAmount())).thenReturn(testProduct);
         //invoke
-        shoppingCartFileDAO.addProduct(customer.getUsername(), testProduct);
+        shoppingCartFileDAO.addProduct(customer.getUsername(), testProduct.getID(), testProduct.getAmount());
 
         //setup analysis
         Product[] expected = { testProduct };
