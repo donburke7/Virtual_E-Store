@@ -11,6 +11,7 @@ import { Location } from '@angular/common';
 import { UserService } from '../user.service';
 import { Observable } from 'rxjs';
 import { User } from '../user';
+import { LocalStorageService } from '../local-storage.service';
 
 @Component({
   selector: 'app-user-login',
@@ -23,7 +24,8 @@ export class UserLoginComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private location: Location,
-    public router: Router
+    public router: Router,
+    private localStorage: LocalStorageService
   ) { }
 
   ngOnInit(): void {
@@ -40,6 +42,7 @@ export class UserLoginComponent implements OnInit {
      * incorrect login message.
      */
     var username = (<HTMLInputElement>document.getElementById("username-box")).value;
+    this.localStorage.setUsername(username);
     // Admin Login
     if (username == 'admin')
     {

@@ -25,7 +25,7 @@ public class ProductTest {
         double expected_price = 489.01;
 
         // Invoke
-        Product bean = new Product(expected_name, expected_id, expected_amount, expected_price);
+        Product bean = new Product(expected_name, expected_id, expected_amount, expected_price, new double[]{5.0}, 5.0);
 
         // Analyze
         assertEquals(expected_id, bean.getID());
@@ -39,7 +39,7 @@ public class ProductTest {
         String expected_name = "Magic Bean";
         int amount = 100;
         double price = 489.01;
-        Product bean = new Product(expected_name, id, amount, price);
+        Product bean = new Product(expected_name, id, amount, price, new double[]{5.0}, 5.0);
 
         // Invoke
         bean.getName();
@@ -55,9 +55,10 @@ public class ProductTest {
         String name = "Magic Bean";
         int amount = 100;
         double price = 489.01;
-        String expected_string = String.format(Product.STRING_FORMAT, id, name, amount, price);
+        double avg_rating = 5.0;
+        String expected_string = String.format(Product.STRING_FORMAT, id, name, amount, price, avg_rating);
 
-        Product bean = new Product(name, id, amount, price);
+        Product bean = new Product(name, id, amount, price, new double[]{5.0}, 5.0);
 
         // Invoke
         String actual_string = bean.toString();
@@ -69,7 +70,7 @@ public class ProductTest {
     @Test
     public void testsetAmount() {
 
-        Product product = new Product("Green Beans", 0, 500, 2.00);
+        Product product = new Product("Green Beans", 0, 500, 2.00, new double[]{5.0}, 5.0);
 
         // save and sets the amonut
         int targetAmount = 200;
@@ -84,7 +85,7 @@ public class ProductTest {
     public void testgetPrice() {
 
         double targetPrice = 2.00;
-        Product product = new Product("Green Beans", 0, 500, targetPrice);
+        Product product = new Product("Green Beans", 0, 500, targetPrice, new double[]{5.0}, 5.0);
 
         // checks to see if the price of the product is correctly
         // returned by the getPrice() method
@@ -95,7 +96,7 @@ public class ProductTest {
     @Test
     public void testsetPrice() {
 
-        Product product = new Product("Green Beans", 0, 500, 2.00);
+        Product product = new Product("Green Beans", 0, 500, 2.00, new double[]{5.0}, 5.0);
 
         // saves and sets the price of the product
         double targetPrice = 2.00;
@@ -111,8 +112,8 @@ public class ProductTest {
     public void testequal() {
 
         //setup
-        Product newProduct = new Product("Green Beans", 0, 20, 1.00);
-        Product testProduct = new Product("Green Beans", 0, 20, 1.00);
+        Product newProduct = new Product("Green Beans", 0, 20, 1.00, new double[]{5.0}, 5.0);
+        Product testProduct = new Product("Green Beans", 0, 20, 1.00, new double[]{5.0}, 5.0);
 
         //invoke and analyze, should return true
         //all properties of the two products are equal
@@ -124,8 +125,8 @@ public class ProductTest {
     public void testequalFail() {
 
         //setup
-        Product newProduct = new Product("Green Beans", 0, 20, 1.00);
-        Product testProduct = new Product("Green Beans", 1, 20, 1.00);
+        Product newProduct = new Product("Green Beans", 0, 20, 1.00, new double[]{5.0}, 5.0);
+        Product testProduct = new Product("Green Beans", 1, 20, 1.00, new double[]{5.0}, 5.0);
 
         //invoke and analyze, should return false
         //the two are 
@@ -135,7 +136,7 @@ public class ProductTest {
 
     @Test
     public void testequalFailWrongObject() {
-        Product test1 = new Product("Green Beans", 0, 1, 1.00);
+        Product test1 = new Product("Green Beans", 0, 1, 1.00, new double[]{5.0}, 5.0);
         User test2 = new User("Billy");
 
         assertFalse(test1.equals(test2));
@@ -143,9 +144,23 @@ public class ProductTest {
 
     @Test
     public void testequalFailNull() {
-        Product test1 = new Product("Green Beans", 0, 1, 1.00);
+        Product test1 = new Product("Green Beans", 0, 1, 1.00, new double[]{5.0}, 5.0);
 
         assertFalse(test1.equals(null));
+    }
+
+    @Test
+    public void testUpdateAvgRating() {
+        // setup
+        Product test1 = new Product("Green Beans", 0, 1, 1.00, new double[]{1, 5}, 0.0);
+        double expected = 3.0;
+
+        // invoke
+        test1.updateAvgRating();
+
+        // analysis
+        double actual = test1.getAvgRating();
+        assertEquals(expected, actual);
     }
 
 }

@@ -24,7 +24,7 @@ public class ShoppingCartTest {
     @BeforeEach
     public void setup() {
         TreeMap<Integer, Product> map = new TreeMap<>();
-        Product expected = new Product("Green Beans", 0, 1, 1.00);
+        Product expected = new Product("Green Beans", 0, 1, 1.00, new double[]{5.0}, 5.0);
         map.put(expected.getID(), expected);
 
         testShoppingCart = new ShoppingCart(map);
@@ -34,7 +34,7 @@ public class ShoppingCartTest {
     @Test
     public void testAddProduct() {
         // Setup
-        Product addedProduct = new Product("Green Beans", 0, 500, 2.00);
+        Product addedProduct = new Product("Green Beans", 0, 500, 2.00, new double[]{5.0}, 5.0);
         ShoppingCart cart = new ShoppingCart(null);
 
         // Invoke
@@ -59,7 +59,7 @@ public class ShoppingCartTest {
     @Test
     public void testRemoveProduct() {
         // Setup
-        Product product = new Product("Green Beans", 0, 500, 2.00);
+        Product product = new Product("Green Beans", 0, 500, 2.00, new double[]{5.0}, 5.0);
         ShoppingCart actual = new ShoppingCart(null);
         actual.addProduct(product);
 

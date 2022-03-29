@@ -183,7 +183,8 @@ public class InventoryFileDAO implements InventoryDAO {
     @Override
     public Product createProduct(Product product) throws IOException {
         synchronized (inventory) {
-            Product newProduct = new Product(product.getName(), nextID(), product.getAmount(), product.getPrice());
+            Product newProduct = new Product(product.getName(), nextID(), product.getAmount(), 
+                                             product.getPrice(), product.getRatings(), product.getAvgRating());
             inventory.put(newProduct.getID(), newProduct);
             save();
             return newProduct;
@@ -198,6 +199,8 @@ public class InventoryFileDAO implements InventoryDAO {
         synchronized (inventory) {
             if (inventory.containsKey(product.getID()) == false)
                 return null; // product does not exist
+
+            product.updateAvgRating();
 
             inventory.put(product.getID(), product);
             save(); // may throw an IOException
@@ -218,6 +221,17 @@ public class InventoryFileDAO implements InventoryDAO {
             // return true if the result was found
             return result != null;
         }
+    }
+    
+    public Product createClone(int id, int amount) {
+        if (amount == 0) {
+            return null;
+        } else {
+
+            Product result = new Product(inventory.get(id), amount);
+            return result;
+        }
+        
     }
 
 }

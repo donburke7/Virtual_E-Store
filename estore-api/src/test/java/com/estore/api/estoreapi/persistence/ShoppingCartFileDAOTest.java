@@ -9,6 +9,7 @@ import java.util.Arrays;
 
 import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.model.Users.Customer;
+import com.estore.api.estoreapi.persistence.Inventory.InventoryDAO;
 import com.estore.api.estoreapi.persistence.User.ShoppingCartFileDAO;
 import com.estore.api.estoreapi.persistence.User.UserFileDAO;
 
@@ -26,6 +27,7 @@ public class ShoppingCartFileDAOTest {
 
     ShoppingCartFileDAO shoppingCartFileDAO;
     UserFileDAO mockUserFileDAO;
+    InventoryDAO mockInventoryDAO;
     Customer customer;
 
     /**
@@ -37,7 +39,8 @@ public class ShoppingCartFileDAOTest {
     @BeforeEach
     public void setup() throws IOException {
         mockUserFileDAO = mock(UserFileDAO.class);
-        shoppingCartFileDAO = new ShoppingCartFileDAO(mockUserFileDAO);
+        mockInventoryDAO = mock(InventoryDAO.class);
+        shoppingCartFileDAO = new ShoppingCartFileDAO(mockUserFileDAO, mockInventoryDAO);
         customer = new Customer("username");
         when(mockUserFileDAO.getUser(customer.getUsername())).thenReturn(customer);
     }
@@ -46,7 +49,7 @@ public class ShoppingCartFileDAOTest {
     public void testaddProduct() throws IOException {
 
         //setup
-        Product testProduct = new Product("Green Bean", 0, 1, 1.00);
+        Product testProduct = new Product("Green Bean", 0, 1, 1.00, new double[]{5.0}, 5.0);
         
         //invoke
         shoppingCartFileDAO.addProduct(customer.getUsername(), testProduct);
@@ -63,7 +66,7 @@ public class ShoppingCartFileDAOTest {
     public void testdeleteProduct() throws IOException {
 
         //setup
-        Product testProduct = new Product("Green Bean", 0, 1, 1.00);
+        Product testProduct = new Product("Green Bean", 0, 1, 1.00, new double[]{5.0}, 5.0);
         customer.addProduct(testProduct);
 
         //invoke
@@ -81,8 +84,8 @@ public class ShoppingCartFileDAOTest {
     public void testgetShoppingCart() throws IOException {
 
         //setup
-        Product testProduct = new Product("Green Bean", 0, 1, 1.00);
-        Product testProductTwo = new Product("Red Beans", 1, 1, 2.50);
+        Product testProduct = new Product("Green Bean", 0, 1, 1.00, new double[]{5.0}, 5.0);
+        Product testProductTwo = new Product("Red Beans", 1, 1, 2.50, new double[]{5.0}, 5.0);
         customer.addProduct(testProduct);
         customer.addProduct(testProductTwo);
 
@@ -101,8 +104,8 @@ public class ShoppingCartFileDAOTest {
     public void testclearShoppingCart() throws IOException {
 
         //setup
-        Product testProduct = new Product("Green Bean", 0, 1, 1.00);
-        Product testProductTwo = new Product("Red Beans", 1, 1, 2.50);
+        Product testProduct = new Product("Green Bean", 0, 1, 1.00, new double[]{5.0}, 5.0);
+        Product testProductTwo = new Product("Red Beans", 1, 1, 2.50, new double[]{5.0}, 5.0);
         customer.addProduct(testProduct);
         customer.addProduct(testProductTwo);
 
