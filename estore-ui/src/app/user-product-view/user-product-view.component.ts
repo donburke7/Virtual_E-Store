@@ -55,12 +55,13 @@ export class UserProductViewComponent implements OnInit {
     });
   }
 
-  addRating(rating: string): void {
+  addRate(rating: string): void {
     /**
      * Adds a rating from a user
      */
     if (this.product) {
-      this.productService.rateProduct(parseInt(rating))
+      this.product.ratings.push(parseInt(rating));
+      this.productService.updateProduct(this.product).subscribe(() => this.product);
     }
   }
 }

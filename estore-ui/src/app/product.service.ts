@@ -69,9 +69,4 @@ export class ProductService {
     const url = `${this.productsURL}/?name=${name}`;
     return this.http.get<Product[]>(url);
   }
-
-  rateProduct(rating: number): Observable<any> {
-    const url = `${this.productsURL}/?rating=${rating}`
-    return this.http.post<Product>(url, rating, this.httpOptions);
-  }
 }
