@@ -112,6 +112,16 @@ public class ShoppingCartController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @PostMapping("/{username}")
+    public ResponseEntity<Boolean> checkout(@PathVariable String username) {
+        try {
+            Product result = shoppingCartDao.addProduct(customer, product);
+        //Calls shoppingDAO's checkout
+        //if shoppingDAO returns false then we know something happend which caused an error in checking out, HttpStatus.CONFLICT
+        //if shoppingDAO returns true then the checkout was successful
+        //if an exception was thrown then an internal server error occured
+        return null;
+    }
 
     @PostMapping("/{customer}/{product}")
     public ResponseEntity<Product> addProduct(@PathVariable Customer customer, @PathVariable Product product){

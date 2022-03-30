@@ -70,6 +70,18 @@ public interface ShoppingCartDAO {
      */
     boolean clearShoppingCart(Customer customer) throws IOException;
 
+    /**
+     * Deletes a {@link Product product} that corresponds with the given id
+     * 
+     * @param id the id of the {@link Product product} to delete
+     * 
+     * @return true if the {@link Product product} was deleted successfully,
+     *         otherwise false
+     * 
+     * @throws IOException if an issue with underlying storage occurs
+     */
+    Boolean checkOut(String username) throws IOException;
+
 
 
 }

@@ -5,6 +5,8 @@ import java.io.IOException;
 import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.model.ShoppingCart;
 import com.estore.api.estoreapi.model.Users.Customer;
+import com.estore.api.estoreapi.persistence.Inventory.InventoryDAO;
+import com.estore.api.estoreapi.persistence.Inventory.InventoryFileDAO;
 
 import org.springframework.stereotype.Component;
 
@@ -76,6 +78,17 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
         Customer targetCustomer = (Customer) userDAO.getUser(customer.getUsername());
         boolean status = targetCustomer.clearCart();
         userDAO.saveUsers();
+        return status;
+    }
+    /**
+     * {@inheritDoc}
+     */
+    public synchronized boolean checkout(String username) throws IOException {
+        Customer targetCustomer = (Customer) userDAO.getUser(username);
+        boolean status = targetCustomer.checkout();
+        if(status){
+            targetCustomer.clearCart();
+        }
         return status;
     }
     

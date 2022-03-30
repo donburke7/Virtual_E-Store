@@ -2,9 +2,13 @@ package com.estore.api.estoreapi.model.Users;
 
 import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.model.ShoppingCart;
+import com.estore.api.estoreapi.persistence.Inventory.InventoryDAO;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.estore.api.estoreapi.persistence.Inventory.InventoryFileDAO;
+import com.estore.api.estoreapi.persistence.User.ShoppingCartFileDAO;
+
 
 /**
  * The customer class
@@ -87,7 +91,7 @@ public class Customer extends User {
      * executes checkout methods once implemented
      */
     public void checkout() {
-        // TODO
+        //todo
     }
 
 }

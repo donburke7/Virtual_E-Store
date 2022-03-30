@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
+
 import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.persistence.JsonUtilities;
 
@@ -235,7 +236,6 @@ public class InventoryFileDAO implements InventoryDAO {
             inventory.get(passed[i].getID()).setAmount(inventory.get(passed[i].getID()).getAmount() - passed.length);
         }
         return false;
-
     }
 
 }
