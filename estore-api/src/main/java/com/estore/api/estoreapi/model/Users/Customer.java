@@ -87,13 +87,5 @@ public class Customer extends User {
         return this.cart.getItems();
     }
 
-    /**
-     * executes checkout methods once implemented
-     */
-    public boolean checkout(String name) {
-        return
-        
-        //todo
-    }
 
 }

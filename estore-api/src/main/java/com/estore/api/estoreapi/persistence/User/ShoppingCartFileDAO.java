@@ -25,6 +25,7 @@ import org.springframework.stereotype.Component;
 public class ShoppingCartFileDAO implements ShoppingCartDAO {
 
     UserDAO userDAO; //the userDAO that corresponds with this DAO
+    InventoryDAO inventoryFileDAO;
 
     /**
      * Constructor for the shopping cart DAO class
@@ -34,8 +35,9 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
      *                since this class modifies the {@link ShoppingCart shopping
      *                cart} which the {@link Customer customers} hold
      */
-    public ShoppingCartFileDAO(UserDAO userDAO) {
+    public ShoppingCartFileDAO(UserDAO userDAO, InventoryDAO inventoryFileDAO) {
         this.userDAO = userDAO;
+        this.inventoryFileDAO = inventoryFileDAO;
     }
 
     /**
@@ -84,14 +86,13 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
      * {@inheritDoc}
      */
     public synchronized boolean checkout(String username) throws IOException {
-        Customer targetCustomer = (Customer) userDAO.getUser(username);
-        boolean status = targetCustomer.checkout();
+        //Customer targetCustomer = (Customer) userDAO.getUser(username);
+        //boolean status = targetCustomer.checkout();
+        Product [] product_array = this.getShoppingCart(username);
+        boolean status = inventoryFileDAO.checkOut(product_array);
         if(status){
-            targetCustomer.clearCart();
+            this.clearShoppingCart(username);
         }
         return status;
     }
-    
-    
-
 }
