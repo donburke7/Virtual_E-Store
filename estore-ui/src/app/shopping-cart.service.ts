@@ -27,9 +27,9 @@ export class ShoppingCartService {
     return this.http.get<Product[]>(url);
   }
  
-  addToCart(product: Product, username: string): Observable<any> {
-    const url = `${this.shoppingCartURL}/${username}`;
-    return this.http.put(url, product)
+  addToCart(product: Product, amount: number, username: string): Observable<any> {
+    const url = `${this.shoppingCartURL}/${username}/${amount}/${product.id}`;
+    return this.http.put(url, this.http);
   }
 
   deleteProduct(product: Product, username: string): Observable<any> {

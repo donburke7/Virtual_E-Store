@@ -19,6 +19,7 @@ import { ShoppingCartService } from '../shopping-cart.service';
 })
 export class UserProductViewComponent implements OnInit {
   @Input() product?: Product;
+  currAmount: number = 1;
 
   constructor(
       private productService: ProductService,
@@ -45,13 +46,19 @@ export class UserProductViewComponent implements OnInit {
     this.location.back();
   }
 
-  addToCart(product: Product): void {
+  addToCart(product: Product, amount: number): void {
     /**
      * Takes in a product to add to the user's cart
      */
     var username = (this.route.snapshot.paramMap.get('username')!);
-    this.shoppingCartService.addToCart( product, username ).subscribe(product => {
+    this.shoppingCartService.addToCart( product, amount, username ).subscribe(product => {
       product.push(product);
     });
+  }
+
+
+  amountInput(value: string): void
+  {
+    this.currAmount = +value;
   }
 }

@@ -1,3 +1,5 @@
+<button type="button" (click)="backButton()">Go Back</button>
+
 <ul class="wrapper">
     <div *ngFor="let product of cart">
         <div class="box">{{product.name}}</div>
@@ -8,5 +10,4 @@
     </div>
 </ul>
 
-<button type="button" (click)="backButton()">Go Back</button>
-<button type="button">Check out!</button>
+<button type="button" (click)="checkout()">Check out!</button>

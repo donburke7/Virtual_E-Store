@@ -124,16 +124,16 @@ public class ShoppingCartController {
         return null;
     }
 
-    @PutMapping("/{username}")
-    public ResponseEntity<Product> addProduct(@PathVariable String username, @RequestBody Product product) {
-        LOG.info("PUT /shoppingcart/customer=" + username + "/product=" + product);
+    @PutMapping("/{username}/{amount}/{id}")
+    public ResponseEntity<Integer> addProduct(@PathVariable String username, @PathVariable Integer amount, @PathVariable Integer id) {
+        LOG.info("PUT /shoppingcart/customer=" + username + "/productID=" + id + "/amount=" + amount);
         try {
-            Product result = shoppingCartDao.addProduct(username, product.getID(), product.getAmount());
+            Product result = shoppingCartDao.addProduct(username, id, amount);
             if(result != null){
                 return new ResponseEntity<>(HttpStatus.CREATED);
             }
             else{
-                return new ResponseEntity<Product>(product, HttpStatus.CONFLICT);
+                return new ResponseEntity<Integer>(id, HttpStatus.CONFLICT);
             }
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

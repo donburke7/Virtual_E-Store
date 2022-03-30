@@ -2,7 +2,9 @@
     <h2>{{product.name | uppercase}} Details</h2>
     <div><span>id: </span>{{product.id}}</div>
     <div><span>price: </span>${{product.price}}</div>
+    <div class="productAmount"><span>Amount: </span> <input type="range" min="1" max={{product.amount}} value="1" class="slider" id="myRange" #amountSelect
+        (input)="amountInput(amountSelect.value)"> {{currAmount}}</div>
 
     <button type="button" (click)="backButton()">Go Back</button>
-    <button type="button" (click)="addToCart(product)">Add to Cart</button>
+    <button type="button" (click)="addToCart(product, currAmount)">Add to Cart</button>
 </div>
