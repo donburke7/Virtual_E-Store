@@ -90,7 +90,9 @@ public class Customer extends User {
     /**
      * executes checkout methods once implemented
      */
-    public void checkout() {
+    public boolean checkout(String name) {
+        return
+        
         //todo
     }
 

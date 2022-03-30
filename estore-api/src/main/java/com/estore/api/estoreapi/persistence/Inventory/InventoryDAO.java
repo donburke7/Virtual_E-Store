@@ -82,4 +82,6 @@ public interface InventoryDAO {
      */
     Boolean deleteProduct(int id) throws IOException;
 
+    
+
 }

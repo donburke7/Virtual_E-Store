@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.model.Users.Customer;
+import com.estore.api.estoreapi.persistence.Inventory.InventoryFileDAO;
 import com.estore.api.estoreapi.persistence.User.ShoppingCartDAO;
 
 import org.springframework.http.HttpStatus;
@@ -115,12 +116,17 @@ public class ShoppingCartController {
     @PostMapping("/{username}")
     public ResponseEntity<Boolean> checkout(@PathVariable String username) {
         try {
-            Product result = shoppingCartDao.addProduct(customer, product);
-        //Calls shoppingDAO's checkout
-        //if shoppingDAO returns false then we know something happend which caused an error in checking out, HttpStatus.CONFLICT
-        //if shoppingDAO returns true then the checkout was successful
-        //if an exception was thrown then an internal server error occured
-        return null;
+            boolean result = shoppingCartDao.checkOut(username);
+            if(result){
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+            else{
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
+            }
+        }
+        catch (IOException e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping("/{customer}/{product}")
