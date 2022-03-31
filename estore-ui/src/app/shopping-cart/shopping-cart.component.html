@@ -14,7 +14,7 @@
 <ul class="wrapper">
     <div *ngFor="let product of cart">
         <button class="btn-group" routerLink="/user-product-view/{{user?.username}}/{{product.id}}">{{product.name}}
-            <label class="amount">Stock: {{product.amount}}</label>
+            <label class="amount">Quantity: {{product.amount}}</label>
             <label class="price">Price: ${{product.price}}</label>
         </button>
         <button type="button" class="delete" title="Delete Product" (click)="deleteProduct(product)">x</button>
