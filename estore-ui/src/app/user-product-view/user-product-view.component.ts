@@ -22,6 +22,7 @@ import { ShoppingCartService } from '../shopping-cart.service';
 export class UserProductViewComponent implements OnInit {
   @Input() product?: Product;
   currAmount: number = 1;
+  ifDisplay: boolean = true;
 
   constructor(
       private productService: ProductService,
@@ -81,5 +82,21 @@ export class UserProductViewComponent implements OnInit {
   amountInput(value: string): void
   {
     this.currAmount = +value;
+  }
+
+  addRate(rating: string): void {
+    /**
+     * Adds a rating from a user
+     */
+    if (this.product) {
+      if(parseInt(rating) > 10 || parseInt(rating) < 0){
+        return;
+      }
+      this.ifDisplay = false;
+      this.product.ratings.push(parseInt(rating));
+      this.productService.updateProduct(this.product).subscribe(() => this.product);
+      this.getProduct();
+
+    }
   }
 }
