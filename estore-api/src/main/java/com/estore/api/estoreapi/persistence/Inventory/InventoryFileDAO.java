@@ -109,7 +109,7 @@ public class InventoryFileDAO implements InventoryDAO {
 
         // add all items that matches the string that was passed in
         for (Product currProduct : inventory.values()) {
-            if (searchParameter == null || currProduct.getName().contains(searchParameter)) {
+            if (searchParameter == null || currProduct.getName().toLowerCase().contains(searchParameter.toLowerCase())) {
                 products.add(currProduct);
             }
         }
