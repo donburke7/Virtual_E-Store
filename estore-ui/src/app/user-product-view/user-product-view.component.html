@@ -2,7 +2,7 @@
     <h2>{{product.name | uppercase}} Details</h2>
     <div><span>id: </span>{{product.id}}</div>
     <div><span>price: </span>${{product.price}}</div>
-    <div><span>rating: </span>{{product.rating}}</div>
+    <div><span>rating: </span>{{product.avg_rating}}</div>
     <div id="make-rating">
         <label for="rating-box">Leave a rating? </label>
         <input #ratingBox id="make-rating" type="number" min="0" max="10"/>
