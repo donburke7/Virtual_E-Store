@@ -7,7 +7,6 @@ import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.model.ShoppingCart;
 import com.estore.api.estoreapi.model.Users.Customer;
 import com.estore.api.estoreapi.persistence.Inventory.InventoryDAO;
-import com.estore.api.estoreapi.persistence.Inventory.InventoryFileDAO;
 
 import org.springframework.stereotype.Component;
 
@@ -88,16 +87,14 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
     /**
      * {@inheritDoc}
      */
-    public synchronized boolean checkout(String username) throws IOException {
-
-        //will call get cart on the user that corresponds with the parameterized username
-        //using the returned product[] send it to inventoryDAO's checkout function to checkout
-        //clear the cart if the checkout was successful, inficated by a true that was returned from inventoryDAO
-        //return the boolean that gets returned from inventoryDAO's checkout function
-
-        return false;
+    public synchronized Boolean checkout(String username) throws IOException {
+        //Customer targetCustomer = (Customer) userDAO.getUser(username);
+        //boolean status = targetCustomer.checkout();
+        Product [] product_array = this.getShoppingCart(username);
+        boolean status = inventoryFileDAO.checkOut(product_array);
+        if (status) {
+            this.clearShoppingCart(username);
+        }
+        return status;
     }
-    
-    
-
 }

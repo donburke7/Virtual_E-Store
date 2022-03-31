@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Unit testing for the InventoryFileDAO class
@@ -153,7 +154,7 @@ public class InventoryFileDAOTest {
     public void testupdateProductAvgRating() throws IOException {
 
         // Product to be updated
-        Product testProduct = new Product("Bean1", 2, 4, 10, new double[]{5.0, 1.0}, 5.0);
+        Product testProduct = new Product("Bean1", 2, 4, 10, new double[] { 5.0, 1.0 }, 5.0);
 
         // Result of the updateProduct function
         // Should return null if no product was found
@@ -164,6 +165,35 @@ public class InventoryFileDAOTest {
         double actual = result.getAvgRating();
         double expected = 3.0;
         assertEquals(expected, actual);
+    }
+    
+    @Test
+    public void testCheckoutFail() throws IOException {
+
+        //setup
+        Product testProduct = new Product("Bean1", 2, 4, 10, new double[] { 5.0, 1.0 }, 5.0);
+        Product[] testCart = { testProduct };
+
+        //invoke
+        Boolean result = inventoryDAO.checkOut(testCart);
+
+        //assert
+        //should return false to indicate the checkout failed
+        //this is due to a product not being in the initial inventory
+        assertFalse(result);
+    }
+
+    @Test
+    public void testCheckoutSuceed() throws IOException {
+        //setup and invoke
+        Boolean result = inventoryDAO.checkOut(testProducts);
+        int inventoryLength = inventoryDAO.getProducts().length;
+
+        //assert
+        //the result should be true to indicate a sucessful checkout
+        //the length should be 0 since we inputted the entire inventory as the shopping cart
+        assertTrue(result);
+        assertEquals(inventoryLength, 0);
     }
 
 }

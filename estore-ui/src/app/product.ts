@@ -4,4 +4,6 @@ export interface Product {
     id: number;
     price: number;
     amount: number;
+    avg_rating: number;
+    ratings: number[];
 }

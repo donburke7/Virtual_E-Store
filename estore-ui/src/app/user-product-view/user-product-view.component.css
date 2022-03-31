@@ -1,0 +1,12 @@
+label {
+    display: block;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    margin-bottom: .5rem;
+    color: #98b972;
+  }
+
+div {
+    color: #98b972;
+}

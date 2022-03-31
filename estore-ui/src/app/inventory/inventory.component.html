@@ -1,3 +1,5 @@
+
+<body>
 <div>
     <label for="new-product">Product name: </label>
     <input id="new-product" #productName />
@@ -13,7 +15,9 @@
             <label class="amount">Stock: {{product.amount}}</label>
             <label class="price">Price: ${{product.price}}</label>
         </button>
-        <button type="button" class="delete" title="delete product" (click)="deleteProduct(product)">x</button>
+        <button type="button" class="delete" title="Delete Product" (click)="deleteProduct(product)">x</button>
     </div>
         
 </ul>
+
+</body>

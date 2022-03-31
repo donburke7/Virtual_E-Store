@@ -1,5 +1,5 @@
 <div *ngIf="product != null">
-    <h2>{{product.name | uppercase}} Details</h2>
+    <h1>{{product.name}} Details</h1>
     <div><span>id: </span>{{product.id}}</div>
     <div>
       <label for="product-name">Product name: </label>
@@ -14,6 +14,11 @@
 
       <label for="product-stock">Product stock: </label>
       <input id="product-stock" [(ngModel)]="product.amount" placeholder="Product stock"/>
+
+      <br>
+
+      <label for="product-rating">Product rating:  </label>
+      {{product.avg_rating}}
     </div>
   
   </div>

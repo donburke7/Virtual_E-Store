@@ -1,23 +1,30 @@
-<div *ngIf="user != null">
-    <nav>
-        <h2><a routerLink="shopping-cart">Shopping Cart</a></h2>
-    </nav>
-</div>
 
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
     <app-product-search></app-product-search>
 
     <br><br>
 
-    <h2>Product List: </h2>
+    <h2 *ngIf="user != null">
+        <button class="cart" routerLink="shopping-cart">
+            <span>Shopping Cart</span>
+        </button>
+    </h2>
+
+    <h1>Available Beans: </h1>
     <ul class="wrapper">
         <div *ngFor="let product of inventory"> 
             <button class="btn-group" routerLink="/user-product-view/{{user?.username}}/{{product.id}}">{{product.name}}
                 <label class="amount">Stock: {{product.amount}}</label>
                 <label class="price">Price: ${{product.price}}</label>
             </button>
-            
+
         </div>
     </ul>
+
+</body>
 
 
     

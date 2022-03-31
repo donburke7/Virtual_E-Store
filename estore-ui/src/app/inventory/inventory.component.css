@@ -12,20 +12,21 @@ body {
     align-items: inital;
     padding: 20px 24px;
     cursor: pointer; 
-    text-align: center;
+    align-items: center;
     background-color: #eee;
     color: black;
   }
 
   .btn-group:hover {
-  background-color: #cacaca;
+    background-color: #cacaca;
   }
   
   .wrapper {
+    padding: 45px;
     display: grid;
-    grid-template-columns: 200px 200px 200px 200px 200px 200px;
-    grid-template-rows: 200px 200px 200px;
-    gap: 10px;
+    grid-template-columns: 200px 200px 200px 200px 200px;
+    column-gap: 15px;
+    row-gap: 50px;
     background-color: #fff;
     color: #444;
     align-items: center;
@@ -37,7 +38,6 @@ body {
     border-radius: 20px;
     padding: 20px;
     font-size: 100%;
-    
   }
 
   .amount {

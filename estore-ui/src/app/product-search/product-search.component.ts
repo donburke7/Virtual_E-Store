@@ -2,7 +2,9 @@
  * SWEN 261
  * product-search.component.ts
  * 
- * Contributors: Isaac Post
+ * This is the component that handles the {@linkplain User users} searching for a {@link Product product}
+ * 
+ * Contributors: Isaac Post, Donald Burke
  */
 
 import { Component, Input, OnInit } from '@angular/core';
@@ -28,10 +30,20 @@ export class ProductSearchComponent implements OnInit {
 
   constructor(private productService: ProductService, private localStorage: LocalStorageService) { }
 
+  /**
+   * Method that handles input from the serach bar
+   * This updates the string saved in this component to constantly update the results
+   * Whenever a {@linkplain User user} inputs another character in the serach box
+   * 
+   * @param term The string that is currently being searched for
+   */
   search(term: string): void {
       this.searchTerms.next(term);
   }
 
+  /**
+   * Upon initialization this method gets the {@linkplain Product products} that matches this component's search string
+   */
   ngOnInit(): void
   {
     this.username = this.localStorage.getUsername();

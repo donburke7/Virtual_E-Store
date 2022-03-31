@@ -5,10 +5,11 @@
  * Contributors: Isaac Post, Donald Burke
  */
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, tap, of } from 'rxjs';
 import { Product } from './product';
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,25 +22,63 @@ export class ShoppingCartService {
   };
 
   constructor(private http: HttpClient) { }
-
+  
+  /**
+   * Retrieves the shopping cart of the customer from the backend
+   * 
+   * @param username the username of the {@link User user} 
+   * 
+   * @returns an array of {@link Product products} that are in the shopping cart
+   */
   getCart(username: string): Observable<Product[]> {
     const url = `${this.shoppingCartURL}/${username}`
     return this.http.get<Product[]>(url);
   }
  
-  addToCart(product: Product, username: string): Observable<any> {
-    const url = `${this.shoppingCartURL}/${username}`;
-    return this.http.put(url, product)
+  /**
+   * Adds a {@linkplain Product product} to the customer's shopping cart
+   * 
+   * @param product the {@link Product product} to be added
+   * @param amount the amount to set the added {@link Product product} to
+   * @param username the username of the {@link User user} that initiated the action
+   * 
+   * @returns an observable that is created from observing the return state of the put request
+   */
+  addToCart(product: Product, amount: number, username: string): Observable<any> {
+    const url = `${this.shoppingCartURL}/${username}/${amount}/${product.id}`;
+    return this.http.put(url, this.http);
   }
 
+  /**
+   * deletes a {@linkplain Product product} from the customer's shopping cart
+   * 
+   * @param product the {@link Product product} that is to be deleted
+   * @param username the username associated with the customer
+   * 
+   * @returns an observable that is created from observing the return state of the delete request
+   */
   deleteProduct(product: Product, username: string): Observable<any> {
     const url = `${this.shoppingCartURL}/${username}/${product.id}`;
     return this.http.delete(url)
   }
 
+  /**
+   * Initiates the checkout action for the customer by sending
+   * the requested customer's username back to the backend 
+   * 
+   * @param username the username of the customer
+   * 
+   * @returns an observable that is created from observing the return state of the post request
+   */
   checkout(username: string): Observable<any>
   {
     const url = `${this.shoppingCartURL}/${username}`;
-    return this.http.post(url, this.http);
+    return this.http.post(url, this.http).pipe(tap(), catchError(err => { return this.checkoutErrorCatch(err)} ));
   }
+
+  checkoutErrorCatch(error: HttpErrorResponse)
+  {
+    return of(false);
+  }
+
 }

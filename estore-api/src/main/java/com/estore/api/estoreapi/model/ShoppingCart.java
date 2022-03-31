@@ -40,7 +40,11 @@ public class ShoppingCart {
      * @return the {@link Product product} that was added
      */
     public Product addProduct(Product product) {
-        items.put(product.getID(), product);
+        if (items.containsKey(product.getID())) {
+            items.get(product.getID()).setAmount(product.getAmount());
+        } else {
+            items.put(product.getID(), product);
+        }
         return product;
     }
 
@@ -83,6 +87,8 @@ public class ShoppingCart {
         return results;
 
     }
+    
+    
 
 
 }

@@ -40,6 +40,8 @@ public class ShoppingCartControllerTest {
         cartController = new ShoppingCartController(mockCartDAO);
         mockUser = mock(Customer.class);
         when(mockUser.getUsername()).thenReturn("mock");
+        when(mockProduct.getID()).thenReturn(1);
+        when(mockProduct.getAmount()).thenReturn(5);
     }
 
     @Test
@@ -132,7 +134,7 @@ public class ShoppingCartControllerTest {
     public void testAddProductSuccess() throws IOException {
         when(mockCartDAO.addProduct(mockUser.getUsername(), mockProduct.getID(), mockProduct.getAmount())).thenReturn(mockProduct);
 
-        ResponseEntity<Product> result = cartController.addProduct(mockUser.getUsername(), mockProduct);
+        ResponseEntity<Integer> result = cartController.addProduct(mockUser.getUsername(), 5, mockProduct.getID());
 
         assertEquals(HttpStatus.CREATED, result.getStatusCode());
     }
@@ -141,17 +143,17 @@ public class ShoppingCartControllerTest {
     public void testAddProductFail() throws IOException {
         when(mockCartDAO.addProduct(mockUser.getUsername(), mockProduct.getID(), mockProduct.getAmount())).thenReturn(null);
 
-        ResponseEntity<Product> result = cartController.addProduct(mockUser.getUsername(), mockProduct);
+        ResponseEntity<Integer> result = cartController.addProduct(mockUser.getUsername(), mockProduct.getAmount(), mockProduct.getID());
 
         assertEquals(HttpStatus.CONFLICT, result.getStatusCode());
-        assertEquals(mockProduct, result.getBody());
+        assertEquals(mockProduct.getID(), result.getBody());
     }
 
     @Test
     public void testAddProductError() throws IOException {
         when(mockCartDAO.addProduct(mockUser.getUsername(), mockProduct.getID(), mockProduct.getAmount())).thenThrow(new IOException());
 
-        ResponseEntity<Product> result = cartController.addProduct(mockUser.getUsername(), mockProduct);
+        ResponseEntity<Integer> result = cartController.addProduct(mockUser.getUsername(), 5, mockProduct.getID());
 
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, result.getStatusCode());
     }

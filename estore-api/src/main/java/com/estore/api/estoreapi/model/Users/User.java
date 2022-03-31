@@ -45,8 +45,11 @@ public class User {
             return false;
         }
 
+        //check to see if the class type is equal
         if (object.getClass() == this.getClass() || object.getClass() == Customer.class) {
             User other = (User) object;
+
+            //then check to see if the usernames are equal
             if (other.username.equals(this.username)) {
                 return true;
             } else {

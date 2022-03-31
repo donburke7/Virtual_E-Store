@@ -81,7 +81,24 @@ public interface InventoryDAO {
      * @throws IOException if an issue with underlying storage occurs
      */
     Boolean deleteProduct(int id) throws IOException;
+     /**
+     * Deletes a {@link Product product} that corresponds with the given id
+     * 
+     * @param id the id of the {@link Product product} to delete
+     * 
+     * @return true if the {@link Product product} was deleted successfully,
+     *         otherwise false
+     * 
+     * @throws IOException if an issue with underlying storage occurs
+     */
+    Boolean checkOut(Product[] passed) throws IOException;
 
+    /**
+     * Creates a clone of an already existing {@linkplain Product product}
+     * @param id The id of the {@link Product product} to clone
+     * @param amount The new amount to set the clone to
+     * @return The newly created {@link Product product}
+     */
     Product createClone(int id, int amount);
 
 }
