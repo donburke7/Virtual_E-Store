@@ -155,4 +155,31 @@ public class ShoppingCartControllerTest {
 
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, result.getStatusCode());
     }
+    @Test
+    public void testcheckoutSuccess() throws IOException {
+        when(mockCartDAO.checkout(mockUser.getUsername())).thenReturn(true);
+
+        ResponseEntity<Boolean> result = cartController.checkout(mockUser.getUsername());
+
+        assertEquals(HttpStatus.OK, result.getStatusCode());
+    }
+
+    @Test
+    public void testcheckoutFail() throws IOException {
+        when(mockCartDAO.checkout(mockUser.getUsername())).thenReturn(false);
+
+        ResponseEntity<Boolean> result = cartController.checkout(mockUser.getUsername());
+
+        assertEquals(HttpStatus.CONFLICT, result.getStatusCode());
+        assertFalse(result.getBody());
+    }
+
+    @Test
+    public void testcheckoutError() throws IOException {
+        when(mockCartDAO.checkout(mockUser.getUsername())).thenThrow(new IOException());
+
+        ResponseEntity<Boolean> result = cartController.checkout(mockUser.getUsername());
+
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, result.getStatusCode());
+    }
 }
