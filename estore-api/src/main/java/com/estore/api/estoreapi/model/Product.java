@@ -35,12 +35,16 @@ public class Product {
      * @param name   The name of the product
      * @param id     The id of the product
      * @param amount How many of this product is currently present
-     * @param price
+     * @param price  The price of this product
+     * @param ratings An array of doubles that holds all of the ratings for this product
+     * @param avgRating The average rating for this product
      */
     public Product(@JsonProperty("name") String name, @JsonProperty("id") int id,
             @JsonProperty("amount") int amount, @JsonProperty("price") double price, 
             @JsonProperty("ratings") double ratings[], @JsonProperty("avg_rating") double avgRating) {
 
+        //Check to see if the priduct has any 0's or nulls present upon creation
+        //if so then set a default
         if (amount <= 0) {
             this.amount = 1;
         } else {
@@ -65,6 +69,14 @@ public class Product {
         this.id = id;
     }
 
+    /**
+     * secondary constructor for the product class
+     * this constructor specifically creates a clone of an already existing product
+     * and save a new amount to the new product
+     * 
+     * @param original The original product to clone
+     * @param amount The new int to set the amount to
+     */
     public Product(Product original, int amount) {
         this.name = original.name;
         this.amount = amount;

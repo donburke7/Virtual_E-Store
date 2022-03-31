@@ -95,7 +95,16 @@ public class UserController {
         }
     }
 
-
+    /**
+     * Adds a new {@linkplain User user} to the database
+     * 
+     * @param username the username of the new {@link User user}
+     * 
+     * @return the newly created {@link User user} as well as a
+     *         200 (OK) indicating that the action was successful
+     *         404 (NOT_FOUND) if the action failed
+     *         500 (INTERNAL_SERVER_ERROR) if an issue arouse
+     */
     @PostMapping("/{username}")
     public ResponseEntity<User> addUser(@PathVariable String username) {
         LOG.info("POST /user=" + username);
@@ -111,6 +120,11 @@ public class UserController {
         }
     }
     
+    /**
+     * Gets an array of the {@linkplain User users}
+     * 
+     * @return an array of the {@link User user} in the database
+     */
     @GetMapping("")
     public ResponseEntity<User[]> getUsers() {
         LOG.info("GET /users");

@@ -2,6 +2,8 @@
  * SWEN 261
  * shopping-cart.component.ts
  * 
+ * The component that displays the current {@linkplain User user's} shopping cart
+ * 
  * Contributors: Isaac Post
  */
 
@@ -31,12 +33,18 @@ export class ShoppingCartComponent implements OnInit {
       private route: ActivatedRoute
       ) { }
 
+  /**
+   * The initialization of this component
+   */
   ngOnInit(): void
   {
     this.getUser();
     this.getCart();
   }
 
+  /**
+   * Gets and saves the shopping cart of the currently logged in {@linkplain User user}
+   */
   getCart(): void {
     /**
      * Gets the id from the route to get the cart
@@ -45,6 +53,9 @@ export class ShoppingCartComponent implements OnInit {
       .subscribe(cart => this.cart = cart);
   }
 
+  /**
+   * Gets the information of the currently logged in {@linkplain User user}
+   */
   getUser(): void
   {
     this.username = this.route.snapshot.paramMap.get('username') as string;
@@ -52,6 +63,10 @@ export class ShoppingCartComponent implements OnInit {
       .subscribe(user => this.user = user);
   }
 
+  /**
+   * Deletes a {@linkplain Product product} from the current {@link User user's} shopping cart
+   * @param product The {@link Product product} that is to be deleted
+   */
   deleteProduct(product: Product): void {
     /**
      * Initilized with a button and deletes the product from the cart
@@ -64,10 +79,16 @@ export class ShoppingCartComponent implements OnInit {
     this.shoppingCartService.deleteProduct(product, this.username).subscribe();
   }
 
+  /**
+   * Returns the {@linkplain User user} to their previous page
+   */
   backButton(): void {
     this.location.back();
   }
 
+  /**
+   * Initiates the action of checking out for the {@linkplain User user}
+   */
   checkout(): void
   {
     this.shoppingCartService.checkout(this.username).subscribe();

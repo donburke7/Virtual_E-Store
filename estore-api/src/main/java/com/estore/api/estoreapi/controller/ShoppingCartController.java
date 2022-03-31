@@ -46,15 +46,15 @@ public class ShoppingCartController {
     }
 
     /**
-     * Gets a {@link Product} with the provided id
+     * Gets a {@linkplain Product product} array which holds the items inside of a {@link Customer customer's}
+     * {@link ShoppingCart cart}
      * 
-     * @param id An id that is used to get a product that corresponds to that id
-     *           from the inventory
+     * @param username the username of the {@link Customer customer}
      * 
      * @return A ResonseEntity with the {@link Product product} that was obtained
      *         from the id
      *         and a HTTP status code OK
-     *         A ResponseEntity with HTTP status of NOT_FOUND if no product was
+     *         A ResponseEntity with HTTP status of NOT_FOUND if no {@link Product product} was
      *         found
      *         A ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
@@ -77,6 +77,7 @@ public class ShoppingCartController {
     /**
      * Deletes a {@linkplain Product product} with the given id
      * 
+     * @param username the username of the {@link Customer customer} who initiaited this action
      * @param id The id of the {@linkplain Product product}to deleted
      * 
      * @return ResponseEntity HTTP status of OK if deleted<br>
@@ -98,32 +99,51 @@ public class ShoppingCartController {
         }
     }
 
+    /**
+     * Clears the cart of the {@linkplain Customer customer} who initiated the method
+     * 
+     * @param username the username of the {@link Customer customer}
+     * 
+     * @return a boolean indicating of the success of the action as well as a
+     *         200 (OK) indicating that the action was successful
+     *         404 (NOT_FOUND) if the action failed
+     *         500 (INTERNAL_SERVER_ERROR) if an issue arouse
+     */
     @DeleteMapping("/{username}")
-    public ResponseEntity<Boolean> clearCart(@PathVariable String username){
+    public ResponseEntity<Boolean> clearCart(@PathVariable String username) {
         LOG.info("DELETE /cart/customer=" + username);
-        try{
+        try {
             boolean deleted = shoppingCartDao.clearShoppingCart(username);
-            if(deleted){
-                return new ResponseEntity<>(HttpStatus.OK);
-            }
-            else{
+            if (deleted) {
+                return new ResponseEntity<Boolean>(deleted, HttpStatus.OK);
+            } else {
                 return new ResponseEntity<Boolean>(deleted, HttpStatus.NOT_FOUND);
             }
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
+    /**
+     * A checkout execution for the {@linkplain Customer customer}
+     * 
+     * @param username the username of the {@linkplain Customer customer} who wishes to checkout
+     * 
+     * @return A boolean indicating the success of the action as well as a
+     *         201 (CREATED) indicating that the action was successful
+     *         409 (CONFLICT) if the action failed
+     *         500 (INTERNAL_SERVER_ERROR) if an issue arouse
+     */
     @PostMapping("/{username}")
     public ResponseEntity<Boolean> checkout(@PathVariable String username) {
         LOG.info("POST /shoppingcart/customer=" + username);
         try {
             boolean result = shoppingCartDao.checkout(username);
             if(result){
-                return new ResponseEntity<>(HttpStatus.OK);
+                return new ResponseEntity<Boolean>(result, HttpStatus.OK);
             }
             else{
-                return new ResponseEntity<>(HttpStatus.CONFLICT);
+                return new ResponseEntity<Boolean>(result, HttpStatus.CONFLICT);
             }
         }
         catch (IOException e){
@@ -131,6 +151,18 @@ public class ShoppingCartController {
         }
     }
 
+    /**
+     * Lets the {@linkplain Customer customer} add a {@link Product product} to their {@link ShoppingCart cart}
+     * 
+     * @param username the {@link Customer customer} username who initiated the action
+     * @param amount the number of items the {@linke Customer customer} is attempting to add
+     * @param id the id of the specific {@link Product product} the {@link Customer customer} is trying to add
+     * 
+     * @return the id of the {@link Product product} that was added as well as a 
+     *          201 (CREATED) indicating that the action was successful
+     *          409 (CONFLICT) if the action failed
+     *          500 (INTERNAL_SERVER_ERROR) if an issue arouse
+     */
     @PutMapping("/{username}/{amount}/{id}")
     public ResponseEntity<Integer> addProduct(@PathVariable String username, @PathVariable Integer amount, @PathVariable Integer id) {
         LOG.info("PUT /shoppingcart/customer=" + username + "/productID=" + id + "/amount=" + amount);

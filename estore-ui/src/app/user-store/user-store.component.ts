@@ -2,6 +2,10 @@
  * SWEN 261
  * user-store.component.ts
  * 
+ * This component showcases a customer's store front page
+ * On this page the customer is able to serach for a product,
+ * See the entire inventory of said store, as well as access their shopping cart
+ * 
  * Contributors: Isaac Post, Donald Burke
  */
 
@@ -26,16 +30,28 @@ export class UserStoreComponent implements OnInit {
       private userService: UserService,
       private route: ActivatedRoute) { }
 
+  /**
+   * Initialization of this component
+   */
   ngOnInit(): void {
     this.getInventory();
     this.getUser();
   }
 
+  /**
+   * Gets and saves the entire inventory of the store
+   * in order to display the {@linkplain Product products} within said inventory
+   * for the customers to see
+   */
   getInventory(): void {
     this.productService.getProducts()
       .subscribe(inventory => this.inventory = inventory);
   }
 
+  /**
+   * Gets the {@linkplain User user} that is currently logged in 
+   * @returns The {@link User user} that is logged in
+   */
   getUser(): User {
     const username = this.route.snapshot.paramMap.get('username')!;
 

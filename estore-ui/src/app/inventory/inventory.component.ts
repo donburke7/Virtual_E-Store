@@ -2,6 +2,8 @@
  * SWEN 261
  * inventory.component.ts
  * 
+ * The component that showcases the inventory
+ * 
  * Contributors: Donald Burke
  */
 
@@ -19,34 +21,38 @@ export class InventoryComponent implements OnInit {
 
   constructor(private productService: ProductService) { }
 
+  /**
+   * Initialization of this comopnent
+   */
   ngOnInit(): void {
     this.getInventory();
   }
 
+  /**
+   * Retrieves the inventory and saves it in order to be displayed
+   */
   getInventory(): void {
     this.productService.getProducts()
       .subscribe(inventory => this.inventory = inventory);
   }
 
-  deleteProduct(product: Product): void {
-    /**
+
+  /**
      * Gets called by a button from html to remove product
      * 
-     * Input Arguments:
-     * product -- The product to be deleted.
+     * @param product The product to be deleted.
      */
-
+  deleteProduct(product: Product): void {
     this.inventory = this.inventory.filter(p => p !== product);
     this.productService.deleteProduct(product.id).subscribe();
   }
 
-  addProduct(name: String): void {
-    /**
+  /**
      * Gets called by a button from html to add a new product
      * 
-     * Input Arguments:
-     * product -- The name of the new product.
+     * @param product The name of the new product.
     */
+  addProduct(name: String): void {
 
     name = name.trim();
     if (!name) { return; }

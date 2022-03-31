@@ -37,7 +37,7 @@ public class InventoryFileDAO implements InventoryDAO {
      * Creates an Inventory File Data Access Object
      * 
      * @param filename     filename to read from and write to
-     * @param objectMapper provides conversion between JSON files to object
+     * @param jsonUtilities provides conversion between JSON files to object
      * 
      * @throws IOException when file cannot be accessed or read from
      */
@@ -48,8 +48,8 @@ public class InventoryFileDAO implements InventoryDAO {
     }
 
     /**
-     * Loads all products that were in the file that was passed in
-     * Deserialize all JSON products and saves it into a local storage for easy
+     * Loads all {@linkplain Product products} that were in the file that was passed in
+     * Deserialize all JSON {@link Product products} and saves it into a local storage for easy
      * access
      * 
      * @return a boolean indicating if the operation was successful
@@ -225,6 +225,9 @@ public class InventoryFileDAO implements InventoryDAO {
         }
     }
     
+    /**
+     * {@inheritDoc}
+     */
     public Product createClone(int id, int amount) {
         if (amount == 0) {
             return null;
@@ -238,11 +241,15 @@ public class InventoryFileDAO implements InventoryDAO {
     /**
      * Changes the ammount of the inventory has in stock
      * 
-     * @return false if the length of the product that is being checkedout is larger than the amount the inventory has in stock
+     * @return false:
+     *              if the amount of the {@linkplain Product product} that is being checkedout is larger than the amount the inventory has in stock
+     *              if a {@link Product product} that is being checked out no longer is available in the inventory
+     *         true otherwise indicating a sucessful action
      * 
      * @throws IOException 
      */
     public Boolean checkOut(Product[] passed) throws IOException {
+        //base cases for false
         for (Product input : passed) {
             if (!inventory.containsKey(input.getID())) {
                 return false;
@@ -253,6 +260,7 @@ public class InventoryFileDAO implements InventoryDAO {
             }
         }
 
+        //execute the checkout in other terms: reduce the stock of each item based on the items being checkedout
         for (int i = 0; i < passed.length; i++) {
             inventory.get(passed[i].getID())
                     .setAmount(inventory.get(passed[i].getID()).getAmount() - passed[i].getAmount());
@@ -260,6 +268,8 @@ public class InventoryFileDAO implements InventoryDAO {
                 this.deleteProduct(passed[i].getID());
             }
         }
+
+        //save the changed inventory
         this.save();
         return true;
     }
