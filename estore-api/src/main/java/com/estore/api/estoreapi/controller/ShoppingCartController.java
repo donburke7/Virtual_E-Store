@@ -114,14 +114,20 @@ public class ShoppingCartController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
     @PostMapping("/{username}")
     public ResponseEntity<Boolean> checkout(@PathVariable String username) {
-        //Calls shoppingDAO's checkout
-        //if shoppingDAO returns false then we know something happend which caused an error in checking out, HttpStatus.CONFLICT
-        //if shoppingDAO returns true then the checkout was successful
-        //if an exception was thrown then an internal server error occured
-        return null;
+        try {
+            boolean result = shoppingCartDao.checkout(username);
+            if(result){
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+            else{
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
+            }
+        }
+        catch (IOException e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping("/{username}/{amount}/{id}")

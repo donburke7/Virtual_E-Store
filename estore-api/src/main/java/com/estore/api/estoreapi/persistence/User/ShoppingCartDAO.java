@@ -76,7 +76,7 @@ public interface ShoppingCartDAO {
      * @return
      * @throws IOException
      */
-    boolean checkout(String username) throws IOException;
+    Boolean checkout(String username) throws IOException;
 
 
 

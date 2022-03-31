@@ -4,9 +4,11 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
+
 
 import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.persistence.JsonUtilities;
@@ -231,7 +233,23 @@ public class InventoryFileDAO implements InventoryDAO {
             Product result = new Product(inventory.get(id), amount);
             return result;
         }
+    }
         
+    /**
+     * Changes the ammount of the inventory has in stock
+     * 
+     * @return false if the length of the product that is being checkedout is larger than the amount the inventory has in stock
+     * 
+     * @throws IOException 
+     */
+    public Boolean checkOut(Product[] passed) throws IOException{
+        for (int i = 0; i < passed.length; i++){
+            if(passed.length > inventory.get(passed[i].getID()).getAmount()){
+                return false;
+            }
+            inventory.get(passed[i].getID()).setAmount(inventory.get(passed[i].getID()).getAmount() - passed.length);
+        }
+        return false;
     }
 
 }

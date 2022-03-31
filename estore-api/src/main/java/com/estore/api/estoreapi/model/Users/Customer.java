@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+
+
 /**
  * The customer class
  * A class that represents a user that contains a shopping cart and can buy products from the shop
@@ -83,11 +85,5 @@ public class Customer extends User {
         return this.cart.getItems();
     }
 
-    /**
-     * executes checkout methods once implemented
-     */
-    public void checkout() {
-        // TODO
-    }
 
 }
