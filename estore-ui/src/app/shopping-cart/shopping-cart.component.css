@@ -1,6 +1,10 @@
 body {
     margin: 40px;
 }
+
+div {
+  color: #98b972;
+}
   
 .btn-group {
   width: 100%;
