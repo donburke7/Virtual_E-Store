@@ -1,5 +1,7 @@
+
+<body>
 <div *ngIf="product != null">
-    <h2>{{product.name | uppercase}} Details</h2>
+    <h1>{{product.name}} Details</h1>
     <div><span>id: </span>{{product.id}}</div>
     <div><span>price: </span>${{product.price}}</div>
     <div class="productAmount"><span>Amount: </span> <input type="range" min="1" max={{product.amount}} value="1" class="slider" id="myRange" #amountSelect
@@ -7,6 +9,7 @@
 
     <button type="button" (click)="backButton()">Go Back</button>
     <button type="button" (click)="addToCart(product, currAmount)">Add to Cart</button>
+    <label [textContent]="this.message"></label>
     <div><span>rating: </span>{{product.avg_rating}}</div>
     <div id="make-rating">
         <div *ngIf="ifDisplay">
@@ -19,3 +22,4 @@
         </div>
     </div>
 </div>
+</body>

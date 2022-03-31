@@ -1,13 +1,24 @@
+
+<body>
 <button type="button" (click)="backButton()">Go Back</button>
+<button type="button" (click)="checkout()">Check out!</button>
+
+<div *ngIf="ifSuceed">
+  Checkout Sucessful!
+</div>
+
+<div *ngIf="ifFailed">
+  Checkout Failed!
+</div>
 
 <ul class="wrapper">
     <div *ngFor="let product of cart">
-        <div class="box">{{product.name}}</div>
-        <div class="amount">Stock: {{product.amount}}</div>
-        <div class="price">Price: ${{product.price}}</div>
-        <button type="button" class="delete" title="delete product"
-      (click)="deleteProduct(product)">x</button>
+        <button class="btn-group" routerLink="/user-product-view/{{user?.username}}/{{product.id}}">{{product.name}}
+            <label class="amount">Stock: {{product.amount}}</label>
+            <label class="price">Price: ${{product.price}}</label>
+        </button>
+        <button type="button" class="delete" title="Delete Product" (click)="deleteProduct(product)">x</button>
     </div>
 </ul>
 
-<button type="button" (click)="checkout()">Check out!</button>
+</body>

@@ -2,6 +2,60 @@ body {
     margin: 40px;
 }
 
+h1 {
+  display: block;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  margin-bottom: .5rem;
+  color: #98b972;
+}
+
+h2 {
+  text-align: left; 
+  color: #98b972;
+}
+
+  .cart {
+    border-radius: 4px;
+    background-color: #ffffff;
+    border: none;
+    color: #98b972;
+    text-align: center;
+    font-size: 14px;
+    padding: 10px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+  }
+
+  .cart span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  .cart span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+
+  .cart:hover span {
+    padding-right: 25px;
+  }
+
+  .cart:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+
+
   .btn-group {
     width: 100%;
     display: grid;
@@ -22,22 +76,14 @@ body {
   }
   
   .wrapper {
+    padding: 45px;
     display: grid;
-    grid-template-columns: 200px 200px 200px 200px 200px 200px;
-    grid-template-rows: 200px 200px 200px;
-    gap: 10px;
+    grid-template-columns: 200px 200px 200px 200px 200px;
+    column-gap: 15px;
+    row-gap: 50px;
     background-color: #fff;
     color: #444;
     align-items: center;
-  }
-  
-  .box {
-    background-color: #444;
-    color: #fff;
-    border-radius: 20px;
-    padding: 20px;
-    font-size: 100%;
-    
   }
 
   .amount {
@@ -52,18 +98,6 @@ body {
       border-radius: 5px;
       padding: 2px;
       font-size: 100%;
-  }
-
-  .delete {
-      color: #444;
-      border-radius: 5px;
-      padding: 2px;
-      font-size: 100%;
-      width: 200px;
-      height: 30px;
-    }
-  .delete:hover {
-    background-color: #cacaca;
   }
 
   

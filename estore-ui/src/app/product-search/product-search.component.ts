@@ -4,7 +4,7 @@
  * 
  * This is the component that handles the {@linkplain User users} searching for a {@link Product product}
  * 
- * Contributors: Isaac Post
+ * Contributors: Isaac Post, Donald Burke
  */
 
 import { Component, Input, OnInit } from '@angular/core';

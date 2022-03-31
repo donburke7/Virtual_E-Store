@@ -1,4 +1,4 @@
-/* HeroSearch private styles */
+
 
 label {
     display: block;
@@ -6,7 +6,7 @@ label {
     font-size: 1.2rem;
     margin-top: 1rem;
     margin-bottom: .5rem;
-  
+    color: #98b972;
   }
   input {
     padding: .5rem;
@@ -17,7 +17,7 @@ label {
   }
   
   input:focus {
-    outline: #336699 auto 1px;
+    outline: #e4e4e4 auto 1px;
   }
   
   li {
@@ -33,7 +33,8 @@ label {
     padding: .5rem;
     box-sizing: border-box;
     text-decoration: none;
-    color: black;
+    background-color: white;
+    color: #98b972;
   }
   
   .search-result li a:hover {

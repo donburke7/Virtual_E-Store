@@ -1,14 +1,26 @@
 <style>
-    h2 {text-align: center;}
-    h3 {text-align: center;}
+    h1 {color: #98b972;}
 </style>
 
-<div>
-        <h2>
-        <label for="username-box">Login </label>
-        <h3><input type="text" id="username-box" placeholder="Username"></h3>
-        <button type="button" (click)="login()">Submit</button>
-        <br>
-        </h2>
+<head>
+    <meta charset="UTF-8">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Rubik:400,700'><link rel="stylesheet" href="user-login.component.css">  
+</head>
 
-</div>
+<body>
+    <!-- partial:index.partial.html -->
+    <div class="login-form">
+      <form>
+        <h1>Login</h1>
+        <div class="content">
+          <div class="input-field">
+            <input type="text" id="username-box" placeholder="Username" autocomplete="nope">
+          </div>
+        </div>
+        <div class="action">
+            <button type="button" (click)="login()">Submit</button>
+        </div>
+      </form>
+    </div>
+    
+</body>

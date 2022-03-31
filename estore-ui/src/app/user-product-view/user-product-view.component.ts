@@ -4,7 +4,7 @@
  * 
  * This component handles the page that showcases a {@linkplain Product product's} details for a customer
  * 
- * Contributors: Isaac Post
+ * Contributors: Isaac Post, Donald Burke
  */
 
 import { Component, Input, OnInit } from '@angular/core';
@@ -23,13 +23,15 @@ export class UserProductViewComponent implements OnInit {
   @Input() product?: Product;
   currAmount: number = 1;
   ifDisplay: boolean = true;
+  public message: string;
 
   constructor(
       private productService: ProductService,
       private shoppingCartService: ShoppingCartService,
       private route: ActivatedRoute,
       private location: Location,
-  ) { }
+      
+  ) { this.message = "";}
 
   /**
    * Initialization of this component
@@ -69,7 +71,12 @@ export class UserProductViewComponent implements OnInit {
      * Takes in a product to add to the user's cart
      */
     var username = (this.route.snapshot.paramMap.get('username')!);
-    this.shoppingCartService.addToCart( product, amount, username ).subscribe();
+    this.shoppingCartService.addToCart(product, amount, username).subscribe(product =>
+    {
+      product.push(product);
+    });
+    this.message = "Item Added To Cart Successfully!";
+  
   }
 
   /**
@@ -84,12 +91,15 @@ export class UserProductViewComponent implements OnInit {
     this.currAmount = +value;
   }
 
-  addRate(rating: string): void {
+  addRate(rating: string): void
+  {
     /**
      * Adds a rating from a user
      */
-    if (this.product) {
-      if(parseInt(rating) > 10 || parseInt(rating) < 0){
+    if (this.product)
+    {
+      if (parseInt(rating) > 10 || parseInt(rating) < 0)
+      {
         return;
       }
       this.ifDisplay = false;

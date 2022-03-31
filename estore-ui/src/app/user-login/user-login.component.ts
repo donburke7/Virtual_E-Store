@@ -4,7 +4,7 @@
  * 
  * This component handles the action of logging in for the {@linkplain User user}
  * 
- * Contributors: Isaac Post
+ * Contributors: Isaac Post, Donald Burke
  */
 
 import { Component, OnInit } from '@angular/core';

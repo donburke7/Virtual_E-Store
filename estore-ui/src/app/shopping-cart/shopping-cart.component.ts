@@ -4,7 +4,7 @@
  * 
  * The component that displays the current {@linkplain User user's} shopping cart
  * 
- * Contributors: Isaac Post
+ * Contributors: Isaac Post, Donald Burke
  */
 
 import { Component, Input, OnInit } from '@angular/core';
@@ -25,6 +25,8 @@ export class ShoppingCartComponent implements OnInit {
   @Input() username!: string;
   cart: Product[] = [];
   @Input() user?: User;
+  ifSuceed: Boolean = false;
+  ifFailed: Boolean = false;
   
   constructor(
       private shoppingCartService: ShoppingCartService, 
@@ -38,6 +40,8 @@ export class ShoppingCartComponent implements OnInit {
    */
   ngOnInit(): void
   {
+    this.ifSuceed = false;
+    this.ifFailed = false;
     this.getUser();
     this.getCart();
   }
@@ -91,8 +95,15 @@ export class ShoppingCartComponent implements OnInit {
    */
   checkout(): void
   {
-    this.shoppingCartService.checkout(this.username).subscribe();
-    this.getCart();
+    this.shoppingCartService.checkout(this.username).subscribe(output =>
+    {
+      if (output)
+      {
+        this.ifSuceed = true;
+        this.cart = [];
+      } else { this.ifFailed = true; }
+    });
   }
-
 }
+
+
