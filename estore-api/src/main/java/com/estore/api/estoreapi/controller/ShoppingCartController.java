@@ -98,6 +98,15 @@ public class ShoppingCartController {
         }
     }
 
+    /**
+     * Clears the shopping cart of a user 
+     * 
+     * @param username The username of the user whose cart should be cleared
+     * 
+     * @return ResponseEntity HTTP status of OK if cleared<br>
+     *         ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     *         ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
     @DeleteMapping("/{username}")
     public ResponseEntity<Boolean> clearCart(@PathVariable String username){
         LOG.info("DELETE /cart/customer=" + username);
@@ -115,6 +124,14 @@ public class ShoppingCartController {
         }
     }
 
+    /**
+     * Checks out the items in a users cart
+     * 
+     * @param username The username of the user whose cart should be checked out
+     * @return ResponseEntity HTTP status of OK if checked out<br>
+     *         ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     *         ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
     @PostMapping("/{username}")
     public ResponseEntity<Boolean> checkout(@PathVariable String username) {
         //Calls shoppingDAO's checkout
@@ -124,6 +141,15 @@ public class ShoppingCartController {
         return null;
     }
 
+    /**
+     * Adds an item to a user's cart
+     * 
+     * @param username The username of the user whose cart the product should be added to
+     * @param product The product of the item to add
+     * @return ResponseEntity HTTP status of CREATED if added<br>
+     *         ResponseEntity with HTTP status of CONFLICT if not added<br>
+     *         ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
     @PutMapping("/{username}")
     public ResponseEntity<Product> addProduct(@PathVariable String username, @RequestBody Product product) {
         LOG.info("PUT /shoppingcart/customer=" + username + "/product=" + product);
