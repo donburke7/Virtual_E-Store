@@ -8,7 +8,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { Product } from '../product';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 @Component({
@@ -22,6 +22,7 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
       private productService: ProductService, 
       private route: ActivatedRoute, 
+      public router: Router,
       private location: Location) { 
   }
 

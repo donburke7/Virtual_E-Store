@@ -59,4 +59,18 @@ export class UserProductViewComponent implements OnInit {
   {
     this.currAmount = +value;
   }
+
+  addRate(rating: string): void {
+    /**
+     * Adds a rating from a user
+     */
+    if (this.product) {
+      if(parseInt(rating) > 10 || parseInt(rating) < 0){
+        return;
+      }
+      this.product.ratings.push(parseInt(rating));
+      this.productService.updateProduct(this.product).subscribe(() => this.product);
+      this.getProduct();
+    }
+  }
 }
