@@ -29,6 +29,7 @@ public class ShoppingCartFileDAOTest {
     UserFileDAO mockUserFileDAO;
     InventoryDAO mockInventoryDAO;
     Customer customer;
+    Customer mockCustomer;
 
     /**
      * setup before each test
@@ -42,6 +43,8 @@ public class ShoppingCartFileDAOTest {
         mockInventoryDAO = mock(InventoryDAO.class);
         shoppingCartFileDAO = new ShoppingCartFileDAO(mockUserFileDAO, mockInventoryDAO);
         customer = new Customer("username");
+        mockCustomer = mock(Customer.class);
+        when(mockCustomer.getUsername()).thenReturn("mock");
         when(mockUserFileDAO.getUser(customer.getUsername())).thenReturn(customer);
     }
     
@@ -119,6 +122,30 @@ public class ShoppingCartFileDAOTest {
 
         //analyze
         assertTrue(Arrays.equals(expected, actual));
+
+    }
+    @Test
+    public void testcheckout() throws IOException {
+
+        //setup
+        Product testProduct = new Product("Green Bean", 0, 1, 1.00, new double[]{5.0}, 5.0);
+        Product[] testCart = { testProduct };
+        
+        
+        when(mockUserFileDAO.getUser(mockCustomer.getUsername())).thenReturn(mockCustomer);
+        when(mockCustomer.getCart()).thenReturn(testCart);
+        when(mockInventoryDAO.checkOut(testCart)).thenReturn(true);
+
+        //invoke
+        boolean stat = shoppingCartFileDAO.checkout(mockCustomer.getUsername());
+        
+
+        //setup analysis
+
+
+
+        //analyze
+        assertTrue((stat));
 
     }
     
