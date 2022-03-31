@@ -69,10 +69,11 @@ export class UserProductViewComponent implements OnInit {
       if(parseInt(rating) > 10 || parseInt(rating) < 0){
         return;
       }
+      this.ifDisplay = false;
       this.product.ratings.push(parseInt(rating));
       this.productService.updateProduct(this.product).subscribe(() => this.product);
       this.getProduct();
-      this.ifDisplay = false;
+
     }
   }
 }
