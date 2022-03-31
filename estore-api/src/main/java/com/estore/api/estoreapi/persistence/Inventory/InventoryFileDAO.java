@@ -228,7 +228,7 @@ public class InventoryFileDAO implements InventoryDAO {
      * 
      * @throws IOException 
      */
-    public boolean checkOut(Product[] passed) throws IOException{
+    public Boolean checkOut(Product[] passed) throws IOException{
         for (int i = 0; i < passed.length; i++){
             if(passed.length > inventory.get(passed[i].getID()).getAmount()){
                 return false;
