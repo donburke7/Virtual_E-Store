@@ -2,7 +2,7 @@
  * SWEN 261
  * user-product-view.components.ts
  * 
- * Contributors: Isaac Post
+ * Contributors: Isaac Post, Donald Burke
  */
 
 import { Component, Input, OnInit } from '@angular/core';
@@ -19,13 +19,15 @@ import { ShoppingCartService } from '../shopping-cart.service';
 })
 export class UserProductViewComponent implements OnInit {
   @Input() product?: Product;
+  public message: string;
 
   constructor(
       private productService: ProductService,
       private shoppingCartService: ShoppingCartService,
       private route: ActivatedRoute,
       private location: Location,
-  ) { }
+      
+  ) { this.message = "";}
 
   ngOnInit(): void {
     this.getProduct();
@@ -53,5 +55,6 @@ export class UserProductViewComponent implements OnInit {
     this.shoppingCartService.addToCart( product, username ).subscribe(product => {
       product.push(product);
     });
+    this.message = "Item Added To Cart Successfully!";
   }
 }

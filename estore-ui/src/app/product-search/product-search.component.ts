@@ -2,7 +2,7 @@
  * SWEN 261
  * product-search.component.ts
  * 
- * Contributors: Isaac Post
+ * Contributors: Isaac Post, Donald Burke
  */
 
 import { Component, Input, OnInit } from '@angular/core';

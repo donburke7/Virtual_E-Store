@@ -2,36 +2,59 @@ body {
     margin: 40px;
 }
   
-  .wrapper {
-    display: grid;
-    grid-template-columns: 150px 150px 150px 150px 150px 150px;
-    grid-template-rows: 200px 200px 200px;
-    gap: 10px;
-    background-color: #fff;
-    color: #444;
-    align-items: center;
-  }
-  
-  .box {
-    background-color: #444;
-    color: #fff;
-    border-radius: 5px;
-    padding: 20px;
-    font-size: 100%;
-  }
+.btn-group {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  justify-items: stretch;
+  align-items: inital;
+  padding: 20px 24px;
+  cursor: pointer; 
+  text-align: center;
+  background-color: #eee;
+  color: black;
+}
 
-  .amount {
-    background-color: beige;
+.btn-group:hover {
+background-color: #cacaca;
+}
+
+.wrapper {
+  padding: 45px;
+  display: grid;
+  grid-template-columns: 200px 200px 200px 200px 200px;
+  column-gap: 15px;
+  row-gap: 50px;
+  background-color: #fff;
+  color: #444;
+  align-items: center;
+}
+
+.amount {
+  color: #444;
+  border-radius: 5px;
+  padding: 2px;
+  font-size: 100%;
+}
+
+.price {
     color: #444;
     border-radius: 5px;
     padding: 2px;
-    font-size: 75%;
-  }
+    font-size: 100%;
+}
 
-  .price {
-      background-color: beige;
-      color: #444;
-      border-radius: 5px;
-      padding: 2px;
-      font-size: 75%;
-  }
+.delete {
+  color: #444;
+  border-radius: 5px;
+  padding: 2px;
+  font-size: 100%;
+  width: 200px;
+  height: 30px;
+}
+
+.delete:hover {
+background-color: #cacaca;
+}

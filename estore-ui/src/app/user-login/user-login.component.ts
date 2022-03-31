@@ -2,7 +2,7 @@
  * SWEN 261
  * Huser-login.components.ts
  * 
- * Contributors: Isaac Post
+ * Contributors: Isaac Post, Donald Burke
  */
 
 import { Component, OnInit } from '@angular/core';
