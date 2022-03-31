@@ -5,10 +5,11 @@
  * Contributors: Isaac Post, Donald Burke
  */
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, tap, of } from 'rxjs';
 import { Product } from './product';
+
 
 @Injectable({
   providedIn: 'root'
@@ -72,6 +73,12 @@ export class ShoppingCartService {
   checkout(username: string): Observable<any>
   {
     const url = `${this.shoppingCartURL}/${username}`;
-    return this.http.post(url, this.http);
+    return this.http.post(url, this.http).pipe(tap(), catchError(err => { return this.checkoutErrorCatch(err)} ));
   }
+
+  checkoutErrorCatch(error: HttpErrorResponse)
+  {
+    return of(false);
+  }
+
 }
