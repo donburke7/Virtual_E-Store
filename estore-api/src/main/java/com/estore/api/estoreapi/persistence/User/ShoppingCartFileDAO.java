@@ -92,7 +92,7 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
         //boolean status = targetCustomer.checkout();
         Product [] product_array = this.getShoppingCart(username);
         boolean status = inventoryFileDAO.checkOut(product_array);
-        if(status){
+        if (status) {
             this.clearShoppingCart(username);
         }
         return status;

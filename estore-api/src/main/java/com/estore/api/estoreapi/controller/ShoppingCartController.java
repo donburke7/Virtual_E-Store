@@ -116,6 +116,7 @@ public class ShoppingCartController {
     }
     @PostMapping("/{username}")
     public ResponseEntity<Boolean> checkout(@PathVariable String username) {
+        LOG.info("POST /shoppingcart/customer=" + username);
         try {
             boolean result = shoppingCartDao.checkout(username);
             if(result){

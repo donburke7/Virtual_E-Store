@@ -242,14 +242,26 @@ public class InventoryFileDAO implements InventoryDAO {
      * 
      * @throws IOException 
      */
-    public Boolean checkOut(Product[] passed) throws IOException{
-        for (int i = 0; i < passed.length; i++){
-            if(passed.length > inventory.get(passed[i].getID()).getAmount()){
+    public Boolean checkOut(Product[] passed) throws IOException {
+        for (Product input : passed) {
+            if (!inventory.containsKey(input.getID())) {
                 return false;
+            } else {
+                if (input.getAmount() > inventory.get(input.getID()).getAmount()) {
+                    return false;
+                }
             }
-            inventory.get(passed[i].getID()).setAmount(inventory.get(passed[i].getID()).getAmount() - passed.length);
         }
-        return false;
+
+        for (int i = 0; i < passed.length; i++) {
+            inventory.get(passed[i].getID())
+                    .setAmount(inventory.get(passed[i].getID()).getAmount() - passed[i].getAmount());
+            if (inventory.get(passed[i].getID()).getAmount() <= 0) {
+                this.deleteProduct(passed[i].getID());
+            }
+        }
+        this.save();
+        return true;
     }
 
 }

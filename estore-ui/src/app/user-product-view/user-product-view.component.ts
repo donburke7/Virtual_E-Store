@@ -51,9 +51,7 @@ export class UserProductViewComponent implements OnInit {
      * Takes in a product to add to the user's cart
      */
     var username = (this.route.snapshot.paramMap.get('username')!);
-    this.shoppingCartService.addToCart( product, amount, username ).subscribe(product => {
-      product.push(product);
-    });
+    this.shoppingCartService.addToCart( product, amount, username ).subscribe();
   }
 
 

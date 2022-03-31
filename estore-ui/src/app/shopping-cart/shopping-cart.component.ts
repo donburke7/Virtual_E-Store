@@ -70,7 +70,8 @@ export class ShoppingCartComponent implements OnInit {
 
   checkout(): void
   {
-    this.shoppingCartService.checkout(this.username);
+    this.shoppingCartService.checkout(this.username).subscribe();
+    this.getCart();
   }
 
 }
