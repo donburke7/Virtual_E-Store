@@ -121,5 +121,27 @@ public class ShoppingCartFileDAOTest {
         assertTrue(Arrays.equals(expected, actual));
 
     }
+    @Test
+    public void testcheckout() throws IOException {
+
+        //setup
+        Product testProduct = new Product("Green Bean", 0, 1, 1.00, new double[]{5.0}, 5.0);
+        Product [] testCart = {testProduct};
+        
+        when(mockInventoryDAO.checkOut(testCart)).thenReturn(true);
+
+
+        //invoke
+        boolean stat = shoppingCartFileDAO.checkout(customer.getUsername());
+        
+
+        //setup analysis
+
+
+
+        //analyze
+        assertTrue((stat));
+
+    }
     
 }
