@@ -100,6 +100,15 @@ public class ShoppingCartController {
     }
 
     /**
+<<<<<<< HEAD
+     * Clears the shopping cart of a user 
+     * 
+     * @param username The username of the user whose cart should be cleared
+     * 
+     * @return ResponseEntity HTTP status of OK if cleared<br>
+     *         ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     *         ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+=======
      * Clears the cart of the {@linkplain Customer customer} who initiated the method
      * 
      * @param username the username of the {@link Customer customer}
@@ -108,6 +117,7 @@ public class ShoppingCartController {
      *         200 (OK) indicating that the action was successful
      *         404 (NOT_FOUND) if the action failed
      *         500 (INTERNAL_SERVER_ERROR) if an issue arouse
+>>>>>>> 82c86ee604cb3a25f77daa2b28711e349789f776
      */
     @DeleteMapping("/{username}")
     public ResponseEntity<Boolean> clearCart(@PathVariable String username) {
